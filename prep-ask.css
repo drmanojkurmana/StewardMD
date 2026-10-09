@@ -57,8 +57,35 @@ body.dark .pn-root .pa-sb.on { background: var(--pn-seg); }
 @media (hover: hover) and (pointer: fine) {
   .pn-root .pa-opt:not(.on):not([aria-disabled="true"]):hover { border-color: var(--pn-s2); background: var(--pn-s1); }
   .pn-root .pa-sb:not(.on):not([aria-disabled="true"]):hover { color: var(--pn-text); }
+  .pn-root .pa-send:not([aria-disabled="true"]):hover { filter: brightness(1.08); }
 }
 .pn-root .pn-maikline span:last-child { min-width: 0; overflow-wrap: anywhere; }
+
+/* MaiK AI mark (maik-ai-mark.js): the avatar tile is the SVG itself; the old picture stays only as a fallback */
+.pn-root .pt-av.mk { background: none; overflow: hidden; box-shadow: 0 6px 16px -8px rgba(56, 211, 192, .8); }
+.pn-root .pt-av.mk > svg { display: block; width: 100%; height: 100%; }
+.pn-root :is(.pa-hchip, .pa-hand) .mkai { color: currentColor; }
+.pn-root .pn-ib .pl-mkai { color: var(--pn-pri-ink); }
+
+/* chat: follow-up box under the thread, then the hand-off after 10 messages */
+.pn-root .pa-cmp, .pn-root .pa-hand { flex: 0 0 auto; display: flex; flex-direction: column; gap: 6px; margin: 0 -20px -8px; padding: 10px 20px 0; border-top: 1px solid var(--pn-line); }
+.pn-root .pa-box { display: flex; align-items: flex-end; gap: 8px; padding: 3px 3px 3px 16px; border-radius: 24px; border: 1.5px solid var(--pn-s2); background: var(--pn-bg);
+  transition: border-color var(--pn-d-quick) ease; }
+.pn-root .pa-box:focus-within { border-color: var(--pn-pri); }
+.pn-root #paIn { flex: 1 1 auto; min-width: 0; min-height: 44px; max-height: 132px; padding: 11px 0; border: 0; outline: none; resize: none; background: transparent; color: var(--pn-text);
+  font: inherit; font-size: 16px; line-height: 1.4; field-sizing: content; }
+.pn-root #paIn::placeholder { color: var(--pn-mut); }
+.pn-root .pa-send { flex: 0 0 auto; display: grid; place-items: center; width: 44px; height: 44px; border: 0; border-radius: 50%; background: var(--pn-pri-grad); color: var(--pn-on-pri); cursor: pointer;
+  box-shadow: var(--pn-glow); transition: transform var(--pn-d-press) var(--pn-ease), opacity var(--pn-d-quick) ease; touch-action: manipulation; -webkit-tap-highlight-color: transparent; }
+.pn-root .pa-send:active { transform: scale(.92); }
+.pn-root .pa-send[aria-disabled="true"], .pn-root #paIn:placeholder-shown + .pa-send { opacity: .45; cursor: default; }
+.pn-root .pa-send[aria-disabled="true"]:active { transform: none; }
+.pn-root .pa-left { padding-left: 16px; font-size: 13px; color: var(--pn-mut); font-variant-numeric: tabular-nums; }
+.pn-root .pa-hand p { font-size: 15px; line-height: 1.5; }
+.pn-root .pa-hand .pn-btn { gap: 10px; min-height: 50px; }
+.pn-root .pa-hchip { list-style: none; padding-left: 44px; }
+.pn-root .pa-hchip .pt-chip { gap: 8px; }
+.pn-root .pa-send:focus-visible { outline: 2px solid var(--pn-pri); outline-offset: 2px; }
 
 /* iPad landscape runner: a side panel on the right, the question stays in view */
 @media (orientation: landscape) and (min-width: 900px) {
@@ -84,6 +111,7 @@ body.dark .pn-root .pa-sb.on { background: var(--pn-seg); }
 
 @media (prefers-reduced-motion: reduce) {
   .pn-root .pn-balloons { display: none; }
+  .pn-root .pa-send, .pn-root .pa-box { transition: none; }
   .pn-root .pn-maikline { animation: none; }
   .pn-root .pa-opt, .pn-root .pa-sb { transition: none; }
 }

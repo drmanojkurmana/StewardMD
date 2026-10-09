@@ -1057,7 +1057,7 @@
     var maikCta = (maikOn() && G.DX) ?
       '<button class="oe-maik-cta' + (st.maikBusy ? " busy" : "") + '" data-oe-act="assess-maik"' + (st.maikBusy ? " disabled" : "") + ' aria-label="Ask MaiK">' +
         '<span class="oe-maik-glow" aria-hidden="true"></span>' +
-        '<span class="oe-maik-ico">' + ms(st.maikBusy ? "hourglass_top" : "auto_awesome") + "</span>" +
+        '<span class="oe-maik-ico">' + (st.maikBusy ? ms("hourglass_top") : (typeof window !== "undefined" && window.SMD_MAIK_MARK ? window.SMD_MAIK_MARK.html("mark", { size: 24, color: "#fff" }) : ms("auto_awesome"))) + "</span>" +
         '<span class="oe-maik-txt"><b>' + (st.maikBusy ? "MaiK is thinking" : "Ask MaiK") + "</b>" +
         "<span>" + (st.maikBusy ? "Reading your notes" : "Diagnosis, investigations &amp; treatment from your notes") + "</span></span>" +
       "</button>" : "";

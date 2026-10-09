@@ -619,7 +619,7 @@
   function barHtml() {
     var s = store(), last = L.i === pages(L.les).length - 1, speak = canSpeak();
     return '<div class="pn-lsn-bar" id="pnLsnBar"><div class="pn-lsn-bin">' +
-      (askable() ? '<button type="button" class="pn-ib" data-act="l-ask" aria-label="Ask MaiK about this step">' + ic("ask") + "</button>" : "") +
+      (askable() ? '<button type="button" class="pn-ib" data-act="l-ask" aria-label="Ask MaiK about this step">' + (G.SMD_MAIK_MARK ? G.SMD_MAIK_MARK.html("mark", { size: 24, cls: "pl-mkai" }) : ic("ask")) + "</button>" : "") +
       '<button type="button" class="pn-ib" data-act="l-prev" aria-label="Previous step"' + (L.i ? "" : " disabled") + ">" + ic("back") + "</button>" +
       // Play is a pill: the icon and a small waveform that moves only while the voice speaks.
       (speak ? '<button type="button" class="pn-lsn-play' + (L.playing ? " on" : "") + '" data-act="l-play" aria-pressed="' + L.playing + '" aria-label="' + (L.playing ? "Pause narration" : "Play narration") + '">' + ic(L.playing ? "pause" : "play") +

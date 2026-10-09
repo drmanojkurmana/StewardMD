@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>MaiK AI mark</title>
+<!-- Visual check of assets/maik-ai-mark.svg through maik-ai-mark.js: every variant at its sizes, light and dark.
+     Served by test/serve.mjs (node test/serve.mjs . 8799, then /test/maik-ai-mark-preview.html). -->
+<style>
+  body { margin: 0; font: 14px/1.4 -apple-system, system-ui, sans-serif; background: #f6f7f5; color: #10201f; }
+  body.dark { background: #0c1416; color: #e7f0ef; }
+  .row { display: flex; align-items: center; gap: 22px; padding: 16px 20px; flex-wrap: wrap; }
+  .lbl { width: 90px; font-weight: 700; }
+  .btn { display: inline-flex; align-items: center; gap: 8px; min-height: 44px; padding: 0 16px; border-radius: 12px; border: 1px solid #c9d6d3; background: #fff; color: #0e6e63; font-weight: 700; }
+  body.dark .btn { background: #142124; border-color: #24383b; color: #7fe3d4; }
+</style></head>
+<body>
+<div id="out"></div>
+<script src="/maik-ai-mark.js"></script>
+<script>
+  var M = window.SMD_MAIK_MARK, rows = [["full", [28, 40, 64, 128]], ["mark", [16, 20, 24]], ["tile", [28, 34, 44, 64, 120]]];
+  var h = "";
+  rows.forEach(function (r) { h += '<div class="row"><span class="lbl">' + r[0] + "</span>" + r[1].map(function (s) { return M.html(r[0], { size: s }); }).join("") + "</div>"; });
+  h += '<div class="row"><span class="lbl">button</span><span class="btn">' + M.html("auto", { size: 20 }) + "Ask MaiK</span></div>";
+  document.getElementById("out").innerHTML = h;
+  if (/dark/.test(location.hash)) document.body.classList.add("dark");
+</script>
+</body></html>

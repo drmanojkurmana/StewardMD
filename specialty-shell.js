@@ -145,7 +145,7 @@
     // sends it, so MaiK's own engine choice, quota and local-only policy apply.
     function maikBtn(q) {
       if (!G.SMD_askMaik) return "";
-      return '<button type="button" class="sp-btn sec sp-maik" data-act="maik" data-q="' + esc(q) + '">' + ico("ai") + " " + s("askMaik") + "</button>";
+      return '<button type="button" class="sp-btn sec sp-maik" data-act="maik" data-q="' + esc(q) + '">' + (typeof window !== "undefined" && window.SMD_MAIK_MARK ? window.SMD_MAIK_MARK.html("mark", { size: 20 }) : ico("ai")) + " " + s("askMaik") + "</button>";
     }
     function maikOpen() { try { return G.document.body.classList.contains("maik-open"); } catch (e) { return false; } }
 

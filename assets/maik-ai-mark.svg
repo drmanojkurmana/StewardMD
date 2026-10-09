@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100" height="100">
+  <!-- MaiK AI mark: the ONE file for the "Ask MaiK" icon across the app (owner artwork placeholder, 2026-10-09).
+       Traced from the owner's IMG_2673 / IMG_2672 (white geometric M of two chevron brackets, a four-point star, a
+       small teal "AI" lower right). To swap in the final artwork, replace the shapes inside the three symbols and
+       keep the ids and the 0 0 100 100 viewBox; nothing else in the app needs to change (maik-ai-mark.js injects
+       this file as an inline sprite; vault/modules/MaiK.md, "MaiK AI mark").
+       Symbols: mkai-full (M, star, teal AI; 28 px and up), mkai-mark (no AI; small sizes), mkai-tile (app-icon tile,
+       40 px and up), mkai-tile-mark (the tile without AI, under 40 px); mkai-m and mkai-tile-bg-s are shared parts.
+       Colours: the M and the star are currentColor; "AI" is var(--mkai-accent, #2fb3a6); the tile is a fixed
+       dark teal gradient with a white mark, readable on light and dark screens. Fills are inline styles so no page
+       CSS (icon rules like "svg * { fill: none }") can repaint the mark. -->
+  <defs>
+    <linearGradient id="mkai-tile-bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0f4a4a"/>
+      <stop offset=".55" stop-color="#0a3333"/>
+      <stop offset="1" stop-color="#061e22"/>
+    </linearGradient>
+    <radialGradient id="mkai-tile-glow" cx=".5" cy=".46" r=".5">
+      <stop offset="0" stop-color="#2fb3a6" stop-opacity=".42"/>
+      <stop offset="1" stop-color="#2fb3a6" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <!-- the M (two chevron brackets) and the star; shared by every variant -->
+  <symbol id="mkai-m" viewBox="0 0 100 100">
+    <path style="fill:inherit;stroke:none" d="M0 0L36 36L30.5 39.5L7.8 16.8V46H0ZM100 0L64 36L69.5 39.5L92.2 16.8V46H100ZM0 100L36 64L30.5 60.5L7.8 83.2V54H0ZM100 100L64 64L69.5 60.5L92.2 83.2V54H100Z"/>
+    <path style="fill:inherit;stroke:none" d="M50 12.5C51.6 36 56 46.6 85 50C56 53.4 51.6 64 50 87.5C48.4 64 44 53.4 15 50C44 46.6 48.4 36 50 12.5Z"/>
+  </symbol>
+  <!-- full mark: M, star and the teal AI (28 px and up) -->
+  <symbol id="mkai-full" viewBox="0 0 100 100">
+    <use href="#mkai-m" style="fill:currentColor;stroke:none"/>
+    <path style="fill:var(--mkai-accent,#2fb3a6);stroke:none;fill-rule:evenodd" d="M58.5 96.6L63.9 80.6H67.1L72.5 96.6H69.1L68 93.4H63L61.9 96.6ZM63.9 90.6H67.1L65.5 85.9ZM75.4 80.6H78.6V96.6H75.4Z"/>
+  </symbol>
+  <!-- mark only, for small sizes (16 to 27 px): no AI -->
+  <symbol id="mkai-mark" viewBox="0 0 100 100">
+    <use href="#mkai-m" style="fill:currentColor;stroke:none"/>
+  </symbol>
+  <!-- the tile background, shared by both tiles -->
+  <symbol id="mkai-tile-bg-s" viewBox="0 0 100 100">
+    <rect width="100" height="100" rx="22" style="fill:url(#mkai-tile-bg);stroke:none"/>
+    <rect width="100" height="100" rx="22" style="fill:url(#mkai-tile-glow);stroke:none"/>
+    <rect x=".5" y=".5" width="99" height="99" rx="21.5" style="fill:none;stroke:#63f0db;stroke-opacity:.28;stroke-width:1"/>
+  </symbol>
+  <!-- app-icon tile: dark teal gradient, white mark, teal AI (40 px and up) -->
+  <symbol id="mkai-tile" viewBox="0 0 100 100">
+    <use href="#mkai-tile-bg-s"/>
+    <g transform="translate(20 20) scale(.6)">
+      <use href="#mkai-m" style="fill:#fff;stroke:none"/>
+      <path style="fill:#5fe0cf;stroke:none;fill-rule:evenodd" d="M58.5 96.6L63.9 80.6H67.1L72.5 96.6H69.1L68 93.4H63L61.9 96.6ZM63.9 90.6H67.1L65.5 85.9ZM75.4 80.6H78.6V96.6H75.4Z"/>
+    </g>
+  </symbol>
+  <!-- the same tile without AI, for avatars under 40 px; the mark sits a little larger -->
+  <symbol id="mkai-tile-mark" viewBox="0 0 100 100">
+    <use href="#mkai-tile-bg-s"/>
+    <g transform="translate(17 17) scale(.66)">
+      <use href="#mkai-m" style="fill:#fff;stroke:none"/>
+    </g>
+  </symbol>
+  <use href="#mkai-full" color="#fff"/>
+</svg>

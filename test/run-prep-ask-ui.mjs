@@ -192,7 +192,8 @@ try {
   await until(`return !!document.querySelector("#pnAsk .pt-ans-b");`, 5000);
   await click("#pnAsk .pa-top [data-act=ak-close]");
 
-  // ---- tokens used up: the app's own top-up path, the stored explanation shown
+  // ---- tokens used up: the app's own top-up path, the stored explanation shown (a fresh thread: a started one just reopens)
+  await ev(`PREP_ASK._resetThreads(); return 1;`);
   teach = { status: 429, body: { error: "quota", reason: "ai-cost-cap", creditsMt: 0, resetAt: Date.now() + 3600e3, message: "You have used today's free MaiK Tokens. Add MaiK Tokens or go Pro to keep asking MaiK online." } };
   await click("#smdPrep [data-act=ask]");
   ok(await until(`var w=document.getElementById("pnAsk"); return !!w && /used today's free MaiK Tokens/.test(w.textContent) && !!w.querySelector("[data-act=ak-tokens]") === !!(window.SMD_PRO && SMD_PRO.openAiLimit) && /Answer [A-D]/.test(w.querySelector(".pt-ans-b").textContent);`, 6000), "tokens used up: said plainly, the top-up path offered, the stored explanation shown");
@@ -231,6 +232,7 @@ try {
   await click('#pnAsk [data-act=ak-close].pn-btn');
 
   // ---- capable phone (iPhone 15 Pro) with MaiK Lite: the phone answers
+  await ev(`PREP_ASK._resetThreads(); return 1;`);
   await native("iPhone16,1", 7.5, true);
   await click("#smdPrep [data-act=ask]");
   ok(await until(`var w=document.getElementById("pnAsk"); return !!w && !!PREP_ASK._s().vd && w.querySelector('[data-v=local]').getAttribute("aria-checked")==="true" && /Runs on this phone\\. About 10 to 40 seconds\\./.test(w.textContent);`, 5000), "capable with MaiK Lite: On this phone selected, Runs on this phone");
@@ -242,6 +244,7 @@ try {
   await click("#pnAsk .pa-top [data-act=ak-close]");
 
   // ---- MaiK engine on Local: an online ask asks first
+  await ev(`PREP_ASK._resetThreads(); return 1;`);
   await ev(`window.SMD_MAIK_ENGINE = { cloudAllowed: function () { return false; } }; var s=PREP._host.store(); s.ask={m:"online",q:1}; PREP._host.save(); return 1;`);
   teach = { status: 200, body: { text: "The answer is the key, as the stored explanation says.", usage: { mt: 60 }, wallet: { balanceMt: 0, costCapOn: false } } };
   const b4 = teachReqs.length;

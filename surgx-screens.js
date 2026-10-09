@@ -394,7 +394,7 @@
     body += sourcesCard(p.sources);
     body += '<div class="sgx-btnrow">' +
       '<button class="sgx-btn" data-sgx="go" data-r="evidence">' + ic("menu_book") + " Evidence</button>" +
-      '<button class="sgx-btn" data-sgx="ask" data-q="' + attr(p.title) + '">' + ic("auto_awesome") + " Ask MaiK</button>" +
+      '<button class="sgx-btn" data-sgx="ask" data-q="' + attr(p.title) + '">' + (typeof window !== "undefined" && window.SMD_MAIK_MARK ? window.SMD_MAIK_MARK.html("mark", { size: 20 }) : ic("auto_awesome")) + " Ask MaiK</button>" +
       "</div>";
     body += '<div class="sgx-disclaim">' + esc(p.disclaimer) + "</div>";
 

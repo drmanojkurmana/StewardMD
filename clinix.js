@@ -29,7 +29,7 @@
     "/clinix-physiology.js?v=cx11a927-sandbox1-lazy1",
     "/clinix-profile.js?v=cx10a927-lazy1",
     "/clinix-examiner.js?v=cx10a927-lazy1",
-    "/clinix-screens.js?v=cx26a927-sandbox1-prolock-snd1-lazy1-own4-obg1-cel1"
+    "/clinix-screens.js?v=cx26a927-sandbox1-prolock-snd1-lazy1-own4-obg1-cel1-mkai1"
   ];
 
   function flags() { try { return (typeof window !== "undefined" && window.SMD_CLINIX_FLAGS) || null; } catch (e) { return null; } }

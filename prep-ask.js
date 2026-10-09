@@ -20,6 +20,14 @@
    - With the next store build: the official Capacitor Device plugin (@capacitor/device) adds the model identifier
      ("iPhone16,1", "iPad13,4") matched against prep/device-capability.json. Feature-checked: without the native
      plugin (web, the current store build) the memory rule alone decides.
+   Chat (owner, 2026-10-09 evening): the sheet is a short conversation on that one MCQ, lesson step or card. After the
+   first answer a box takes follow-up doubts; each goes with the same grounding, the last few turns and a summary of
+   older ones (prep-teacher.js chatContext, small on purpose: MaiK Tokens), through the same place (on this phone or
+   online, POST /api/ai/prep-teach kind "chat") and the same check; MaiK Tokens are shown under every online answer.
+   After 10 student messages (the first ask counts) the box gives way to "Continue this in MaiK Assistant", which opens
+   the app's main MaiK (home.js SMD_askMaikHandoff) with the topic and a short summary typed in. A thread is kept per
+   item for the session and, small, on the phone (pruneThreads). The avatars and buttons carry the MaiK AI mark
+   (maik-ai-mark.js, assets/maik-ai-mark.svg).
    Pure helpers load under node for tests. */
 (function (G) {
   "use strict";
@@ -98,8 +106,44 @@
     if (status === 0) return { error: "offline", note: "Ask MaiK online needs a connection. Here is the stored explanation." };
     return { error: "online-error", note: "MaiK could not answer online just now. Here is the stored explanation." };
   }
+  /* ---- chat threads (pure) ---- */
+  var TH = { max: 12, turns: 24, chars: 1200, days: 7 };
+  function hash(s) { var h = 5381, i; s = String(s || ""); for (i = 0; i < s.length; i++) h = ((h * 33) ^ s.charCodeAt(i)) >>> 0; return h.toString(36); }
+  /* threadKey(ctx) -> the thread an Ask MaiK sheet belongs to: an MCQ by its id (any pick), a step or card by its text. */
+  function threadKey(ctx) {
+    ctx = ctx || {};
+    if (ctx.kind === "mcq") { var it = ctx.item || {}; return "q:" + (it.id ? String(it.id).slice(0, 80) : hash(it.q)); }
+    var tx = ctx.step ? ctx.step.tx : String(ctx.fr || "") + "\n" + String(ctx.bk || "");
+    return (ctx.kind === "card" ? "c:" : "s:") + hash(String(ctx.title || "") + "|" + String(tx || ""));
+  }
+  /* pruneThreads(th, now) -> the threads worth keeping: newer than TH.days, at most TH.max (newest first), each with
+     its last TH.turns turns of at most TH.chars characters. Anything malformed is dropped. */
+  function pruneThreads(th, now) {
+    var out = {}, list = [], k;
+    if (!th || typeof th !== "object") return out;
+    for (k in th) {
+      var r = th[k];
+      if (!Object.prototype.hasOwnProperty.call(th, k) || !r || typeof r !== "object" || !Array.isArray(r.turns) || !(r.ts > now - TH.days * 864e5)) continue;
+      list.push([k, r]);
+    }
+    list.sort(function (a, b) { return b[1].ts - a[1].ts; });
+    list.slice(0, TH.max).forEach(function (e) {
+      var r = e[1], turns = r.turns.filter(function (t) { return t && (t.r === "u" || t.r === "m") && typeof t.t === "string"; }).slice(-TH.turns).map(function (t) {
+        var o = {}, f; for (f in t) if (Object.prototype.hasOwnProperty.call(t, f)) o[f] = t[f];
+        o.t = t.t.slice(0, TH.chars); if (o.note) o.note = String(o.note).slice(0, 300);
+        return o;
+      });
+      out[e[0]] = { ts: r.ts, mode: r.mode === "local" || r.mode === "online" ? r.mode : null, turns: turns };
+    });
+    return out;
+  }
+  // The idempotency id of one follow-up: the same thread, message number and text replay the same answer for free.
+  function idemFor(k, n, messages) {
+    var last = messages && messages.length ? messages[messages.length - 1].t : "";
+    return ("ck" + hash(k + "|" + n) + hash(last) + "00000000").slice(0, 24);
+  }
   var PURE = { RULES: RULES, MSG: MSG, deviceVerdict: deviceVerdict, verdictMsg: verdictMsg, localOk: localOk, androidVerOf: androidVerOf,
-    firstChoice: firstChoice, skipChoice: skipChoice, onlineNote: onlineNote, rowFor: rowFor };
+    firstChoice: firstChoice, skipChoice: skipChoice, onlineNote: onlineNote, rowFor: rowFor, TH: TH, threadKey: threadKey, pruneThreads: pruneThreads, idemFor: idemFor };
   if (typeof module !== "undefined" && module.exports && !(G && G.document)) { module.exports = PURE; return; }
 
   /* ================= app ================= */
@@ -149,16 +193,43 @@
   var ICO = {
     phone: '<rect x="7" y="2.5" width="10" height="19" rx="2.5"/><path d="M11 18.5h2"/>',
     cloud: '<path d="M7 18h10.5a4 4 0 0 0 .6-7.95A6 6 0 0 0 6.6 9.2 4.4 4.4 0 0 0 7 18z"/>',
-    check: '<path d="M5 12l5 5 9-10"/>', close: '<path d="M18 6L6 18M6 6l12 12"/>'
+    check: '<path d="M5 12l5 5 9-10"/>', close: '<path d="M18 6L6 18M6 6l12 12"/>', send: '<path d="M12 19V5M5.5 11.5L12 5l6.5 6.5"/>'
   };
   function ic(n, sz) { return '<svg viewBox="0 0 24 24" width="' + (sz || 20) + '" height="' + (sz || 20) + '" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">' + ICO[n] + "</svg>"; }
   function L(k) { return ["A", "B", "C", "D", "E"][k] || "?"; }
   function keyOf(item) { var a = item && item.a; return typeof a === "number" && a >= 0 && item.o && a < item.o.length ? a : -1; }
 
+  /* ---------- threads: one short chat per MCQ, lesson step or card ----------
+     Kept for the app session in memory and, small, on the phone (localStorage THREAD_KEY, pruned by pruneThreads: at
+     most TH.max threads of TH.turns turns of TH.chars characters, dropped after TH.days days). Exam text only:
+     the student's own doubts and MaiK's checked answers, nothing about a patient. */
+  var THREAD_KEY = "smd_prep_ask_v1";
+  var threads = null;
+  function loadThreads() {
+    if (threads) return threads;
+    threads = {};
+    try { var o = JSON.parse(G.localStorage.getItem(THREAD_KEY) || "null"); threads = pruneThreads(o && o.th, Date.now()); } catch (e) { threads = {}; }
+    return threads;
+  }
+  // The stored copy is pruned; the live records stay the same objects (an open sheet holds its own), only dropped ones go.
+  function saveThreads() {
+    try {
+      var keep = pruneThreads(loadThreads(), Date.now()), k;
+      for (k in threads) if (Object.prototype.hasOwnProperty.call(threads, k) && !keep[k] && !(S && S.th && S.th.k === k)) delete threads[k];
+      G.localStorage.setItem(THREAD_KEY, JSON.stringify({ v: 1, th: keep }));
+    } catch (e) {}
+  }
+  function threadFor(ctx) {
+    var all = loadThreads(), k = threadKey(ctx);
+    if (!all[k]) all[k] = { ts: Date.now(), mode: null, turns: [] };
+    return { k: k, rec: all[k] };
+  }
+
   /* ---------- the sheet ---------- */
   function root() { return S && S.host && S.host.root && S.host.root(); }
   function el() { var r = root(); return r && r.querySelector("#pnAsk"); }
   function sheet() { var w = el(); return w && w.querySelector(".pn-sheet"); }
+  function turns() { return S.th.rec.turns; }
   function title() {
     var c = S.ctx;
     if (c.kind === "mcq") { var a = keyOf(c.item), ch = typeof c.chosen === "number" ? c.chosen : -1; return ch >= 0 && ch !== a ? "Why is " + L(ch) + " wrong?" : "Why is " + L(a) + " right?"; }
@@ -174,6 +245,9 @@
     }
     return '<section class="pt-ctx" aria-label="' + (c.kind === "card" ? "The card" : "The lesson step") + '"><p class="pt-q">' + esc(String(c.step.tx || "").replace(/\*\*/g, "")) + '</p><p class="pt-pills"><span class="pt-pill">' + esc(c.title || "") + "</span></p></section>";
   }
+  // The MaiK AI mark (maik-ai-mark.js, one SVG for the whole app); without it, the old avatar picture.
+  function mark(size) { var M = G.SMD_MAIK_MARK; return M ? M.html("tile", { size: size || 34 }) : ""; }
+  function avatar(size) { var m = mark(size); return '<span class="pt-av' + (m ? " mk" : "") + '" aria-hidden="true">' + m + "</span>"; }
   function optHtml(v, on, dis, icon, name, desc, extra) {
     return '<button type="button" class="pa-opt' + (on ? " on" : "") + '" role="radio" aria-checked="' + on + '" data-act="ak-pick" data-v="' + v + '"' + (dis ? ' aria-disabled="true"' : "") + ' tabindex="' + (on ? 0 : -1) + '">' +
       '<span class="pa-oi" aria-hidden="true">' + ic(icon) + '</span><span class="pa-ob"><b>' + name + "</b><small>" + desc + "</small>" + (extra ? '<small class="pa-ov">' + extra + "</small>" : "") + "</span>" +
@@ -182,7 +256,7 @@
   function chooseHtml() {
     var vd = S.vd, ready = S.ready, canLocal = localOk(vd, ready), msg = vd ? verdictMsg(vd, ready) : "Checking this phone…";
     var cantLocal = vd && !canLocal;
-    return '<span class="pn-grab" aria-hidden="true"></span><div class="pa-head"><span class="pt-av" aria-hidden="true"></span><div><h2 id="paT">Ask MaiK</h2><p class="pn-mut pn-small">Choose where MaiK answers.</p></div></div>' +
+    return '<span class="pn-grab" aria-hidden="true"></span><div class="pa-head">' + avatar(44) + '<div><h2 id="paT">Ask MaiK</h2><p class="pn-mut pn-small">Choose where MaiK answers.</p></div></div>' +
       (cantLocal ? '<p class="pa-note" role="status">' + esc(msg) + "</p>" : "") +
       '<div class="pa-opts" role="radiogroup" aria-labelledby="paT">' +
       optHtml("local", S.sel === "local", !canLocal, "phone", "On this phone", "Works without signal. Your question stays on this phone.", cantLocal ? "" : esc(msg)) +
@@ -205,32 +279,61 @@
     return (f.why ? "<h3>Why " + esc(f.chosen) + " is wrong</h3>" + para(f.why) : "") + "<h3>Answer " + esc(f.key) + "</h3>" +
       (f.exp ? para(f.exp) : '<p class="pn-mut">No explanation is stored for this question yet.</p>') + (f.kp ? '<p class="pn-kp"><b>Remember:</b> ' + esc(f.kp) + "</p>" : "");
   }
-  function avatar() { return '<span class="pt-av" aria-hidden="true"></span>'; }
-  function typing(cap) { return '<li class="pt-msg ai">' + avatar() + '<div class="pt-bub pt-typing"><span class="pt-dots" aria-hidden="true"><i></i><i></i><i></i></span><p class="pn-mut pn-small" role="status">' + cap + "</p></div></li>"; }
-  function reply(html, note) { return '<li class="pt-msg ai">' + avatar() + '<div class="pt-col"><section class="pt-bub pt-ans-b" role="status" tabindex="-1">' + html + "</section>" + (note ? '<p class="pt-note">' + note + "</p>" : "") + "</div></li>"; }
+  function typing(cap) { return '<li class="pt-msg ai" data-key="typing">' + avatar() + '<div class="pt-bub pt-typing"><span class="pt-dots" aria-hidden="true"><i></i><i></i><i></i></span><p class="pn-mut pn-small" role="status">' + cap + "</p></div></li>"; }
+  function reply(key, html, note, last) { return '<li class="pt-msg ai" data-key="' + key + '">' + avatar() + '<div class="pt-col"><section class="pt-bub pt-ans-b' + (last ? " pa-last" : "") + '"' + (last ? ' role="status"' : "") + ' tabindex="-1">' + html + "</section>" + (note ? '<p class="pt-note">' + note + "</p>" : "") + "</div></li>"; }
   function fmt(n) { try { return Number(n).toLocaleString("en-IN"); } catch (e) { return String(n); } }
-  function threadHtml() {
-    var r = S.res || {}, msgs = "", local = S.mode === "local", c = S.ctx;
-    if (S.phase === "consent") msgs = reply('<p>Your MaiK setting keeps answers on this phone. Send this question to StewardMD\'s server for this one answer?</p><div class="pa-row"><button type="button" class="pn-btn pri" data-act="ak-consent">Send online</button><button type="button" class="pn-btn" data-act="ak-mode" data-v="local"' + (localOk(S.vd, S.ready) ? "" : ' aria-disabled="true"') + ">On this phone</button></div>", "");
-    else if (S.phase === "run") msgs = typing(local ? 'MaiK is working on your phone: <span id="paSecs">0</span> s. This takes 10 to 40 seconds.' : "MaiK is answering online…");
-    else if (S.phase === "busy") msgs = reply("<p>MaiK is still working on another answer on this phone. Try again in a moment.</p>", "");
-    else if (S.phase === "done" && r.ok) {
-      var src = c.kind === "mcq" ? "this question's stored explanation" : c.kind === "card" ? "this card" : "this step";
-      var note = (local ? "Written on this phone by " + esc(T().packLabel()) : "Answered online by MaiK") + " from " + src + ". Checked: every drug and number in it appears there.";
-      if (!local && S.usage && S.usage.mt != null) note += " Used about " + fmt(S.usage.mt) + " MaiK Tokens" + (S.wallet && S.wallet.costCapOn && S.wallet.balanceMt != null ? "; " + fmt(S.wallet.balanceMt) + " left in your account." : ".");
-      msgs = reply('<p class="pt-who">MaiK explains</p>' + para(r.text), note) +
-        (c.kind === "mcq" ? '<li class="pa-more"><details class="pt-more"><summary class="pn-chip pt-chip">Show the stored explanation</summary><div class="pt-bub pt-stored">' + storedHtml() + "</div></details></li>" : "");
-    } else if (S.phase === "done") {
-      var acts = "";
-      if (r.why === "tokens" && G.SMD_PRO && G.SMD_PRO.openAiLimit) acts = '<div class="pa-row"><button type="button" class="pn-btn pri" data-act="ak-tokens">Add MaiK Tokens</button></div>';
-      msgs = reply('<p class="pn-mut pn-small">' + esc(r.note || "MaiK could not answer just now.") + "</p>" + acts + storedHtml(), "");
+  function canHand() { return !!(G.SMD_askMaikHandoff || G.SMD_askMaik); }
+  // The note under one of MaiK's answers: where it was written, how it was checked, the MaiK Tokens it used.
+  function noteFor(t) {
+    var c = S.ctx, src = c.kind === "mcq" ? "this question's stored explanation" : c.kind === "card" ? "this card" : "this step";
+    var n = (t.mode === "local" ? "Written on this phone by " + esc(t.pack || "MaiK") : "Answered online by MaiK") + " from " + src + ". Checked: every drug and number in it appears there.";
+    if (t.mode !== "local" && t.mt != null) n += " Used about " + fmt(t.mt) + " MaiK Tokens" + (t.capOn && t.bal != null ? "; " + fmt(t.bal) + " left in your account." : ".");
+    return n;
+  }
+  function turnHtml(t, i, all, lastIdle) {
+    var c = S.ctx, last = i === all.length - 1;
+    if (t.r === "u") return '<li class="pt-msg me" data-key="t' + i + '"><p class="pt-bub">' + esc(t.t) + "</p></li>";
+    if (t.ok) {
+      return reply("t" + i, '<p class="pt-who">MaiK explains</p>' + para(t.t), noteFor(t), last) +
+        (t.first && c.kind === "mcq" ? '<li class="pa-more" data-key="more' + i + '"><details class="pt-more"><summary class="pn-chip pt-chip">Show the stored explanation</summary><div class="pt-bub pt-stored">' + storedHtml() + "</div></details></li>" : "") +
+        (last && lastIdle && t.why === "not-covered" && canHand() ? handChip() : "");
     }
-    return '<ol class="pt-thread"><li class="pt-msg me"><p class="pt-bub">' + esc(title()) + "</p></li>" + msgs + "</ol>";
+    var acts = "";
+    if (last && lastIdle) {
+      if (t.why === "tokens" && G.SMD_PRO && G.SMD_PRO.openAiLimit) acts += '<button type="button" class="pn-btn pri" data-act="ak-tokens">Add MaiK Tokens</button>';
+      if (t.retry) acts += '<button type="button" class="pn-btn" data-act="ak-retry">Try again</button>';
+      if (acts) acts = '<div class="pa-row">' + acts + "</div>";
+    }
+    return reply("t" + i, '<p class="pn-mut pn-small">' + esc(t.note || "MaiK could not answer just now.") + "</p>" + acts + (t.first ? storedHtml() : ""), "", last) +
+      (last && lastIdle && t.why === "not-covered" && canHand() ? handChip() : "");
+  }
+  function handChip() { return '<li class="pa-hchip" data-key="hchip"><button type="button" class="pn-chip pt-chip" data-act="ak-hand">' + mkSmall() + "Continue in MaiK Assistant</button></li>"; }
+  function mkSmall() { var M = G.SMD_MAIK_MARK; return M ? M.html("mark", { size: 18 }) : ""; }
+  function threadHtml() {
+    var all = turns(), idle = S.phase !== "run" && S.phase !== "consent", msgs = "";
+    all.forEach(function (t, i) { msgs += turnHtml(t, i, all, idle); });
+    if (S.phase === "consent") msgs += reply("consent", '<p>Your MaiK setting keeps answers on this phone. Send this question to StewardMD\'s server for this one answer?</p><div class="pa-row"><button type="button" class="pn-btn pri" data-act="ak-consent">Send online</button><button type="button" class="pn-btn" data-act="ak-mode" data-v="local"' + (localOk(S.vd, S.ready) ? "" : ' aria-disabled="true"') + ">On this phone</button></div>", "", true);
+    else if (S.phase === "run") msgs += typing(S.mode === "local" ? 'MaiK is working on your phone: <span id="paSecs">0</span> s. This takes 10 to 40 seconds.' : "MaiK is answering online…");
+    else if (S.phase === "busy") msgs += reply("busy", "<p>MaiK is still working on another answer on this phone. Try again in a moment.</p>", "", true);
+    return '<ol class="pt-thread">' + msgs + "</ol>";
+  }
+  // Below the thread: the follow-up box, or after 10 student messages the hand-off to the MaiK assistant.
+  function footHtml() {
+    var all = turns(), p = P(), n = p ? p.userCount(all) : 0, max = p ? p.CHAT_LIM.turns : 10;
+    if (!all.length || S.phase === "consent") return "";
+    if (n >= max && S.phase !== "run") {
+      return '<div class="pa-hand" role="status"><p><b>This chat has reached ' + max + " questions.</b> " + (canHand() ? "Carry on in MaiK Assistant with this topic and a short summary of this chat." : "Open MaiK from the home screen to ask more.") + "</p>" +
+        (canHand() ? '<button type="button" class="pn-btn pri" data-act="ak-hand">' + mkSmall() + "Continue this in MaiK Assistant</button>" : "") + "</div>";
+    }
+    var left = max - n, wait = S.phase === "run";
+    return '<div class="pa-cmp"><div class="pa-box"><textarea id="paIn" rows="1" maxlength="' + (p ? p.CHAT_LIM.user : 300) + '" aria-label="Ask MaiK a follow-up doubt" name="paIn" placeholder="Ask a follow-up doubt…" enterkeyhint="send" autocomplete="off">' + esc(S.draft || "") + "</textarea>" +
+      '<button type="button" class="pa-send" data-act="ak-send" aria-label="Send"' + (wait ? ' aria-disabled="true"' : "") + ">" + ic("send", 20) + "</button></div>" +
+      '<p class="pa-left" id="paLeft">' + (left === 1 ? "1 question left in this chat" : left + " questions left in this chat") + "</p></div>";
   }
   function chatHtml() {
-    return '<span class="pn-grab" aria-hidden="true"></span><div class="pa-top"><span class="pt-av" aria-hidden="true"></span><h2 id="paT">Ask MaiK</h2>' +
+    return '<span class="pn-grab" aria-hidden="true"></span><div class="pa-top">' + avatar(36) + '<h2 id="paT">Ask MaiK</h2>' +
       '<button type="button" class="pn-ib" data-act="ak-close" aria-label="Close Ask MaiK">' + ic("close") + "</button></div>" + segHtml() +
-      '<div class="pa-body pt-chat">' + ctxHtml() + threadHtml() + "</div>";
+      '<div class="pa-body pt-chat">' + ctxHtml() + threadHtml() + "</div>" + footHtml();
   }
   function draw(focusSel) {
     var sh = sheet(); if (!sh) return;
@@ -243,24 +346,32 @@
     body = sh.querySelector(".pa-body");
     if (body && !same) body.scrollTop = y;
     if (focusSel) { var f = sh.querySelector(focusSel); if (f) try { f.focus({ preventScroll: false }); } catch (e) {} }
-    if (S.phase === "done" && body) { var ans = sh.querySelector(".pt-ans-b"); if (ans && ans.scrollIntoView) try { ans.scrollIntoView({ block: "nearest" }); } catch (e) {} }
+    // The newest message stays in view: MaiK's answer (its top), or the student's own message and the typing dots.
+    if (body && S.view !== "choose" && S.scroll) {
+      S.scroll = false;
+      var tgt = S.phase === "run" ? sh.querySelector('.pt-msg[data-key="typing"]') : sh.querySelector(".pa-hchip") || sh.querySelector(".pa-last") || sh.querySelector(".pa-hand");
+      if (tgt && tgt.scrollIntoView) try { tgt.scrollIntoView({ block: S.phase === "run" ? "end" : "nearest" }); } catch (e) {}
+    }
   }
 
-  /* open(ctx, host). ctx: { kind: "mcq", item, chosen } | { kind: "step", step, title } | { kind: "card", fr, bk, title }. */
+  /* open(ctx, host). ctx: { kind: "mcq", item, chosen, topic? } | { kind: "step", step, title } | { kind: "card", fr, bk, title }. */
   function open(ctx, host) {
     if (!ctx || !host || !host.root || !host.root()) return false;
     close(true);
     if (ctx.kind === "card") ctx = { kind: "card", step: { tx: String(ctx.fr || "") + "\n" + String(ctx.bk || "") }, title: ctx.title || "Card" };
-    var ready = packReady(), pf = pref(host);
-    S = { ctx: ctx, host: host, prev: D.activeElement, vd: null, ready: ready, sel: firstChoice(pf, ready), dont: !!(pf && pf.q), view: "choose", mode: null, phase: "", res: null, token: ++seq, consented: false };
+    var ready = packReady(), pf = pref(host), th = threadFor(ctx);
+    S = { ctx: ctx, host: host, prev: D.activeElement, vd: null, ready: ready, sel: firstChoice(pf, ready), dont: !!(pf && pf.q), view: "choose", mode: null, phase: "", token: ++seq, consented: false, th: th, draft: "", scroll: true };
     var w = D.createElement("div");
     w.className = "pn-sheet-wrap pa-wrap" + (side() && ctx.side ? " pa-side" : "");
     w.id = "pnAsk";
     w.innerHTML = '<div class="pn-scrim" data-act="ak-close"></div><section class="pn-sheet pa-sheet" role="dialog" aria-modal="true" aria-labelledby="paT" tabindex="-1"></section>';
     host.root().appendChild(w);
+    w.addEventListener("input", onInput);
+    w.addEventListener("keydown", onComposeKey);
     var mine = S;
-    // A remembered choice that still works skips the question (pack readiness is synchronous; the verdict follows).
-    if (skipChoice(pf, ready)) { S.view = "chat"; draw(); ask(pf.m); }
+    // A remembered choice that still works skips the question; else the sheet asks where, as before. Either way a thread
+    // already started on this item continues (resume()).
+    if (skipChoice(pf, ready)) { S.view = "chat"; resume(pf.m); }
     else draw();
     try { sheet().focus(); } catch (e) {}
     verdict().then(function (vd) {
@@ -268,6 +379,7 @@
       S.vd = vd; S.ready = packReady();
       // A phone that cannot run MaiK starts on Online, said at once.
       if (!localOk(vd, S.ready) && S.sel === "local") S.sel = "online";
+      if (S.view === "chat" && S.mode === "local" && !localOk(vd, S.ready) && S.phase !== "run") S.mode = "online";
       if (S.view === "choose") draw(); else if (S.phase !== "run") draw();
     });
     return true;
@@ -280,36 +392,107 @@
     return !!w;
   }
   function alive(tok) { return !!(S && S.token === tok && el()); }
+  function onInput(e) { if (S && e.target && e.target.id === "paIn") S.draft = e.target.value; }
+  function onComposeKey(e) {
+    if (!S || !e.target || e.target.id !== "paIn") return;
+    if (e.key === "Enter" && !e.shiftKey && !e.isComposing) { e.preventDefault(); send(); }
+  }
+  function addTurn(t) { var all = turns(); all.push(t); S.th.rec.ts = Date.now(); if (S.mode) S.th.rec.mode = S.mode; saveThreads(); }
 
-  function ask(mode) {
-    var c = S.ctx, t = T(), p = P(), tok = S.token;
-    if (!t || !p) { S.mode = mode; S.phase = "done"; S.res = { ok: false, note: "Ask MaiK did not load. Close and open PrepNucleus again." }; return draw(); }
+  // The answer for the student's message at turns()[idx] (the first ask, or a follow-up), on the phone or online.
+  function ask(mode, retry) {
+    var c = S.ctx, t = T(), p = P(), tok = S.token, all = turns();
+    if (!t || !p) { S.mode = mode; S.phase = ""; if (!all.length) all.push({ r: "u", t: title() }); all.push({ r: "m", t: "", ok: false, first: all.length === 1, note: "Ask MaiK did not load. Close and open PrepNucleus again." }); return draw(); }
     if (mode === "local" && !localOk(S.vd || { v: "unknown" }, S.ready)) mode = "online";
-    S.mode = mode; S.res = null; S.usage = null; S.wallet = null;
-    if (mode === "online" && !cloudAllowed() && !S.consented) { S.phase = "consent"; return draw(".pa-body [data-act=ak-consent]"); }
-    S.phase = "run"; S.t0 = Date.now(); draw();
+    S.mode = mode; S.usage = null; S.wallet = null;
+    if (!all.length) addTurn({ r: "u", t: title() });
+    if (mode === "online" && !cloudAllowed() && !S.consented) { S.phase = "consent"; S.scroll = true; return draw(".pa-body [data-act=ak-consent]"); }
+    var first = all.length === 1;
+    S.phase = "run"; S.t0 = Date.now(); S.scroll = true; draw();
     if (mode === "local") tick(tok);
-    var finish = function (res) { if (mode === "local") t.setBusy(false); if (!alive(tok) || S.mode !== mode) return; S.res = res || { ok: false }; S.phase = "done"; draw(".pt-ans-b"); };
+    var finish = function (res) {
+      if (mode === "local") t.setBusy(false);
+      if (!alive(tok) || S.mode !== mode) return;
+      res = res || { ok: false };
+      var turn = res.ok ? { r: "m", t: res.text, ok: true, mode: mode } : { r: "m", t: "", ok: false, mode: mode, note: res.note, why: res.why || res.reason, retry: retryable(res) };
+      if (first) turn.first = true;
+      if (mode === "local") turn.pack = t.packLabel();
+      else if (S.usage && S.usage.mt != null) { turn.mt = S.usage.mt; if (S.wallet) { turn.bal = S.wallet.balanceMt; turn.capOn = !!S.wallet.costCapOn; } }
+      S.phase = ""; S.scroll = true; addTurn(turn); draw(".pa-last");
+    };
     var chosen = c.kind === "mcq" ? (typeof c.chosen === "number" ? c.chosen : -1) : -1;
     if (mode === "local") {
       if (t.isBusy()) { S.phase = "busy"; return draw(); }
       t.setBusy(true);
       return t.available().then(function (ok) {
         if (!ok) return { ok: false, note: "MaiK is not ready on this phone. Download MaiK Lite in Settings, MaiK, or ask online." };
-        if (c.kind === "mcq") return t.sourceSentences(c.item).then(function (sents) { return p.teach(c.item, chosen, { generate: t.localGenerate, lexicon: G.SMD_DRUG_LEXICON || null, sents: sents }); });
-        return p.teachStep(c.step, c.title, { generate: t.localGenerate, lexicon: G.SMD_DRUG_LEXICON || null });
+        return groundP().then(function (g) {
+          if (!first) return p.teachChat(g.ground, turns(), { generate: function (prompt, system) { return t.localGenerate(prompt, system); }, lexicon: G.SMD_DRUG_LEXICON || null, local: true });
+          if (c.kind === "mcq") return p.teach(c.item, chosen, { generate: t.localGenerate, lexicon: G.SMD_DRUG_LEXICON || null, sents: g.sents });
+          return p.teachStep(c.step, c.title, { generate: t.localGenerate, lexicon: G.SMD_DRUG_LEXICON || null });
+        });
       }).then(finish, function () { finish({ ok: false, note: "MaiK could not answer on this phone just now." }); });
     }
     // Online: the same grounding the phone would use, sent to the server; the reply is checked here like the phone's.
-    var gen = function (sents) {
-      var ground = c.kind === "mcq" ? p.groundingText(c.item, chosen, sents) : p.stepGround(c.step, c.title);
-      var body = c.kind === "mcq" ? { kind: "mcq", ground: ground, key: keyOf(c.item), chosen: chosen } : { kind: "step", ground: ground, title: String(c.title || "").slice(0, 200) };
-      return function () { return online(body); };
-    };
-    var srcP = c.kind === "mcq" ? t.sourceSentences(c.item) : Promise.resolve([]);
-    srcP.then(function (sents) {
-      return c.kind === "mcq" ? p.teach(c.item, chosen, { generate: gen(sents), lexicon: G.SMD_DRUG_LEXICON || null, sents: sents }) : p.teachStep(c.step, c.title, { generate: gen([]), lexicon: G.SMD_DRUG_LEXICON || null });
+    groundP().then(function (g) {
+      if (!first) {
+        return p.teachChat(g.ground, turns(), { lexicon: G.SMD_DRUG_LEXICON || null, generate: function (prompt, system, cx) {
+          var n = p.userCount(turns()), body = { kind: "chat", base: c.kind === "mcq" ? "mcq" : "step", ground: g.ground, turn: n, messages: cx.messages, idem: idemFor(S.th.k, n, cx.messages) };
+          if (cx.summary) body.summary = cx.summary;
+          return online(body);
+        } });
+      }
+      var body = c.kind === "mcq" ? { kind: "mcq", ground: g.ground, key: keyOf(c.item), chosen: chosen } : { kind: "step", ground: g.ground, title: String(c.title || "").slice(0, 200) };
+      var gen = function () { return online(body); };
+      return c.kind === "mcq" ? p.teach(c.item, chosen, { generate: gen, lexicon: G.SMD_DRUG_LEXICON || null, sents: g.sents }) : p.teachStep(c.step, c.title, { generate: gen, lexicon: G.SMD_DRUG_LEXICON || null });
     }).then(finish, function () { finish({ ok: false, note: "MaiK could not answer online just now." }); });
+  }
+  // The grounding for this item: an MCQ's stored text (with a student deck's source sentences), or the step or card.
+  function groundP() {
+    var c = S.ctx, t = T(), p = P(), chosen = c.kind === "mcq" ? (typeof c.chosen === "number" ? c.chosen : -1) : -1;
+    if (c.kind !== "mcq") return Promise.resolve({ ground: p.stepGround(c.step, c.title), sents: [] });
+    return Promise.resolve(t.sourceSentences(c.item)).then(function (sents) { return { ground: p.groundingText(c.item, chosen, sents), sents: sents }; }, function () { return { ground: p.groundingText(c.item, chosen, []), sents: [] }; });
+  }
+  // A failure the student can retry as it is (connection, busy, an empty or failed answer); not a check failure or tokens.
+  function retryable(res) { var w = res && (res.why || res.reason); return !!w && w !== "check" && w !== "not-covered" && w !== "tokens" && w !== "sign-in" && w !== "no-grounding"; }
+  /* send(): the student's follow-up doubt from the box. Trimmed, at most CHAT_LIM.user characters, ignored while MaiK
+     is answering or once the thread has its 10 messages. */
+  function send() {
+    var p = P(); if (!S || !p || S.phase === "run" || S.phase === "consent") return;
+    var box = sheet() && sheet().querySelector("#paIn"), txt = String((box && box.value) || S.draft || "").replace(/\s+/g, " ").trim().slice(0, p.CHAT_LIM.user);
+    if (!txt || !p.canAsk(turns())) return;
+    S.draft = ""; if (box) box.value = "";
+    addTurn({ r: "u", t: txt });
+    ask(S.mode || "online");
+  }
+  /* resume(mode): open the chat in this place. A new thread asks its first question; a thread whose last answer failed
+     asks that message again; a thread that ended on an answer just shows, ready for the next doubt (no new call). */
+  function resume(mode) {
+    var all = turns(), last = all[all.length - 1];
+    if (!all.length) return ask(mode);
+    if (last.r === "u" || !last.ok) { if (last.r === "m") { all.pop(); saveThreads(); } return ask(mode); }
+    S.mode = mode === "local" && !localOk(S.vd || { v: "unknown" }, S.ready) ? "online" : mode;
+    S.phase = ""; S.scroll = true; return draw();
+  }
+  // Try again: MaiK's failed answer to the last message is dropped and asked again (not a new student message).
+  function retry() {
+    var all = turns(), last = all[all.length - 1];
+    if (!last || last.r !== "m" || last.ok) return;
+    all.pop(); saveThreads();
+    ask(S.mode || "online", true);
+  }
+  // Continue in MaiK Assistant: the app's main MaiK opens with the topic and a short summary of this chat.
+  function handoffNow() {
+    var c = S.ctx, p = P(), info;
+    if (c.kind === "mcq") { var a = keyOf(c.item); info = { topic: c.topic || c.item.q, q: c.item.q, key: a >= 0 ? L(a) + ". " + c.item.o[a] : "" }; }
+    else info = { topic: c.title || (c.kind === "card" ? "Flashcard" : "Lesson") };
+    var h = p.handoff(info, turns());
+    close(true);
+    try {
+      if (G.SMD_askMaikHandoff) G.SMD_askMaikHandoff({ topic: h.topic, prefill: h.prefill, from: "prep" });
+      else if (G.SMD_askMaik) G.SMD_askMaik(h.prefill);
+    } catch (e) {}
+    return h;
   }
   // One online call. Resolves { text } or { error, note } (prep-teacher.js teach() shows the note); never rejects.
   function online(body) {
@@ -353,10 +536,23 @@
       var d = sheet() && sheet().querySelector("#paDont");
       S.dont = !!(d && d.checked);
       setPref(S.host, S.sel, S.dont);
-      S.view = "chat"; return ask(S.sel);
+      S.view = "chat"; return resume(S.sel);
     }
-    if (a === "ak-mode") { if (b.getAttribute("aria-disabled") === "true" || S.phase === "run") return; if (v === S.mode && S.phase === "done" && S.res && S.res.ok) return; return ask(v); }
+    if (a === "ak-mode") {
+      if (b.getAttribute("aria-disabled") === "true" || S.phase === "run") return;
+      var all = turns(), last = all[all.length - 1];
+      // No answer yet, or the last one failed: ask it again in the new place. Otherwise the next doubt goes there.
+      if (!all.length || S.phase === "consent" || S.phase === "busy" || (last && last.r === "m" && !last.ok)) {
+        if (last && last.r === "m" && !last.ok) { all.pop(); saveThreads(); }
+        S.phase = ""; return ask(v);
+      }
+      if (v === S.mode) return;
+      S.mode = v; S.th.rec.mode = v; saveThreads(); return draw('[data-act=ak-mode][data-v="' + v + '"]');
+    }
     if (a === "ak-consent") { S.consented = true; return ask("online"); }
+    if (a === "ak-send") { if (b.getAttribute("aria-disabled") === "true") return; return send(); }
+    if (a === "ak-retry") return retry();
+    if (a === "ak-hand") return handoffNow();
     if (a === "ak-tokens") { try { G.SMD_PRO.openAiLimit({ message: "You have used today's free MaiK Tokens." }); } catch (e) {} return; }
   }
   // Your plan settings: "Ask me each time", "On this phone", "Online".
@@ -379,5 +575,6 @@
   if (D && D.addEventListener) D.addEventListener("keydown", onKey, true);
 
   G.PREP_ASK = { open: open, close: close, back: back, leave: leave, act: act, settingsHtml: settingsHtml, isOpen: function () { return !!(S && el()); },
-    verdict: verdict, deviceInfo: deviceInfo, _reset: function () { devP = null; tabP = null; }, _pure: PURE, _s: function () { return S; } };
+    verdict: verdict, deviceInfo: deviceInfo, _reset: function () { devP = null; tabP = null; }, _resetThreads: function () { threads = {}; try { G.localStorage.removeItem(THREAD_KEY); } catch (e) {} },
+    _pure: PURE, _s: function () { return S; } };
 })(typeof window !== "undefined" ? window : this);
