@@ -4481,7 +4481,10 @@
     var refSrc = null; try { refSrc = evHarrisonSrc(id); } catch (e) { refSrc = null; }
 
     var sev = H.severityClassification ? '<div class="ev-subh">Severity</div><p>' + medFormat(stripCite(H.severityClassification)) + '</p>' : "";
-    var dxText = (o.confirm || "") + evSub("Investigations", evList(ix)) + sev;
+    // Calculators the app already has: diagnostic and severity scores here, treatment scores under Management.
+    var calcDx = scoreChipsBlock({ id: id, name: o.name || H.name || "" }, "dx", "Scores and calculators");
+    var calcTx = scoreChipsBlock({ id: id, name: o.name || H.name || "" }, "tx", "Treatment calculators");
+    var dxText = (o.confirm || "") + evSub("Investigations", evList(ix)) + sev + calcDx;
     var ddxText = evList(arr(H.additionalDifferentials)) + evSub("Mimics", evList(mim));
     var prog = H.prognosis ? '<p>' + medFormat(stripCite(H.prognosis)) + '</p>' : "";
     var pearlsHtml = (pearls.length ? evSub(glancePearls.length ? "More pearls" : "Pearls", evList(pearls)) : "") + evSub("Pitfalls", evList(arr(H.pitfalls), "warn"));
@@ -4492,7 +4495,7 @@
       ["patho", pathoRest + put.patho, pathoRest + put.patho],
       ["dx", dxText + put.dx + legacyTbl.dx + imaging, dxText + v2("diagnostic") + v2("flowchart-dx") + put.dx + legacyTbl.dx + imaging],
       ["ddx", ddxText + legacyTbl.ddx, ddxText + v2("ddx") + legacyTbl.ddx],
-      ["mgmt", (o.mgmt || "") + put.mgmt + legacyTbl.mgmt + other, (o.mgmt || "") + v2("treatment") + v2("flowchart") + put.mgmt + legacyTbl.mgmt + other],
+      ["mgmt", (o.mgmt || "") + calcTx + put.mgmt + legacyTbl.mgmt + other, (o.mgmt || "") + calcTx + v2("treatment") + v2("flowchart") + put.mgmt + legacyTbl.mgmt + other],
       ["prog", prog, prog],
       ["pearls", pearlsHtml, pearlsHtml],
       ["refs", refs, refs + v2("foot")]
@@ -4506,6 +4509,8 @@
         '<h3>' + L[0] + '</h3>' + s[2] + '</section>';
       chips += '<button type="button" class="kbr-chip" data-jump="kbr-' + key + '">' + L[1] + '</button>';
     });
+    // Patient handout: kb-v2-loader.js fills this slot only when kb/dist/handouts holds one for this disease.
+    glance += '<div class="kbh-slot" data-kbh-id="' + esc(id) + '"></div>';
     var jump = chips ? '<nav class="kbr-jump" aria-label="Jump to section"><div class="kbr-jump-in">' + chips + '</div></nav>' : "";
     return { glance: glance, body: body, jump: jump };
   }
@@ -4606,7 +4611,6 @@
     if (syn) rdMgmt = synMgmt;
     else {
       if (briefTx && briefTx.length) rdMgmt += '<ol class="dx-mgmt-tx">' + briefTx.map(function (x) { return '<li>' + medFormat(x) + '</li>'; }).join("") + '</ol>';
-      if (!refInf) rdMgmt += scoreChipsBlock({ id: id, name: name });
       if (dm && dm.dispo) rdMgmt += '<p><b>Disposition.</b> ' + medFormat(dm.dispo) + '</p>';
       if (dm && dm.src) rdMgmt += '<p class="dx-mgmt-src">Source: ' + esc(dm.src) + '</p>';
       if (!refInf && dm && dm.dx) rdConfirm = '<p><b>How to confirm.</b> ' + medFormat(dm.dx) + '</p>';
@@ -4618,7 +4622,7 @@
     var backLabel = "‹ Back to differential";
     if (opts && opts.from === "onco-home") backLabel = "‹ ONCQIS";
     else if (opts && (opts.standalone || opts.from === "syndromes" || opts.from === "knowledge-library" || _libReturnScroll !== null)) backLabel = "‹ Library";
-    var rd = kbReaderBodyHTML(id, H, { reason: reason, syn: syn, causes: synCauses, mgmt: rdMgmt, confirm: rdConfirm, keyIx: rdKeyIx });
+    var rd = kbReaderBodyHTML(id, H, { name: name, reason: reason, syn: syn, causes: synCauses, mgmt: rdMgmt, confirm: rdConfirm, keyIx: rdKeyIx });
 
     el.innerHTML = '<div class="dx-mgmt-top"><button class="dx-back" id="dxMgmtBack" type="button">' + backLabel + '</button>' +
         '<div class="dx-reader-brand"><strong>Knowledge Library</strong><span>Clinical disease reference</span></div><span class="dx-reader-spacer" aria-hidden="true"></span></div>' +
@@ -4755,11 +4759,11 @@
    * STYLES + launch
    * ---------------------------------------------------------------------- */
   // Relevant-score suggestion chips for a diagnosis (Feature A; uses window.CALC_LINKS).
-  function scoreChipsBlock(r) {
+  function scoreChipsBlock(r, kind, heading) {
     try {
       if (!window.CALC_LINKS) return "";
-      var ids = CALC_LINKS.forDisease(r && r.id, r && r.name);
-      return CALC_LINKS.chipsHTML(ids);
+      var ids = CALC_LINKS.forDisease(r && r.id, r && r.name, kind);
+      return CALC_LINKS.chipsHTML(ids, heading);
     } catch (e) { return ""; }
   }
   function wireScoreChips() {
@@ -4769,7 +4773,19 @@
       var b = e.target && e.target.closest && e.target.closest("button.cl-chip[data-calc]");
       if (!b) return;
       var id = b.getAttribute("data-calc");
-      try { if (window.SB && SB.calc) SB.calc(id); else if (window.MEDCALC) MEDCALC.open(id); } catch (err) {}
+      // MEDCALC holds every calculator these chips can name; the shell's SB.calc/openCalc only knows its own short list and does nothing for the rest.
+      try {
+        if (window.MEDCALC && MEDCALC.get && MEDCALC.get(id)) {
+          MEDCALC.open(id);
+          // the calculator sheet (z 870) sits under the pinned disease reader (z 900): lift it while it is open
+          var mc = document.getElementById("mcOverlay");
+          if (mc && b.closest(".dx-overlay")) {
+            mc.style.zIndex = "960";
+            var mo = new MutationObserver(function () { if (!mc.classList.contains("on")) { mc.style.zIndex = ""; mo.disconnect(); } });
+            mo.observe(mc, { attributes: true, attributeFilter: ["class"] });
+          }
+        } else if (window.SB && SB.calc) SB.calc(id); else if (window.MEDCALC) MEDCALC.open(id);
+      } catch (err) {}
     });
   }
 

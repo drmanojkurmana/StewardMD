@@ -71,6 +71,16 @@
     { re: /kawasaki/i, calcs: ["kawasaki"] }
   ];
 
+  /* Scores that guide TREATMENT (anticoagulation, withdrawal dosing, step-up therapy, fluid and
+     electrolyte correction, outpatient-vs-admit). Every other score is shown with Diagnosis. */
+  var TX = { hasbled: 1, atria_bleed: 1, chadsvasc: 1, ciwa: 1, cows: 1, gold_group: 1, cat_copd: 1,
+    mmrc_dyspnoea: 1, corr_na: 1, effective_osm: 1, anion_gap: 1, mascc: 1 };
+  function isTx(id) { return TX[id] === 1; }
+  function byKind(ids, kind) {
+    if (!kind) return ids;
+    return ids.filter(function (id) { return kind === "tx" ? isTx(id) : !isTx(id); });
+  }
+
   function calcsById() {
     var m = {};
     var arr = (window.MEDCALC && window.MEDCALC._calcs) || [];
@@ -85,10 +95,18 @@
     }
     return out.slice(0, 6);
   }
-  function forDisease(id, name) {
+  /* kind: "dx" (diagnosis and severity scores), "tx" (treatment scores), omitted = all.
+     No curated or keyword hit: one calculator whose own name is the disease name (MEDCALC.find, exact only). */
+  function forDisease(id, name, kind) {
     var ids = (id && LINKS[id]) ? LINKS[id].slice() : [];
     if (name) KW.forEach(function (r) { if (r.re.test(name)) ids = ids.concat(r.calcs); });
-    return filterExisting(ids);
+    if (!ids.length && name) {
+      try {
+        var f = window.MEDCALC && window.MEDCALC.find ? window.MEDCALC.find(String(name)) : null;
+        if (f && f.exact && f.id) ids = [f.id];
+      } catch (e) {}
+    }
+    return byKind(filterExisting(ids), kind);
   }
   function forText(text) {
     if (!text) return [];
@@ -101,7 +119,7 @@
       return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c];
     });
   }
-  function chipsHTML(ids) {
+  function chipsHTML(ids, heading) {
     if (!ids || !ids.length) return "";
     var m = calcsById();
     var chips = ids.map(function (id) {
@@ -109,8 +127,8 @@
       return '<button type="button" class="cl-chip" data-calc="' + esc(id) + '">' + esc(c.title || id) + '</button>';
     }).join("");
     if (!chips) return "";
-    return '<div class="cl-scores"><div class="cl-scores-h">📊 Relevant scores</div><div class="cl-scores-row">' + chips + '</div></div>';
+    return '<div class="cl-scores"><div class="cl-scores-h">' + esc(heading || "📊 Relevant scores") + '</div><div class="cl-scores-row">' + chips + '</div></div>';
   }
 
-  window.CALC_LINKS = { LINKS: LINKS, KW: KW, forDisease: forDisease, forText: forText, chipsHTML: chipsHTML };
+  window.CALC_LINKS = { LINKS: LINKS, KW: KW, isTx: isTx, forDisease: forDisease, forText: forText, chipsHTML: chipsHTML };
 })();

@@ -4,7 +4,10 @@
  *     element past the right edge unless it sits inside its own sideways-scrolling box;
  *   - sections appear in the textbook order, At a glance first;
  *   - each v2 table and flowchart sits in its section (diagnostic, ddx, treatment, flowchart);
- *   - jump chips scroll the body to the section; ?kbv2=0 still renders a clean page.
+ *   - jump chips scroll the body to the section; ?kbv2=0 still renders a clean page;
+ *   - links to features the app already has: calculator chips (dx scores in Diagnosis, treatment scores
+ *     in Management) open the calculator; drug names in tables, text and treatment flowcharts open the
+ *     Drug Index; the Patient handout button shows only when kb/dist/handouts holds one (fixture here).
  * USAGE: node test/run-kb-reader-mobile-ui.mjs   (screenshots in $SHOTS or /tmp/stewardmd-kb-reader)
  */
 import { spawn } from "node:child_process";
@@ -15,7 +18,7 @@ import { fileURLToPath } from "node:url";
 const repo = fileURLToPath(new URL("../", import.meta.url));
 const PORT = Number(process.env.PORT || 9034), CDP = Number(process.env.CDP_PORT || 9434);
 const SHOTS = process.env.SHOTS || "/tmp/stewardmd-kb-reader";
-const DISEASES = (process.env.DISEASES || "MENINGITIS,CAP,gout,sickle_cell_disease,adult_jaundice,stable_angina").split(",");
+const DISEASES = (process.env.DISEASES || "MENINGITIS,CAP,gout,sickle_cell_disease,adult_jaundice,stable_angina,atrial_fib").split(",");
 const ORDER = ["kbr-glance", "kbr-causes", "kbr-patho", "kbr-dx", "kbr-ddx", "kbr-mgmt", "kbr-prog", "kbr-pearls", "kbr-refs"];
 const HOME = { diagnostic: "kbr-dx", ddx: "kbr-ddx", treatment: "kbr-mgmt", flowchart: "kbr-mgmt", "flowchart-dx": "kbr-dx", foot: "kbr-refs" };
 
@@ -29,7 +32,7 @@ const ok = (pass, label) => { console.log(`${pass ? "PASS" : "FAIL"} ${label}`);
 async function shot(name) { await sleep(250); await mkdir(SHOTS, { recursive: true }); const r = await call("Page.captureScreenshot", { format: "png" }); await writeFile(`${SHOTS}/${name}.png`, Buffer.from(r.result.data, "base64")); }
 async function boot(query) {
   await call("Page.navigate", { url: `http://localhost:${PORT}/${query || ""}` });
-  for (let i = 0; i < 120; i++) { if (await ev("!!window.DX && Object.keys(window.KB_ENRICHMENT?.byId||{}).length>4000")) break; await sleep(250); }
+  for (let i = 0; i < 120; i++) { if (await ev("!!window.DX && Object.keys(window.KB_ENRICHMENT?.byId||{}).length>4000 && !!window.MEDCALC && !!window.CALC_LINKS && !!window.SMD_DRUGLINK")) break; await sleep(250); }
   await ev(`['introPoster','splash','accountGate','introOverlay','smdBootSplash'].forEach(k=>document.getElementById(k)?.remove());document.body.classList.remove('dark')`);
 }
 async function open(d) {
@@ -76,6 +79,49 @@ try {
       }
     }
   }
+  // links into existing features (390 wide), on an infective syndrome, an infective reference disease and a non-infective one
+  await call("Emulation.setDeviceMetricsOverride", { width: 390, height: 844, deviceScaleFactor: 2, mobile: true });
+  await boot("");
+  // handout fixture: only MENINGITIS has one. The data itself is built elsewhere (kb/tools/build-handouts.mjs).
+  await ev(`(()=>{var f=window.fetch;window.fetch=function(u){if(String(u).indexOf('/kb/dist/handouts/')>=0){var b={MENINGITIS:{id:'MENINGITIS',title:'Meningitis',status:'ai_drafted',sections:[{h:'What it is',items:['Swelling of the lining around the brain.']}],urgent:['A stiff neck with fever.']}};return Promise.resolve(new Response(JSON.stringify(b),{status:200}))}return f.apply(this,arguments)}})()`);
+  const LINKS = { MENINGITIS: { calc: ["kbr-dx", "bacterial_meningitis_score"], drugSvg: true, handout: true }, CAP: { calc: ["kbr-dx", "curb65"], handout: false }, atrial_fib: { calc: ["kbr-mgmt", "chadsvasc"], handout: false } };
+  for (const [d, want] of Object.entries(LINKS)) {
+    await open(d); await sleep(1200);
+    const inSec = await ev(`(()=>{const b=document.querySelector('#dxMgmt .cl-chip[data-calc="${want.calc[1]}"]');return b&&b.closest('.kbr-sec')&&b.closest('.kbr-sec').id})()`);
+    ok(inSec === want.calc[0], `${d}: calculator chip ${want.calc[1]} sits in ${want.calc[0]} (got ${inSec})`);
+    ok(await ev(`[...document.querySelectorAll('#dxMgmt .cl-chip[data-calc]')].every(b=>{const tx=CALC_LINKS.isTx(b.dataset.calc);return b.closest('.kbr-sec').id===(tx?'kbr-mgmt':'kbr-dx')})`), `${d}: treatment calculators only under Management, the rest under Diagnosis`);
+    await ev(`document.querySelector('#dxMgmt .cl-chip[data-calc="${want.calc[1]}"]').click()`); await sleep(500);
+    ok(await ev(`(()=>{const o=document.getElementById('mcOverlay');var e=document.elementFromPoint(innerWidth/2,innerHeight/2);return !!o&&o.classList.contains('on')&&o.getBoundingClientRect().width>0&&!!e&&o.contains(e)})()`), `${d}: tapping the chip opens the calculator, above the reader`);
+    await ev(`MEDCALC.close()`);
+    const tbl = await ev(`document.querySelectorAll('#dxMgmt .kbv2-tbl .smd-drug').length`);
+    ok(tbl > 0, `${d}: drug names in the tables are links (${tbl})`);
+    ok(await ev(`document.querySelectorAll('#dxMgmt .dx-reader-content .smd-drug[data-smd-drug="influenza vaccine"]').length===0`), `${d}: a partial name ("influenza" of "influenza vaccine") is not linked`);
+    if (want.drugSvg) {
+      const sv = await ev(`document.querySelectorAll('#dxMgmt svg.kbfc-svg .smd-drug').length`);
+      ok(sv > 0, `${d}: drug names in the treatment flowchart are links (${sv})`);
+    }
+    for (const where of ["#dxMgmt .kbv2-tbl .smd-drug", ...(want.drugSvg ? ["#dxMgmt svg.kbfc-svg .smd-drug"] : [])]) {
+      await ev(`(()=>{const e=document.querySelector(${JSON.stringify(where)});window.__opened=null;window.__orig=window.MEDDB.openComposition;window.MEDDB.openComposition=function(n){window.__opened=n};e.dispatchEvent(new MouseEvent('click',{bubbles:true,cancelable:true}))})()`);
+      const got = await ev(`window.__opened`); await ev(`window.MEDDB.openComposition=window.__orig`);
+      ok(typeof got === "string" && got.length > 2, `${d}: tapping a drug link (${where.includes("svg") ? "flowchart" : "table"}) opens its Drug Index entry (${got})`);
+    }
+    const hb = await ev(`!!document.querySelector('#dxMgmt .kbh-btn')`);
+    ok(hb === want.handout, `${d}: Patient handout button ${want.handout ? "shown" : "hidden"} (${hb})`);
+    if (want.handout) {
+      ok(await ev(`document.querySelector('#dxMgmt .kbh-panel').hidden===true`), `${d}: handout starts closed`);
+      await ev(`document.querySelector('#dxMgmt .kbh-btn').click()`);
+      ok(await ev(`document.querySelector('#dxMgmt .kbh-panel').hidden===false&&/Swelling of the lining/.test(document.querySelector('#dxMgmt .kbh-panel').textContent)&&/stiff neck/.test(document.querySelector('#dxMgmt .kbh-panel').textContent)`), `${d}: handout opens with its sections and urgent list`);
+      const fit = JSON.parse(await ev(FIT)); ok(fit.page && fit.body && fit.n === 0, `${d} @390 handout open: fits ${fit.n ? JSON.stringify(fit.clipped) : ""}`);
+      await ev(`document.querySelector('#dxMgmt .kbh-btn').scrollIntoView({block:'start'})`); await shot("390-meningitis-handout");
+    }
+    await ev(`document.querySelector('#dxMgmt .dx-mgmt-body').scrollTop=0`);
+  }
+  // dark mode: chips and the handout button stay legible
+  await ev(`document.body.classList.add('dark')`); await open("CAP");
+  ok(await ev(`(()=>{const b=document.querySelector('#dxMgmt .cl-chip'),c=getComputedStyle(b);return c.color!==c.backgroundColor&&c.backgroundColor!=='rgb(255, 255, 255)'})()`), "dark: calculator chip is not a white pill");
+  await ev(`document.querySelector('#dxMgmt .kbr-chip[data-jump="kbr-dx"]').click()`); await sleep(900); await ev(`document.querySelector('#dxMgmt .cl-scores').scrollIntoView({block:'center'})`); await shot("390-cap-dark-dx");
+  await ev(`document.body.classList.remove('dark')`);
+
   // dark mode keeps the reader legible
   await call("Emulation.setDeviceMetricsOverride", { width: 390, height: 844, deviceScaleFactor: 2, mobile: true });
   await ev(`document.body.classList.add('dark')`); await open("gout");

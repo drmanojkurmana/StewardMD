@@ -370,3 +370,21 @@ body.dark #dxOverlay #dxMgmt.dx-reader :is(.kbv2-scroll, .kbr-scroll) {
     radial-gradient(farthest-side at 0 50%, rgba(255, 255, 255, .22), transparent) left center / 12px 100% no-repeat scroll,
     radial-gradient(farthest-side at 100% 50%, rgba(255, 255, 255, .22), transparent) right center / 12px 100% no-repeat scroll;
 }
+
+/* Reader links: calculators, flowchart drug names, patient handout */
+#dxOverlay #dxMgmt.dx-reader .cl-scores { margin: 14px 0 0; }
+#dxOverlay #dxMgmt.dx-reader .cl-scores-h { font-size: 13px; font-weight: 600; color: var(--rd-mut); opacity: 1; margin-bottom: 8px; }
+#dxOverlay #dxMgmt.dx-reader .cl-scores-row { display: flex; flex-wrap: wrap; gap: 8px; min-width: 0; }
+#dxOverlay #dxMgmt.dx-reader .cl-chip { min-height: 40px; max-width: 100%; padding: 8px 14px; border: 1px solid var(--rd-line); border-radius: 999px; background: transparent; color: var(--rd-ink); font-size: 14px; line-height: 1.3; text-align: left; overflow-wrap: anywhere; }
+#dxOverlay #dxMgmt.dx-reader .cl-chip:focus-visible { outline: 2px solid var(--rd-ink); outline-offset: 2px; }
+#dxOverlay #dxMgmt.dx-reader .kbh-slot:empty { display: none; }
+#dxOverlay #dxMgmt.dx-reader .kbh-btn { display: inline-flex; align-items: center; min-height: 44px; padding: 10px 16px; border: 1px solid var(--rd-line); border-radius: 12px; background: transparent; color: var(--rd-ink); font: inherit; font-size: 15px; font-weight: 600; cursor: pointer; }
+#dxOverlay #dxMgmt.dx-reader .kbh-btn[aria-expanded="true"] { border-color: var(--rd-ink); }
+#dxOverlay #dxMgmt.dx-reader .kbh-btn:focus-visible { outline: 2px solid var(--rd-ink); outline-offset: 2px; }
+#dxOverlay #dxMgmt.dx-reader .kbh-panel { margin-top: 12px; padding: 12px 0 0; border-top: 1px solid var(--rd-line); min-width: 0; overflow-wrap: anywhere; }
+#dxOverlay #dxMgmt.dx-reader .kbh-title { margin: 0 0 8px; font-size: 17px; color: var(--rd-ink); }
+#dxOverlay #dxMgmt.dx-reader .kbh-sec h5 { margin: 12px 0 4px; font-size: 14px; font-weight: 600; color: var(--rd-ink); }
+#dxOverlay #dxMgmt.dx-reader .kbh-sec ul { margin: 0; padding-left: 20px; font-size: 14px; line-height: 1.5; color: var(--rd-ink); }
+#dxOverlay #dxMgmt.dx-reader .kbh-urgent h5 { color: var(--red, #b3261e); }
+body.dark #dxOverlay #dxMgmt.dx-reader .kbh-urgent h5 { color: #ff8a80; }
+#dxOverlay #dxMgmt.dx-reader .kbh-note { margin: 12px 0 0; font-size: 13px; color: var(--rd-mut); }

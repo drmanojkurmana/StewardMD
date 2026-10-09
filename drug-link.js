@@ -139,6 +139,11 @@
     }
     return out;
   }
+  /** True when a hit is only the first word(s) of a longer generic ("influenza" of "influenza vaccine"). */
+  function isPartial(h) {
+    var t = String(h && h.text || "").toLowerCase().replace(/[\s\-]+/g, " "), g = String(h && h.generic || "");
+    return !!t && g.length > t.length && g.indexOf(t + " ") === 0;
+  }
   /** Unique generics named in text, in order (for the MaiK prompt). */
   function drugsIn(text, opts) {
     var seen = {}, out = [];
@@ -218,6 +223,9 @@
       // which the app or the model wrote, is exact only.
       var mine = tn.parentNode.closest && tn.parentNode.closest(".maik-b.you");
       var text = tn.nodeValue, hits = find(text, { fuzzy: !!mine });
+      // The disease reader links only complete names: "influenza" is the start of "influenza vaccine",
+      // not a drug, so a first-word match is dropped there (everywhere else it still links).
+      if (hits.length && tn.parentNode.closest && tn.parentNode.closest(".dx-reader")) hits = hits.filter(function (h) { return !isPartial(h); });
       if (!hits.length) return;
       var frag = doc.createDocumentFragment(), at = 0;
       hits.forEach(function (h) {
@@ -306,6 +314,6 @@
     if (W.document.readyState === "loading") W.document.addEventListener("DOMContentLoaded", boot); else boot();
   }
 
-  return { find: find, drugsIn: drugsIn, highlight: highlight, watch: watch, learn: learn, openMonograph: openMonograph,
+  return { find: find, isPartial: isPartial, drugsIn: drugsIn, highlight: highlight, watch: watch, learn: learn, openMonograph: openMonograph,
     enabled: enabled, askEnabled: askEnabled, SURFACES: SURFACES, _title: title };
 });
