@@ -28,9 +28,10 @@ const STUDY_RE = /^v\d{1,3}\/(?:(?:lessons|cards)\/(?:index|[a-z0-9-]{2,80})\.js
 const RAD_RE = /^v\d{1,3}\/(?!pyq\/|lessons\/|cards\/)[a-z0-9-]{2,60}\/(?:img\/[a-z0-9-]{2,100}\.webp|stack\/[a-z0-9-]{2,60}\/(?:stack\.json|[a-z]{2,12}\/\d{3}\.webp))$/;
 // Images a bank item carries (img + imgPlace, set by the bank build): v<n>/img/<name>.webp, immutable.
 const IMG_RE = /^v\d{1,3}\/img\/[a-z0-9-]{2,80}\.webp$/;
-// The owner's radiology notes (tools/prep-radnotes.mjs, set "radnotes"): figures img/radnotes/rn-<id>.webp and MCQ
-// overlays overlay/radnotes/<subject>/<module>.json (both immutable: a new run writes new names or a new version).
-const RADNOTES_RE = /^(?:img\/radnotes\/rn-[a-z0-9-]{2,80}\.webp|overlay\/radnotes\/[a-z0-9-]{2,60}\/[a-z0-9-]{2,80}\.json)$/;
+// The owner's radiology notes (tools/prep-radnotes.mjs, set "radnotes"; tools/prep-radmax.mjs, set "radmax"): figures
+// img/radnotes/rn-<id>.webp or img/radmax/rm-<id>.webp and MCQ overlays overlay/<set>/<subject>/<module>.json (all
+// immutable: a new run writes new names or a new set folder).
+const RADNOTES_RE = /^(?:img\/(?:radnotes\/rn|radmax\/rm)-[a-z0-9-]{2,80}\.webp|overlay\/(?:radnotes|radmax)\/[a-z0-9-]{2,60}\/[a-z0-9-]{2,80}\.json)$/;
 // Medicine coverage MCQs (tools/prep-medcov.mjs, set "medcov"): overlay/medcov/<subject>/<module>.json, immutable.
 // A new release goes to a new folder (medcov2, medcov3, ...) so phones that cached the old file fetch the new one.
 const MEDCOV_RE = /^overlay\/medcov(?:[2-9]|[1-9]\d)?\/[a-z0-9-]{2,60}\/[a-z0-9-]{2,80}\.json$/;

@@ -238,3 +238,26 @@ licensed figures (pilot targets list) or open grounding (StatPearls bank).
 - Cache: module files cached in IndexedDB are stamped with the subject's bytes and items from
   `prep/bank/<ver>/manifest.json` (`bankStamps`, `cacheFresh` in prep.js), so a file republished in place (v5
   explanations) is fetched again; offline the cached copy is kept. build-www ships the manifest.
+
+## 11. radmax: the owner's four radiology PDFs (shipped 2026-10-09, owner approved "Yes, ship now")
+Tool: `tools/prep-radmax.mjs` (branch `feat/prep-radiology-max`); data `~/prep-data/radnotes/max/` (private, backup
+`gs://project-6074a703-e86c-40a5-848-prep-batch/private/radmax/`). No notes text, figure or item is in git.
+- 623 accepted items. 501 `srd-*` items joined ss-radiology as bank **v8** (the 189 v7 items, unchanged, plus the
+  radmax items in 15 modules; 690 in all); 5 figures renamed to dash form under `v8/ss-radiology/img/`. Taxonomy bank v8,
+  `prep/bank/v8/ss-radiology/index.json` ships in the app.
+- 122 `rad-*` items ship as the new overlay set **radmax** for Radiology (13 modules):
+  `overlay/radmax/radiology/<module>.json` and `img/radmax/rm-*.webp`; prep.js `OVERLAYS.radiology = ["radnotes",
+  "radmax"]`; the bank route accepts `img/radmax/rm-*` and `overlay/radmax/`. A module with no radnotes file
+  (`rad-radiation-protection`) gets its radmax items (a 404 on one set adds nothing).
+- Items labelled Very Hard carry `vh: true` (level 4 in the app, as medcov).
+- Owner decisions on the 67 flags: the 57 possibly-wrong-key items stay out (owner review later); PBC item
+  `rm-4ca445532846` ships as is; calvarial lytic lesion `rm-0f4320a2bd53` ships keyed thyroid with a rewritten
+  explanation (causes of lytic calvarial lesions, why thyroid, why each other option is wrong).
+- Key change (owner-decided, 2026-10-09): `rm-3711532a1e13` (Fallot statements) key B ("1 and 3 only") -> C ("1, 2 and
+  3"); statement 2 is true because the pentalogy is the tetralogy (VSD included) plus an ASD or PFO. Explanation and
+  per-option reasons rewritten to match. No other key changed.
+- Image identifiers: `rm-n1-p021-1` (initials) and `rm-n1-p090-2` (DICOM time stamp, corner exam text) covered with an
+  opaque box before upload; checked before and after. The other 5 image-content flags (`rm-8bea4449a631`,
+  `rm-cfc7fcf33595`, `rm-3572f734b1d8`, `rm-6c388481494b`, `rm-f75bd48bdc7a`) were never in the accepted 623 (left out
+  for fact-check, duplicate or image-vote failures), so they did not ship.
+- R2: 30 v8 files and 21 radmax files (13 overlays, 8 figures) uploaded and SHA-256 verified.
