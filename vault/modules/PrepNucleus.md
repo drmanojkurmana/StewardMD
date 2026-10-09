@@ -775,3 +775,22 @@ global version (`prep.js` `bvOf`). 29 questions in R2 `prep-bank/v6/ss-radiology
 - **ss-radiology v8 counts are real:** radmax items went mostly to cardiac, abdomen, MSK and anatomy; neuro, head and neck,
   chest, breast, IR, nuclear and physics hold 2 to 10 items each (targets 40 to 80). Content gap, not a cache bug.
 - Test: `test/run-prep-subject-ui.mjs` (390, 820, 1180; alignment within 1 px, Learn, exam once), `test/prep-subject.test.mjs`.
+
+## Strict per-question clock, review filters, saved practice sets (2026-10-09, branch `fix/prep-q-timer`, prep35)
+- Owner bug: with 30 s a question, going to the next question and back restarted the clock at 30 s. Now (prep.js
+  `qcNew`/`qcShow`/`qcPause`/`qcLeft`/`qcTick`/`qcNext`, `r.qc` on the run) each question has one budget, spent only while
+  it is on screen (the question grid, a screen pushed over the runner and an answered practice question stop it), never
+  reset. Counting is by timestamps, so background time counts on return (`visibilitychange` runs a tick at once). At 0 the
+  question locks for the rest of the set (practice and timed test alike): options disabled, "Time up" note, grid cell
+  dashed + "time up" label, a practice question is recorded unanswered (-1, like a timed test at the end), and the set
+  moves to the next open question (else the first open earlier one, else it finishes). Whole-set timers unchanged.
+- Result review: filters All / Wrong / Correct / Skipped (or Time up) / Bookmarked with counts, Wrong by default when any
+  (`reviewSplit`, `reviewDefault`); "Practise the missed (n)" and "Practise all again (n)".
+- Saved practice sets: every set started from the practice setup sheet (module, subject, custom, mistakes, bookmarks) or
+  the old custom module screen is saved on finish in `s.ps` (synced map in prep-sync MAPS) as ids + answers only
+  (`psPack`; PYQ and own-deck items are left out because they cannot be reloaded by module), at most 20 sets / 200
+  items, expiring 7 days after creation (`psPurge` on load). Home lists "Your practice sets" (`psopen`): reopens on the
+  result (`psUnpack` from the module files); "Practise all again" updates the same set and keeps its expiry.
+- Tests: `test/prep-qclock.test.mjs`, `test/prep-review.test.mjs`, `test/run-prep-setup-ui.mjs` (fake Date.now clock:
+  no reset on revisit, grid pause, lock + auto-advance, locked revisit, background catch-up; review filters, saved set
+  reopen, re-practise, expiry purge).

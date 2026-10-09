@@ -28,7 +28,7 @@
   function examOf(id) { for (var i = 0; i < EXAMS.length; i++) if (EXAMS[i].id === id) return EXAMS[i]; return EXAMS[0]; }
   // mt: mistakes { itemId: [subject, module, tag, ts, preview] }, removed when the item is next answered right.
   // goal: new questions a day for the daily plan. mh: finished mocks, newest last, at most 20 ({ ts, label, marks, max, n }).
-  function emptyStore() { return { v: 1, cards: {}, conf: {}, days: {}, mod: {}, bm: {}, rep: {}, exam: "neet-pg", last: null, dl: {}, hid: { ids: {}, ts: 0 }, mt: {}, goal: 30, mh: [], ls: {}, lsp: { r: 1, au: 0 }, pl: null, pt: null, ra: [], ask: null, cel: null, ml: null }; }
+  function emptyStore() { return { v: 1, cards: {}, conf: {}, days: {}, mod: {}, bm: {}, rep: {}, exam: "neet-pg", last: null, dl: {}, hid: { ids: {}, ts: 0 }, mt: {}, goal: 30, mh: [], ls: {}, lsp: { r: 1, au: 0 }, pl: null, pt: null, ra: [], ask: null, cel: null, ml: null, ps: {} }; }
   function deckKey(moduleId) { return "p:" + moduleId; }
   // hidden: item ids withdrawn after repeated student reports (/api/prep/flag?hidden=1), as an id -> 1 map.
   /* mergeOverlay(bank, extra) -> bank items, then overlay items whose id the bank (or an earlier overlay item) does not
@@ -197,6 +197,106 @@
     return best;
   }
   function fmtTime(sec) { sec = Math.max(0, Math.round(sec)); var m = Math.floor(sec / 60), s = sec % 60; return m + ":" + (s < 10 ? "0" : "") + s; }
+  /* A clock per question (owner 2026-10-09, strict): each question has one budget of sec seconds, spent only while that
+     question is on screen and never given back. rem[i] is what is left in ms; on is the question whose clock runs (-1
+     none) since the timestamp at. Counting is by timestamps, so time spent with the app in the background still counts
+     on return. When a budget reaches 0 the question is locked for good (out[i]). All times in ms from Date.now(). */
+  function qcNew(n, sec) {
+    var c = { sec: sec, rem: [], out: [], on: -1, at: 0 };
+    for (var i = 0; i < n; i++) { c.rem.push(sec * 1000); c.out.push(false); }
+    return c;
+  }
+  // Stop the running clock and keep what is left (a budget used up here locks the question).
+  function qcPause(c, now) {
+    if (!c || c.on < 0) return;
+    var i = c.on;
+    c.rem[i] = Math.max(0, c.rem[i] - Math.max(0, now - c.at));
+    if (c.rem[i] <= 0) c.out[i] = true;
+    c.on = -1;
+  }
+  // Question i is on screen from now: its clock runs, unless it is locked.
+  function qcShow(c, i, now) {
+    if (!c) return;
+    if (c.on === i) return;
+    qcPause(c, now);
+    if (!c.out[i] && c.rem[i] > 0) { c.on = i; c.at = now; }
+  }
+  function qcLeft(c, i, now) { return c ? Math.max(0, c.rem[i] - (c.on === i ? Math.max(0, now - c.at) : 0)) : 0; }
+  // qcTick(c, now) -> the index locked by this tick (its time ran out), or -1.
+  function qcTick(c, now) {
+    if (!c || c.on < 0 || qcLeft(c, c.on, now) > 0) return -1;
+    var i = c.on; qcPause(c, now); c.rem[i] = 0; c.out[i] = true;
+    return i;
+  }
+  /* qcNext(c, from, open) -> where a timed-out question hands over: the next question after from that is still open
+     (open(i): not locked and, in practice, not answered), else the first open one before it, else -1 (the set is done). */
+  function qcNext(c, from, open) {
+    var n = c ? c.rem.length : 0, i;
+    for (i = from + 1; i < n; i++) if (!c.out[i] && open(i)) return i;
+    for (i = 0; i < from; i++) if (!c.out[i] && open(i)) return i;
+    return -1;
+  }
+  /* Result review (owner 2026-10-09): every question of a finished set under a filter. reviewSplit -> { all, wrong,
+     right, skip, bm, out }: index lists; wrong = answered and wrong, skip = not answered (skipped or time up), bm =
+     bookmarked now, out = timed out. reviewDefault: Wrong when any, else All. */
+  function reviewSplit(items, ans, out, bm) {
+    var r = { all: [], wrong: [], right: [], skip: [], bm: [], out: [] };
+    (items || []).forEach(function (it, i) {
+      r.all.push(i);
+      if (ans[i] < 0 || ans[i] == null) r.skip.push(i); else if (ans[i] === it.a) r.right.push(i); else r.wrong.push(i);
+      if (bm && it && bm[it.id]) r.bm.push(i);
+      if (out && out[i]) r.out.push(i);
+    });
+    return r;
+  }
+  function reviewDefault(sp) { return sp.wrong.length ? "wrong" : "all"; }
+  /* Saved practice sets (owner 2026-10-09): every set made in the practice setup sheet or as a custom module is kept
+     7 days from creation, as item ids and answers only (never item bodies), in the synced store map s.ps (prep-sync
+     MAPS). Entry: { t title, k kind, md mode, c created, x expires, f finished, m ["subject|module"], q [[module index,
+     item id]], a answers, o timed-out indices, ok right, n questions }. Only bank items can be reopened from their
+     module file, so previous-year and own-deck items are left out of the saved copy. */
+  var PS_DAYS = 7, PS_MAX = 20, PS_ITEMS = 200, DAY_MS = 864e5;
+  function psKeepable(it) { return !!(it && it.id != null && it._s && it._s !== "deck" && !it._py && (it._m || it.t)); }
+  function psPack(items, ans, out, meta, now) {
+    var m = [], mi = {}, q = [], a = [], o = [], ok = 0;
+    (items || []).forEach(function (it, i) {
+      if (!psKeepable(it) || q.length >= PS_ITEMS) return;
+      var k = it._s + "|" + (it._m || it.t);
+      if (!(k in mi)) { mi[k] = m.length; m.push(k); }
+      if (out && out[i]) o.push(q.length);
+      var x = ans && ans[i] != null ? ans[i] : -1;
+      if (x >= 0 && x === it.a) ok++;
+      q.push([mi[k], String(it.id)]); a.push(x);
+    });
+    if (!q.length) return null;
+    return { t: String(meta.title || "Practice set").slice(0, 80), k: meta.kind || "", md: meta.mode === "exam" ? "exam" : "study", c: now, x: now + PS_DAYS * DAY_MS, f: now, m: m, q: q, a: a, o: o, ok: ok, n: q.length };
+  }
+  // psPurge(map, now) -> the ids removed: expired (or broken) entries go.
+  function psPurge(map, now) {
+    var gone = [];
+    for (var id in map || {}) { var e = map[id]; if (!e || typeof e !== "object" || !(e.x > now)) { delete map[id]; gone.push(id); } }
+    return gone;
+  }
+  // psCap(map, max) -> the ids removed: the oldest beyond max.
+  function psCap(map, max) {
+    var ids = Object.keys(map || {}).sort(function (x, y) { return (map[y].c || 0) - (map[x].c || 0); }), gone = ids.slice(max || PS_MAX);
+    gone.forEach(function (id) { delete map[id]; });
+    return gone;
+  }
+  function psList(map, now) { return Object.keys(map || {}).filter(function (id) { return map[id] && map[id].x > now; }).sort(function (x, y) { return map[y].c - map[x].c; }).map(function (id) { return { id: id, e: map[id] }; }); }
+  function psDaysLeft(e, now) { return Math.max(0, Math.ceil((e.x - now) / DAY_MS)); }
+  // psUnpack(entry, lists) -> { items, ans, out }: lists maps "subject|module" to that module's items; a question no
+  // longer in its module (or hidden) is dropped with its answer.
+  function psUnpack(e, lists) {
+    var items = [], ans = [], out = [], by = {};
+    (e.m || []).forEach(function (k, j) { by[j] = {}; ((lists && lists[k]) || []).forEach(function (it) { by[j][String(it.id)] = it; }); });
+    (e.q || []).forEach(function (p, i) {
+      var it = by[p[0]] && by[p[0]][p[1]];
+      if (!it) return;
+      items.push(it); ans.push(e.a && e.a[i] != null ? e.a[i] : -1); out.push((e.o || []).indexOf(i) >= 0);
+    });
+    return { items: items, ans: ans, out: out };
+  }
 
   /* Explanations (2026-10-08, tools/prep-explain.mjs). An item may carry x = { key, notes, others: { letter: reason },
      pearl }; notes use a tiny Markdown subset and nothing else is ever turned into HTML: every character is escaped
@@ -319,7 +419,7 @@
     return s.cel;
   }
   var PURE = { pickLine: pickLine, setSubject: setSubject, mileSnap: mileSnap, milestone: milestone, noteCele: noteCele, levelN: levelN, xpOfStore: xpOfStore, streakMile: streakMile, EXAMS: EXAMS, examOf: examOf, emptyStore: emptyStore, deckKey: deckKey, usable: usable, poolFor: poolFor, progressByModule: progressByModule,
-    statusOf: statusOf, stars: stars, countFor: countFor, ovFor: ovFor, solveNext: solveNext, filterModules: filterModules, customDraw: customDraw, oldOverlays: oldOverlays, levelOf: levelOf, markLevels: markLevels, shuffle: shuffle, fmtTime: fmtTime,
+    statusOf: statusOf, stars: stars, countFor: countFor, ovFor: ovFor, solveNext: solveNext, filterModules: filterModules, customDraw: customDraw, oldOverlays: oldOverlays, levelOf: levelOf, markLevels: markLevels, shuffle: shuffle, fmtTime: fmtTime, qcNew: qcNew, qcPause: qcPause, qcShow: qcShow, qcLeft: qcLeft, qcTick: qcTick, qcNext: qcNext, reviewSplit: reviewSplit, reviewDefault: reviewDefault, psPack: psPack, psPurge: psPurge, psCap: psCap, psList: psList, psDaysLeft: psDaysLeft, psUnpack: psUnpack, PS_DAYS: PS_DAYS, PS_MAX: PS_MAX,
     targetDifficulty: targetDifficulty, adaptiveNew: adaptiveNew, weakModules: weakModules, planToday: planToday, MISTAKE_TAGS: MISTAKE_TAGS, mistakeCounts: mistakeCounts,
     MOCKS: MOCKS, mockOf: mockOf, mockModules: mockModules, scoreMock: scoreMock, findModule: findModule,
     mdLite: mdLite, inlineMd: inlineMd, legacyExp: legacyExp, explainOf: explainOf, mergeOverlay: mergeOverlay, bankStamps: bankStamps, cacheFresh: cacheFresh };
@@ -346,6 +446,9 @@
     var s = null; try { s = JSON.parse(G.localStorage.getItem(KEY) || "null"); } catch (e) { s = null; }
     var e = emptyStore();
     if (!s || s.v !== 1) s = e; else for (var k in e) if (!(k in s)) s[k] = e[k];
+    if (!s.ps || typeof s.ps !== "object") s.ps = {};
+    // Saved practice sets expire 7 days after they were made: gone on the first load after that.
+    if (psPurge(s.ps, Date.now()).length) { st.store = s; save(); }
     return (st.store = s);
   }
   function save() { try { G.localStorage.setItem(KEY, JSON.stringify(st.store)); } catch (e) { toast("Progress could not be saved: the device storage is full."); } }
@@ -707,6 +810,7 @@
       (G.PREP_ARENA ? row("a-stats", ico("stats"), "My stats", "Accuracy by subject, the last 30 days") : "") +
       (G.PrepSocial ? row("soc-open", ico("user"), "Friends and groups", "Challenge a friend, college boards") + row("soc-acc", ico("check"), "Accuracy", "Your public accuracy page") : "") +
       (plan ? row("p-settings", ico("gear"), "Settings", "Exam: " + esc(exLabel) + " · plan and reminder") : "") + "</div>" +
+      psHomeHtml(s) +
       '<p class="pn-eb" aria-hidden="true">' + subs.length + (subs.length === 1 ? " subject" : " subjects") + '</p><h2 class="pn-h">Subjects</h2><div class="pn-subs" id="pnGrid">' + subs.map(function (sb) { return tile(sb, null); }).join("") + "</div>" +
       (G.PrepPro ? G.PrepPro.homeHtml(HOST) : "") +
       '<p class="pn-note">Practice and progress stay on this device.</p></div>');
@@ -822,8 +926,9 @@
 
   /* ---------- runner ---------- */
   // opts (mock exams): { limit: seconds, scheme: {plus, minus, label} }. Practice setup (prep-setup.js): { limit } a clock for
-  // the whole set in either mode, { qsec } a clock per question (a timed test moves on when it runs out, leaving the
-  // question unanswered; practice only shows the ring), { untimed: true } a test with no clock. opts.custom (Arena events): { submit(run), render(run) }:
+  // the whole set in either mode, { qsec } a clock per question (qcNew: one budget a question, spent only while it is on
+  // screen, never reset; when it runs out the question locks and the set moves on, in practice and in a timed test),
+  // { untimed: true } a test with no clock. opts.custom (Arena events): { submit(run), render(run) }:
   // the runner neither marks nor records (the items carry no key); submit sends the answers and render draws the result.
   function runQuestions(items, mode, title, opts) {
     var ex = examOf(load().exam);
@@ -831,28 +936,53 @@
     // PrepNucleus Pro (prep-pro.js): the free tier is checked when a set starts, never mid-set. Arena runs (custom) are free.
     if (!opts.custom && G.PrepPro && !G.PrepPro.can("questions", { items: items })) { rerender(); return G.PrepPro.openLimit("questions"); }
     st.run = { m0: opts.custom ? null : snapNow(), items: items, i: 0, mode: mode, title: title, ans: items.map(function () { return -1; }), mark: {}, done: false, t0: Date.now(), limit: opts.untimed || opts.qsec ? 0 : opts.limit || (mode === "exam" ? items.length * ex.sec : 0), qsec: opts.qsec || 0, scheme: opts.scheme || null, custom: opts.custom || null };
+    if (st.run.qsec) st.run.qc = qcNew(items.length, st.run.qsec);
+    // A set made by the student (practice setup sheet, custom module) is saved when it finishes (psSave); a re-practise
+    // of a whole saved set updates that set (psId).
+    if (opts.save && !opts.custom) st.run.save = opts.save;
+    if (opts.psId) st.run.psId = opts.psId;
     st.stack.push(renderRun);
     nav(1); renderRun();
     if (st.run.limit || st.run.qsec) startTimer();
   }
   function startTimer() {
     stopTimer();
-    st.timer = G.setInterval(function () {
+    st.timer = G.setInterval(runTick, 1000);
+  }
+  function runTick() {
       var r = st.run; if (!r || r.done) return stopTimer();
-      if (r.qsec) return qtick(r);
+      if (r.qc) return qtick(r);
       var left = r.limit - (Date.now() - r.t0) / 1000, el = root && root.querySelector("#pnClock");
       if (el) { el.textContent = fmtTime(left); if (el.parentNode) el.parentNode.classList.toggle("over", (Date.now() - (r.qt0 || r.t0)) / 1000 > r.limit / r.items.length); }
       if (left <= 0) finish();
-    }, 1000);
   }
-  // A clock per question: the ring and the figure count this question down; a timed test goes on to the next question
-  // (or submits after the last) when it runs out, only while the question itself is on screen.
+  // Is a question open to answer? Not after its time ran out, and in practice not once answered.
+  function qOpen(r, i) { return !(r.qc && r.qc.out[i]) && !(r.mode === "study" && r.ans[i] >= 0); }
+  // The per-question clock runs only for the question on screen (the runner on top of the stack, the question still
+  // open); the question grid, any screen pushed over the runner and an answered practice question stop it.
+  function syncClock(r) {
+    if (!r || !r.qc) return;
+    var now = Date.now();
+    if (!r.done && st.stack[st.stack.length - 1] === renderRun && qOpen(r, r.i)) qcShow(r.qc, r.i, now); else qcPause(r.qc, now);
+  }
+  function qclockText(r, i) { return fmtTime(Math.ceil(qcLeft(r.qc, i, Date.now()) / 1000)); }
+  /* A clock per question: the figure counts this question's own budget down. When it runs out the question locks (a
+     practice question is recorded as not answered, as a timed test does at the end) and the set goes on to the next
+     open question, or finishes when none is left. Called each second and when the app comes back to the front. */
   function qtick(r) {
-    var ql = r.qsec - (Date.now() - (r.qt0 || r.t0)) / 1000, el = root && root.querySelector("#pnClock");
-    if (el) { el.textContent = fmtTime(ql); if (el.parentNode) el.parentNode.classList.toggle("over", ql <= 0); }
-    if (ql > 0 || r.mode !== "exam" || st.stack[st.stack.length - 1] !== renderRun) return;
-    if (r.i < r.items.length - 1) { r.i++; renderRun(); } else finish();
+    var x = qcTick(r.qc, Date.now()), el = root && root.querySelector("#pnClock");
+    syncClock(r);
+    if (el && r.qc.on === r.i) el.textContent = qclockText(r, r.i);
+    if (x < 0) return;
+    if (r.mode === "study" && !r.custom) record(r.items[x], -1);
+    var nx = qcNext(r.qc, x, function (i) { return qOpen(r, i); });
+    if (st.stack[st.stack.length - 1] !== renderRun || r.i !== x) { if (nx < 0) finish(); return; }
+    toast("Time up on question " + (x + 1) + ".");
+    if (nx < 0) return finish();
+    r.i = nx; st.swipeIn = nx > x ? 1 : -1; renderRun();
   }
+  // Back from the background: the interval may have slept, so catch the clocks up at once (timestamps, not ticks).
+  if (G.document && G.document.addEventListener) G.document.addEventListener("visibilitychange", function () { if (G.document.visibilityState === "visible" && st.run && !st.run.done && st.timer) runTick(); });
   function stopTimer() { if (st.timer) { G.clearInterval(st.timer); st.timer = 0; } }
   // Owner rule (2026-10-07): no authorship or source line on questions; content credits live in the Terms and Privacy pages.
   // A previous-year question still names its paper (exam, year, memory-based recall), which is the paper type, not the origin.
@@ -879,11 +1009,16 @@
       (sk >= 3 ? '<span class="pn-streak" data-n="' + sk + '">' + ico("bolt", true) + sk + " in a row</span>" : "") + "</div>";
   }
   // Timed mode: the clock sits in a pace ring that empties over this question's share of the time (limit / questions).
+  // Per question: the ring empties over this question's own budget from where it stands, and holds still while the
+  // clock is stopped (answered in practice, or locked).
   function clockHtml(r) {
-    var per = r.qsec || r.limit / r.items.length, spent = (Date.now() - (r.qt0 || r.t0)) / 1000;
-    return '<span class="pn-clockw' + (spent > per ? " over" : "") + '"><svg class="pn-pace" viewBox="0 0 40 40" aria-hidden="true"><circle class="rt" cx="20" cy="20" r="17" pathLength="100"/>' +
-      '<circle class="rv" cx="20" cy="20" r="17" pathLength="100" style="animation-duration:' + Math.max(1, per).toFixed(1) + "s;animation-delay:-" + Math.max(0, spent).toFixed(1) + 's"/></svg>' +
-      '<span class="pn-clock" id="pnClock" role="timer" aria-live="off">' + fmtTime(r.qsec ? r.qsec - spent : r.limit - (Date.now() - r.t0) / 1000) + "</span></span>";
+    var per, spent, run = true, txt;
+    if (r.qc) { per = r.qsec; spent = per - qcLeft(r.qc, r.i, Date.now()) / 1000; run = r.qc.on === r.i; txt = qclockText(r, r.i); }
+    else { per = r.limit / r.items.length; spent = (Date.now() - (r.qt0 || r.t0)) / 1000; txt = fmtTime(r.limit - (Date.now() - r.t0) / 1000); }
+    var over = r.qc ? r.qc.out[r.i] : spent > per;
+    return '<span class="pn-clockw' + (over ? " over" : "") + '"><svg class="pn-pace" viewBox="0 0 40 40" aria-hidden="true"><circle class="rt" cx="20" cy="20" r="17" pathLength="100"/>' +
+      '<circle class="rv" cx="20" cy="20" r="17" pathLength="100" style="animation-duration:' + Math.max(1, per).toFixed(1) + "s;animation-delay:-" + Math.max(0, Math.min(per, spent)).toFixed(1) + "s" + (run ? "" : ";animation-play-state:paused") + '"/></svg>' +
+      '<span class="pn-clock" id="pnClock" role="timer" aria-live="off"' + (r.qc ? ' aria-label="Time left for this question ' + txt + '"' : "") + ">" + txt + "</span></span>";
   }
   /* The explanation under the answer: the key line and topic notes when the item has x, else its stored text (old "*"
      bullets made into a list), else a plain "not written yet" line. */
@@ -904,6 +1039,8 @@
     var r = st.run; if (!r) return;
     if (r.done) return r.custom ? r.custom.render(r) : renderResult();
     if (r.qi !== r.i) { r.qi = r.i; r.qt0 = Date.now(); }
+    syncClock(r);
+    var locked = !!(r.qc && r.qc.out[r.i]);
     var it = r.items[r.i], chosen = r.ans[r.i], shown = r.mode === "study" && chosen >= 0, s = load(), bm = !!s.bm[it.id], own = it._s === "deck";
     // PYQ items (prep-pyq.js) are not in a bank module file, so a bookmark could not reload them: no ribbon.
     var pyq = G.PREP_PYQ ? { tags: G.PREP_PYQ.chips(it, HOST), fig: G.PREP_PYQ.figure(it, HOST) } : { tags: "", fig: "" };
@@ -914,7 +1051,7 @@
       var cls = "pn-opt";
       if (shown) { if (k === it.a) cls += " right"; else if (k === chosen) cls += " wrong"; }
       else if (k === chosen) cls += " sel";
-      return '<li><button type="button" class="' + cls + '" data-act="answer" data-k="' + k + '"' + (shown ? ' aria-disabled="true"' : "") + ' aria-pressed="' + (k === chosen) + '"><span class="pn-l">' + L[k] + "</span><span>" + esc(o) + "</span>" +
+      return '<li><button type="button" class="' + cls + '" data-act="answer" data-k="' + k + '"' + (locked ? " disabled" : shown ? ' aria-disabled="true"' : "") + ' aria-pressed="' + (k === chosen) + '"><span class="pn-l">' + L[k] + "</span><span>" + esc(o) + "</span>" +
         (shown && k === it.a ? '<span class="pn-mark">' + ico("check") + "</span>" : shown && k === chosen ? '<span class="pn-mark">' + ico("x") + "</span>" : !shown && k === chosen ? '<span class="pn-mark pn-pick" aria-hidden="true">' + ico("check") + "</span>" : "") + "</button></li>";
     }).join("");
     // Your own deck's questions stay on this phone: no bookmark (bookmarks reload from the bank) and no report.
@@ -951,17 +1088,19 @@
         }).join("") + "</div></div>" : "") +
         provHtml(it) + "</section>";
     }
+    // Time up: the question stays locked for the rest of the set, answered or not.
+    var lockNote = locked ? '<p class="pn-timeup" role="status">' + ico("lock") + "<span><b>Time up</b>" + (chosen >= 0 ? "Your answer " + L[chosen] + " is kept and can no longer be changed." : "This question can no longer be answered.") + "</span></p>" : "";
     var nav = r.mode === "exam" ?
       '<div class="pn-navrow"><button type="button" class="pn-btn" data-act="prev"' + (r.i ? "" : " disabled") + ">Previous</button>" +
       '<button type="button" class="pn-btn' + (r.mark[r.i] ? " on" : "") + '" data-act="markq" aria-label="Mark for review" aria-pressed="' + !!r.mark[r.i] + '">' + ico("flag", !!r.mark[r.i]) + " Mark</button>" +
       (r.i < r.items.length - 1 ? '<button type="button" class="pn-btn pri" data-act="next">Next</button>' : '<button type="button" class="pn-btn pri" data-act="submit">Submit</button>') + "</div>" +
       '<button type="button" class="pn-link" data-act="qgrid">' + ico("grid") + " All questions · " + r.ans.filter(function (a) { return a >= 0; }).length + " of " + r.items.length + " answered</button>"
-      : shown ? '<div class="pn-navrow"><button type="button" class="pn-btn pri" data-act="next">' + (r.i < r.items.length - 1 ? "Next question" : "Finish") + " " + ico("next") + "</button></div>" : "";
+      : shown || locked ? '<div class="pn-navrow"><button type="button" class="pn-btn pri" data-act="next">' + (r.i < r.items.length - 1 ? "Next question" : "Finish") + " " + ico("next") + "</button></div>" : "";
     // A swipe arrives from the side it was thrown toward (shared axis); taps and keys change the question in place.
     var enter = st.swipeIn ? (st.swipeIn > 0 ? " in-r" : " in-l") : "";
     st.swipeIn = 0;
     paint(bar(esc(r.title), "Question " + (r.i + 1) + " of " + r.items.length, "back", right) + qprogHtml(r) +
-      '<div class="pn-body pn-run"><div class="pn-qw' + enter + '" id="pnQw">' + pyq.tags + '<p class="pn-q">' + esc(it.q) + "</p>" + pyq.fig + '<ol class="pn-opts" type="A">' + opts + "</ol>" + fb + nav + "</div></div>", shown ? ".pn-fb" : ".pn-opt");
+      '<div class="pn-body pn-run"><div class="pn-qw' + enter + '" id="pnQw">' + pyq.tags + '<p class="pn-q">' + esc(it.q) + "</p>" + pyq.fig + '<ol class="pn-opts" type="A">' + opts + "</ol>" + lockNote + fb + nav + "</div></div>", shown ? ".pn-fb" : ".pn-opt");
     bindRunSwipe();
     if (G.PREP_RAD) G.PREP_RAD.mount(root);
   }
@@ -970,7 +1109,7 @@
      go, and settles back on a spring when the throw is short; a throw past 80 px or faster than 0.5 px/ms commits. */
   function canSwipe(dir) {
     var r = st.run; if (!r || r.done) return false;
-    if (dir > 0) return r.mode === "exam" ? r.i < r.items.length - 1 : r.ans[r.i] >= 0;
+    if (dir > 0) return r.mode === "exam" ? r.i < r.items.length - 1 : r.ans[r.i] >= 0 || !!(r.qc && r.qc.out[r.i]);
     return r.mode === "exam" && r.i > 0;
   }
   function bindRunSwipe() {
@@ -1091,7 +1230,7 @@
       e.preventDefault(); st.kb = true; answer(idx); st.kb = false; return;
     }
     if ((k === "enter" && !(t && t.closest && t.closest("button"))) || k === "arrowright") {
-      if (!canSwipe(1) && !(r.mode === "study" && r.ans[r.i] >= 0)) return;
+      if (!canSwipe(1) && !(r.mode === "study" && (r.ans[r.i] >= 0 || (r.qc && r.qc.out[r.i])))) return;
       e.preventDefault(); st.kb = true;
       if (r.i < r.items.length - 1) { r.i++; renderRun(); } else if (r.mode === "study") finish();
       st.kb = false; return;
@@ -1120,6 +1259,7 @@
   }
   function answer(k) {
     var r = st.run; if (!r || r.done) return;
+    if (r.qc) { var i0 = r.i; qtick(r); if (r.done || r.i !== i0 || r.qc.out[i0]) return; }   // the time ran out first: no answer after it
     if (r.mode === "study") { if (r.ans[r.i] >= 0) return; r.ans[r.i] = k; r.fresh = st.kb ? -1 : r.i; record(r.items[r.i], k); }
     else r.ans[r.i] = k;
     renderRun();
@@ -1131,7 +1271,9 @@
     while (st.stack.length && st.stack[st.stack.length - 1] !== renderRun) st.stack.pop();
     r.done = true; r.secs = Math.round((Date.now() - r.t0) / 1000);
     if (r.custom) return r.custom.submit(r);
+    if (r.qc) qcPause(r.qc, Date.now());
     if (r.mode === "exam") r.items.forEach(function (it, i) { if (r.ans[i] >= 0) record(it, r.ans[i]); else record(it, -1); });
+    if (r.save || r.psId) psSave(r);
     if (r.scheme) { var sc = scoreMock(r.items, r.ans, r.scheme), s = load(); s.mh = (s.mh || []).concat([{ ts: Date.now(), label: r.title, marks: sc.marks, max: sc.max, n: r.items.length }]).slice(-20); save(); }
     if (!st.kb) nav(1);   // the result arrives like a pushed screen (a key finish stays still)
     renderResult();
@@ -1171,6 +1313,61 @@
     st.mlShown = true; try { G.sessionStorage.setItem(ML_SS, "1"); } catch (e) {}
     return (holder.ml = '<p class="pn-maikline" role="status"><span class="pt-av" aria-hidden="true"></span><span>' + esc(pick.text) + "</span></p>");
   }
+  /* Review every question of the set under a filter (All, Wrong, Correct, Skipped or Time up, Bookmarked), with counts;
+     Wrong first when there is any. A filter with nothing in it stays visible but disabled. */
+  var RV_LIST_MAX = 200;
+  function reviewHtml(r) {
+    var sp = reviewSplit(r.items, r.ans, r.qc && r.qc.out, load().bm), f = r.rf && sp[r.rf] ? r.rf : (r.rf = reviewDefault(sp));
+    var skipL = sp.out.length ? (sp.out.length === sp.skip.length ? "Time up" : "Skipped or time up") : "Skipped";
+    var F = [["all", "All"], ["wrong", "Wrong"], ["right", "Correct"], ["skip", skipL], ["bm", "Bookmarked"]];
+    var list = sp[f].slice(0, RV_LIST_MAX);
+    return '<h2 class="pn-sec" id="pnRvH">Review</h2><div class="pn-filters pn-rvf" role="group" aria-labelledby="pnRvH">' + F.map(function (x) {
+      var n = sp[x[0]].length, on = x[0] === f;
+      return '<button type="button" class="pn-chip' + (on ? " on" : "") + '" aria-pressed="' + on + '" data-act="rfilter" data-v="' + x[0] + '"' + (n || on ? "" : " disabled") + ">" + x[1] + ' <span class="pn-rvn">' + n + "</span></button>";
+    }).join("") + "</div>" +
+      (list.length ? '<ol class="pn-missed" aria-live="polite">' + list.map(function (i) {
+        var it = r.items[i], a = r.ans[i], to = !!(r.qc && r.qc.out && r.qc.out[i]);
+        var st0 = a >= 0 ? (a === it.a ? "Right" : "You chose " + esc(it.o[a])) : to ? "Time ran out, not answered" : "Not answered";
+        var cls = a >= 0 ? (a === it.a ? "ok" : "no") : "skip";
+        return '<li><button type="button" class="pn-mod pn-rv-' + cls + '" data-act="reviewq" data-i="' + i + '"><span class="pn-mb"><b>' + (i + 1) + ". " + esc(it.q.length > 120 ? it.q.slice(0, 119) + "…" : it.q) + "</b><small>" + st0 + " · answer: " + esc(it.o[it.a]) + "</small></span></button></li>";
+      }).join("") + "</ol>" : '<p class="pn-mut">Nothing here.</p>');
+  }
+  function psExpiry(e) { var d = psDaysLeft(e, Date.now()); return d <= 1 ? "Expires within a day" : "Expires in " + d + " days"; }
+  // Keep a finished set the student made (ids and answers only). A re-practise of a whole saved set updates it in place.
+  function psSave(r) {
+    var s = load(), now = Date.now(), e = psPack(r.items, r.ans, r.qc && r.qc.out, { title: r.title, kind: r.save, mode: r.mode }, now);
+    if (!e) return;
+    s.ps = s.ps || {};
+    var old = r.psId && s.ps[r.psId];
+    if (old && old.n === e.n) { e.c = old.c; e.x = old.x; e.t = old.t; e.k = old.k; s.ps[r.psId] = e; }
+    else { r.psId = "s" + now.toString(36) + Math.floor(Math.random() * 1296).toString(36); s.ps[r.psId] = e; }
+    psCap(s.ps, PS_MAX);
+    save();
+  }
+  // Reopen a saved set on its result: every question reloads from its module file by id.
+  function openSet(id) {
+    var s = load(), e = s.ps[id];
+    if (!e || !(e.x > Date.now())) { toast("This practice set has expired."); return rerender(); }
+    st.stack.push(function () {}); loadingScreen(esc(e.t), "Loading your set…");
+    var pairs = e.m.map(function (k) { var p = k.split("|"); return { s: p[0], m: p[1] }; });
+    loadMany(pairs, stepMsg).then(function (lists) {
+      var by = {}; lists.forEach(function (l) { by[l.s + "|" + l.m] = l.items; });
+      var u = psUnpack(e, by);
+      st.stack.pop();
+      if (!u.items.length) { toast("The questions of this set did not load. Check the connection and try again."); return rerender(); }
+      st.run = { m0: null, items: u.items, i: 0, mode: e.md, title: e.t, ans: u.ans, mark: {}, done: true, t0: e.f, secs: 0, limit: 0, qsec: 0, scheme: null, custom: null, psId: id, saved: true,
+        qc: u.out.some(Boolean) ? { sec: 0, rem: [], out: u.out, on: -1, at: 0 } : null, cele: null, ml: "" };
+      st.stack.push(renderRun); nav(1); renderRun();
+    });
+  }
+  function psHomeHtml(s) {
+    var L = psList(s.ps, Date.now());
+    if (!L.length) return "";
+    return '<p class="pn-eb" aria-hidden="true">Kept for 7 days</p><h2 class="pn-h">Your practice sets</h2><div class="pn-group" id="pnSets">' + L.slice(0, 6).map(function (x) {
+      var e = x.e;
+      return row("psopen", ico("clock"), esc(e.t) + " · " + dayMonth(e.c), e.n + (e.n === 1 ? " question" : " questions") + " · " + e.ok + " right · " + psExpiry(e), ' data-id="' + esc(x.id) + '"');
+    }).join("") + "</div>";
+  }
   function renderResult() {
     var r = st.run, ok = 0, missed = [];
     r.items.forEach(function (it, i) { if (r.ans[i] === it.a) ok++; else missed.push(i); });
@@ -1179,19 +1376,20 @@
     var line = !r.scheme && answered >= 5 ? maikLine({ subject: setSubject(r.items, subjectById) }, r) : "";
     paint(bar(r.mode === "exam" ? "Test marked" : "Set finished", esc(r.title), "back") + '<div class="pn-body">' + (r.scheme ? mockAnalysis(r, cele) : '<section class="pn-panel pn-score"' + celeAttrs(cele) + ">" + celeChip(cele) +
       '<div class="pn-ring"><svg viewBox="0 0 120 120" aria-hidden="true"><circle class="rt" cx="60" cy="60" r="52" pathLength="100"/>' + (pct > 0 ? '<circle class="rv" cx="60" cy="60" r="52" pathLength="100" stroke-dasharray="' + pct + ' 100"/>' : "") + '</svg>' +
-      '<p class="pn-big">' + ok + " / " + r.items.length + '</p></div><p class="pn-mut">' + pct + "% right" + (r.mode === "exam" ? " · " + fmtTime(r.secs) + " taken" : "") + "</p>" + recapHtml(r) + "</section>") + line +
-      (missed.length ? '<h2 class="pn-sec">Review the missed</h2><ol class="pn-missed">' + missed.map(function (i) {
-        var it = r.items[i];
-        return '<li><button type="button" class="pn-mod" data-act="reviewq" data-i="' + i + '"><span class="pn-mb"><b>' + esc(it.q.length > 120 ? it.q.slice(0, 119) + "…" : it.q) + "</b><small>Answer: " + esc(it.o[it.a]) + (r.ans[i] >= 0 ? " · you chose " + esc(it.o[r.ans[i]]) : " · not answered") + "</small></span></button></li>";
-      }).join("") + "</ol>" : "") +
-      '<div class="pn-navrow">' + (missed.length ? '<button type="button" class="pn-btn" data-act="retrymissed">Retry the missed</button>' : "") + '<button type="button" class="pn-btn pri" data-act="donerun">Done</button></div>' +
+      '<p class="pn-big">' + ok + " / " + r.items.length + '</p></div><p class="pn-mut">' + pct + "% right" + (r.mode === "exam" && !r.saved ? " · " + fmtTime(r.secs) + " taken" : "") + "</p>" + recapHtml(r) + "</section>") + line +
+      reviewHtml(r) +
+      '<div class="pn-navrow pn-again">' + (missed.length ? '<button type="button" class="pn-btn" data-act="retrymissed">' + (missed.length === r.items.length ? "Practise again" : "Practise the missed (" + missed.length + ")") + "</button>" : "") +
+      (missed.length < r.items.length ? '<button type="button" class="pn-btn" data-act="retryall">Practise all again (' + r.items.length + ")</button>" : "") +
+      '<button type="button" class="pn-btn pri" data-act="donerun">Done</button></div>' +
+      (r.psId && load().ps[r.psId] ? '<p class="pn-mut pn-small">Saved in Your practice sets. ' + psExpiry(load().ps[r.psId]) + ".</p>" : "") +
       '<p class="pn-mut pn-small">Missed questions come back sooner for review; ones you got right come back just before you would forget them.</p></div>');
   }
   function reviewQuestion(i) {
     var r = st.run, it = r.items[i];
     st.stack.push(function () {
       var L = ["A", "B", "C", "D"];
-      paint(bar("Review", esc(r.title), "back") + '<div class="pn-body pn-run">' + (G.PREP_PYQ ? G.PREP_PYQ.chips(it, HOST) : "") + '<p class="pn-q">' + esc(it.q) + "</p>" + (G.PREP_PYQ ? G.PREP_PYQ.figure(it, HOST) : "") + (G.PREP_RAD ? G.PREP_RAD.figure(it, HOST) : "") + '<ol class="pn-opts">' + it.o.map(function (o, k) {
+      var tu = r.qc && r.qc.out[i] ? '<p class="pn-timeup">' + ico("lock") + "<span><b>Time ran out</b>" + (r.ans[i] >= 0 ? "Your answer was kept." : "Not answered.") + "</span></p>" : "";
+      paint(bar("Review", esc(r.title), "back") + '<div class="pn-body pn-run">' + tu + (G.PREP_PYQ ? G.PREP_PYQ.chips(it, HOST) : "") + '<p class="pn-q">' + esc(it.q) + "</p>" + (G.PREP_PYQ ? G.PREP_PYQ.figure(it, HOST) : "") + (G.PREP_RAD ? G.PREP_RAD.figure(it, HOST) : "") + '<ol class="pn-opts">' + it.o.map(function (o, k) {
         return '<li><div class="pn-opt' + (k === it.a ? " right" : k === r.ans[i] ? " wrong" : "") + '"><span class="pn-l">' + L[k] + "</span><span>" + esc(o) + "</span></div></li>";
       }).join("") + '</ol><section class="pn-fb">' + (function () {
         var xo = explainOf(it), others = xo.r ? it.o.map(function (o, k) { return k; }).filter(function (k) { return k !== it.a && String(xo.r[k] || "").trim(); }) : [];
@@ -1442,7 +1640,7 @@
       var list = customDraw(lists, cm.n, cm.d || 0);
       if (!list.length) { toast("No questions match. Try another difficulty or subject."); st.stack.pop(); return rerender(); }
       st.stack.pop();
-      runQuestions(list, cm.mode, "Custom module");
+      runQuestions(list, cm.mode, "Custom module", { save: "custom" });
     });
   }
 
@@ -1482,11 +1680,13 @@
      Each scope says how to load its pool (one list per module file, so the draw spreads across modules) and how to start.
      "Last settings" (su-last) starts the same scope at once with the remembered choice. */
   function setupOn() { return !!(G.PREP_SETUP && G.PREP_SETUP.enabled()); }
+  // The runner options of a set the student made: saved for 7 days when it finishes.
+  function saveOpt(ro, kind) { var o = {}, k; for (k in ro || {}) o[k] = ro[k]; o.save = kind; return o; }
   function scopeModule(sid, mid, kind) {
     var s = load(), t = topicOf(sid, mid), title = t ? tx(t.title) : "Practice";
     return { kind: "module", id: mid, title: title, sub: tx((subjectById(sid) || {}).name), hue: subjHue(sid), mode: kind === "exam" ? "exam" : kind === "study" ? "study" : null,
       load: function () { return loadModule(sid, mid).then(function (items) { return [poolFor(items, s.exam, hidden())]; }); },
-      start: function (list, mode, ro) { runQuestions(list, mode, title, ro); } };
+      start: function (list, mode, ro) { runQuestions(list, mode, title, saveOpt(ro, "module")); } };
   }
   // A subject: every module when it is downloaded; otherwise the modules opened before plus others, 16 files at most.
   var SUBJECT_FILES = 16;
@@ -1503,7 +1703,7 @@
           return loadMany(mods.map(function (t) { return { s: sid, m: t.id }; }));
         }).then(function (lists) { return lists.map(function (l) { return poolFor(l.items, s.exam, hidden()); }); });
       },
-      start: function (list, mode, ro) { runQuestions(list, mode, title, ro); } };
+      start: function (list, mode, ro) { runQuestions(list, mode, title, saveOpt(ro, "subject")); } };
   }
   // Custom module: the subjects picked on the screen, 10 module files at most (as startCustom).
   function scopeCustom() {
@@ -1516,7 +1716,7 @@
           return loadMany(shuffle(mods).slice(0, 10));
         }).then(function (lists) { return lists.map(function (l) { return poolFor(l.items, s.exam, hidden()); }); });
       },
-      start: function (list, mode, ro) { runQuestions(list, mode, "Custom module", ro); } };
+      start: function (list, mode, ro) { runQuestions(list, mode, "Custom module", saveOpt(ro, "custom")); } };
   }
   // My mistakes under the chosen reason: every one is "incorrect before", so that row is left out.
   function scopeMistakes() {
@@ -1524,7 +1724,7 @@
     ids.forEach(function (id) { var b = s.mt[id]; want[id] = 1; if (!seen[b[1]]) { seen[b[1]] = 1; pairs.push({ s: b[0], m: b[1] }); } });
     return { kind: "mistakes", id: mf.tag, title: "My mistakes", sub: mf.tag === "all" ? "All reasons" : tagLabel(mf.tag) || "Not tagged", hue: 16, rows: { seen: false },
       load: function () { return loadMany(pairs.slice(0, 12)).then(function (lists) { var hid = hidden(); return lists.map(function (l) { return l.items.filter(function (it) { return want[it.id] && usable(it, hid); }); }); }); },
-      start: function (list, mode, ro) { runQuestions(list, mode, "My mistakes", ro); } };
+      start: function (list, mode, ro) { runQuestions(list, mode, "My mistakes", saveOpt(ro, "mistakes")); } };
   }
   // Bookmarks: every bookmarked question (all bookmarked, so that choice stays in the repeat row but is the whole pool).
   function scopeBookmarks() {
@@ -1534,7 +1734,7 @@
       load: function () {
         return Promise.all(Object.keys(by).map(function (k) { var p = k.split("|"); return loadModule(p[0], p[1]).then(function (items) { var hid = hidden(); return items.filter(function (it) { return by[k][it.id] && usable(it, hid); }); }, function () { return []; }); }));
       },
-      start: function (list, mode, ro) { runQuestions(list, mode, "Bookmarks", ro); } };
+      start: function (list, mode, ro) { runQuestions(list, mode, "Bookmarks", saveOpt(ro, "bookmarks")); } };
   }
   function scopeFor(kind, b) {
     if (kind === "module") return st.cur ? scopeModule(st.cur.s, st.cur.m, null) : null;
@@ -1587,6 +1787,10 @@
     if (a === "sendreport") return sendReport(v);
     if (a === "reviewq") return reviewQuestion(Number(b.getAttribute("data-i")));
     if (a === "retrymissed") { var r2 = st.run, miss = r2.items.filter(function (it, i) { return r2.ans[i] !== it.a; }); st.stack.pop(); return runQuestions(miss, "study", r2.title); }
+    // Practise the whole set again in the same order; a saved set keeps its place and gets the new answers.
+    if (a === "retryall") { var r5 = st.run; st.stack.pop(); return runQuestions(r5.items.slice(), "study", r5.title, r5.psId ? { psId: r5.psId } : r5.save ? { save: r5.save } : {}); }
+    if (a === "rfilter") { if (st.run && st.run.done) { st.run.rf = v; nav(0); renderRun(); var fb = root && root.querySelector('[data-act=rfilter][data-v="' + v + '"]'); if (fb) fb.focus(); } return; }
+    if (a === "psopen") return openSet(b.getAttribute("data-id"));
     if (a === "donerun") { st.run = null; st.stack.pop(); nav(-1); return rerender(); }
     if (a === "bookmarks") return push(renderBookmarks);
     if (a === "plan") return startPlan();
@@ -1639,13 +1843,16 @@
   }
   function openGrid() {
     var r = st.run;
+    if (r && r.qc) qtick(r);   // catch up first: a budget that ran out locks before the grid shows
+    if (!st.run || st.run.done) return;
     st.stack.push(function () {
       var na = r.ans.filter(function (x) { return x >= 0; }).length, nm = Object.keys(r.mark).filter(function (k) { return r.mark[k]; }).length;
       paint(bar("All questions", esc(r.title), "back") + '<div class="pn-body">' + hband("grid", na + " of " + r.items.length, "answered", nm ? nm + (nm === 1 ? " question" : " questions") + " marked for review." : "Tap a number to go to that question.") + '<div class="pn-qgrid">' + r.items.map(function (it, i) {
-        var c = r.ans[i] >= 0 ? " ans" : ""; if (r.mark[i]) c += " mark";
-        return '<button type="button" class="pn-qn' + c + '" data-act="goq" data-i="' + i + '" aria-label="Question ' + (i + 1) + (r.ans[i] >= 0 ? ", answered" : ", not answered") + (r.mark[i] ? ", marked for review" : "") + '">' + (i + 1) + "</button>";
-      }).join("") + '</div><p class="pn-mut pn-small pn-qkey"><span><i class="ans" aria-hidden="true"></i>Answered</span><span><i class="mark" aria-hidden="true"></i>Marked for review</span><span><i aria-hidden="true"></i>Not answered</span></p><button type="button" class="pn-btn pri" data-act="submit">Submit test</button></div>');
+        var to = !!(r.qc && r.qc.out[i]), c = r.ans[i] >= 0 ? " ans" : ""; if (r.mark[i]) c += " mark"; if (to) c += " out";
+        return '<button type="button" class="pn-qn' + c + '" data-act="goq" data-i="' + i + '" aria-label="Question ' + (i + 1) + (r.ans[i] >= 0 ? ", answered" : ", not answered") + (to ? ", time up" : "") + (r.mark[i] ? ", marked for review" : "") + '">' + (i + 1) + "</button>";
+      }).join("") + '</div><p class="pn-mut pn-small pn-qkey"><span><i class="ans" aria-hidden="true"></i>Answered</span><span><i class="mark" aria-hidden="true"></i>Marked for review</span><span><i aria-hidden="true"></i>Not answered</span>' + (r.qc && r.qc.out.some(Boolean) ? '<span><i class="out" aria-hidden="true"></i>Time up</span>' : "") + '</p><button type="button" class="pn-btn pri" data-act="submit">Submit test</button></div>');
     });
+    syncClock(r);   // the grid hides the question: its clock stops
     rerender();
   }
 
