@@ -4,7 +4,7 @@ import test from "node:test";
 import assert from "node:assert/strict";
 import { createRequire } from "node:module";
 import { editFile, editItem } from "../tools/prep-item-edits.mjs";
-import { fixSpacing, makeKnown } from "../tools/prep-spacing.mjs";
+import { fixSpacing, fixListLabels, makeKnown } from "../tools/prep-spacing.mjs";
 import { bankPath } from "../functions/api/prep/bank/[[path]].js";
 
 const require = createRequire(import.meta.url);
@@ -23,6 +23,14 @@ test("spacing: products, eponyms, prefixes, ratios, units and abbreviations stay
   for (const s of ["MacConkey agar", "GeneXpert on sputum", "endoCervix", "hyperParathyroidism", "Cervix:Body ratio", "e.g.The", "120 mmHgb", "fissureXyz", "pH 7.4", "IgG"]) assert.equal(fixSpacing(s, known), s, s);
   assert.equal(fixSpacing("", known), "");
   assert.equal(fixSpacing(null, known), null);
+});
+
+test("spacing: a run-in statement list gets its labels back in order, other brackets stay", () => {
+  assert.equal(fixListLabels("True about N2O cylinder - a) Pressure 2200 PSI b) Blue in colourc) Gas in liquid formd) Pin index 3.5e) Flammable"),
+    "True about N2O cylinder - a) Pressure 2200 PSI b) Blue in colour c) Gas in liquid form d) Pin index 3.5 e) Flammable");
+  assert.equal(fixListLabels("x -a) A b) B c) C"), "x -a) A b) B c) C");
+  for (const s of ["No list (see b) above", "Vitamin D (a) deficiency", "Vitamin Bc) here"]) assert.equal(fixListLabels(s), s, s);
+  assert.equal(fixSpacing("causes are-a) CRFb) Celiac sprue", known), "causes are-a) CRF b) Celiac sprue");
 });
 
 test("spacing: known words come from the bank text (20 or more uses) or the word list", () => {

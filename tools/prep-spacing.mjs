@@ -2,9 +2,11 @@
 // "petrotympanic fissureThe chorda" and "cell cycle.Phase"). Deterministic and conservative: a space goes in only when
 // both halves are known words (frequent in the bank, or in the system word list), the left half is a plain word (no
 // inner capital, not a prefix such as "endo" or "hyper"), and the join is not a known product or eponym (MacConkey,
-// GeneXpert). Two rules:
+// GeneXpert). Three rules:
 //   R1  lower then Upper inside a token:          "fissureThe"   -> "fissure The"
 //   R2  . ; : with no space before a capital word: "cycle.Phase"  -> "cycle. Phase"   (not ratios: "Cervix:Body ratio")
+//   R3  a run-in statement list "a) ... b) Blue in colourc) Gas ..." (labels a), b), c) in order): a glued label gets
+//       its space back ("colour c) Gas"). Only when the text has "a)" and the labels follow in sequence.
 // Meaning never changes: only a space is added. Used by tools/prep-item-edits.mjs --spacing.
 import fs from "node:fs";
 
@@ -31,8 +33,21 @@ function ok(a, b, known) {
     !PREFIX.has(a.toLowerCase()) && !(a.toLowerCase() === "mm" && /^Hg/.test(b));
 }
 
+export function fixListLabels(s) {
+  const m = /(^|[\s\-:(])a\)/.exec(s);
+  if (!m) return s;
+  let out = s, at = m.index + m[0].length;
+  for (const L of "bcdefgh") {
+    const i = out.indexOf(L + ")", at);
+    if (i < 0) break;
+    if (i > 0 && /[A-Za-z0-9.,;]/.test(out[i - 1])) { out = out.slice(0, i) + " " + out.slice(i); at = i + 3; } else at = i + 2;
+  }
+  return out;
+}
+
 export function fixSpacing(s, known) {
   if (typeof s !== "string" || !s) return s;
+  s = fixListLabels(s);
   const t = s.replace(R1, (m, a, b) => (ok(a, b, known) ? a + " " + b : m));
   return t.replace(R2, (m, a, p, b, off, str) => {
     const after = str.slice(off + m.length);
