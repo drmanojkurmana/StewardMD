@@ -196,8 +196,8 @@ test("assets/maik-ai-mark.svg: the symbols, inline fills, nothing external or ra
   for (const id of ["mkai-m", "mkai-full", "mkai-mark", "mkai-tile", "mkai-tile-mark", "mkai-tile-bg-s"]) assert.match(svg, new RegExp('<symbol id="' + id + '" viewBox="0 0 100 100"'), id);
   assert.doesNotMatch(svg, /<script|<image|<foreignObject|href="(?!#)/i);
   assert.doesNotMatch(svg, /\sfill="/, "fills are inline styles so page icon CSS cannot repaint the mark");
-  assert.match(svg, /var\(--mkai-accent/);
-  assert.ok(svg.length < 8000, "small: " + svg.length);
+  assert.doesNotMatch(svg, /<use href="#mkai-ai"/, "owner removed the small AI from the mark (2026-10-10)");
+  assert.ok(svg.length < 40000, "small (traced owner artwork): " + svg.length);
   const js = readFileSync(join(ROOT, "maik-ai-mark.js"), "utf8");
   assert.match(js, /\/assets\/maik-ai-mark\.svg\?v=/);
   assert.doesNotMatch(js, /=>|`|\blet\s|\bconst\s|^\s*class\s/m, "ES5");
