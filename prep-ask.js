@@ -247,6 +247,8 @@
   }
   // The MaiK AI mark (maik-ai-mark.js, one SVG for the whole app); without it, the old avatar picture.
   function mark(size) { var M = G.SMD_MAIK_MARK; return M ? M.html("tile", { size: size || 34 }) : ""; }
+  // "Ask MaiK" with MaiK in the wordmark lettering (maik-ai-mark.js label()); plain text without it.
+  function askLbl() { var M = G.SMD_MAIK_MARK; return M ? M.label("Ask MaiK") : "Ask MaiK"; }
   function avatar(size) { var m = mark(size); return '<span class="pt-av' + (m ? " mk" : "") + '" aria-hidden="true">' + m + "</span>"; }
   function optHtml(v, on, dis, icon, name, desc, extra) {
     return '<button type="button" class="pa-opt' + (on ? " on" : "") + '" role="radio" aria-checked="' + on + '" data-act="ak-pick" data-v="' + v + '"' + (dis ? ' aria-disabled="true"' : "") + ' tabindex="' + (on ? 0 : -1) + '">' +
@@ -256,7 +258,7 @@
   function chooseHtml() {
     var vd = S.vd, ready = S.ready, canLocal = localOk(vd, ready), msg = vd ? verdictMsg(vd, ready) : "Checking this phone…";
     var cantLocal = vd && !canLocal;
-    return '<span class="pn-grab" aria-hidden="true"></span><div class="pa-head">' + avatar(44) + '<div><h2 id="paT">Ask MaiK</h2><p class="pn-mut pn-small">Choose where MaiK answers.</p></div></div>' +
+    return '<span class="pn-grab" aria-hidden="true"></span><div class="pa-head">' + avatar(44) + '<div><h2 id="paT">' + askLbl() + '</h2><p class="pn-mut pn-small">Choose where MaiK answers.</p></div></div>' +
       (cantLocal ? '<p class="pa-note" role="status">' + esc(msg) + "</p>" : "") +
       '<div class="pa-opts" role="radiogroup" aria-labelledby="paT">' +
       optHtml("local", S.sel === "local", !canLocal, "phone", "On this phone", "Works without signal. Your question stays on this phone.", cantLocal ? "" : esc(msg)) +
@@ -331,7 +333,7 @@
       '<p class="pa-left" id="paLeft">' + (left === 1 ? "1 question left in this chat" : left + " questions left in this chat") + "</p></div>";
   }
   function chatHtml() {
-    return '<span class="pn-grab" aria-hidden="true"></span><div class="pa-top">' + avatar(36) + '<h2 id="paT">Ask MaiK</h2>' +
+    return '<span class="pn-grab" aria-hidden="true"></span><div class="pa-top">' + avatar(36) + '<h2 id="paT">' + askLbl() + '</h2>' +
       '<button type="button" class="pn-ib" data-act="ak-close" aria-label="Close Ask MaiK">' + ic("close") + "</button></div>" + segHtml() +
       '<div class="pa-body pt-chat">' + ctxHtml() + threadHtml() + "</div>" + footHtml();
   }

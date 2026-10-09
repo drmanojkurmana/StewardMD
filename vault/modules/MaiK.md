@@ -474,5 +474,16 @@ raster JPGs (IMG_2666/2670/2672/2673/2675/2676; they have a fake checkerboard ba
   (Tokós, Narkē), Workspaces point-of-care, Knowledge reader (reasoning.js), Ward pharmacy verdict.
 - NOT used (owner): the MaiK logo inside the main MaiK assistant (home.js maikShellHTML, maik-logo*.png) and the
   footer MaiKnowledge logo (`.v4-maik-logo`). `test/prep-ask-chat.test.mjs` guards both.
+- **Owner review 2026-10-10:** the plain mark is approved only at small sizes; `html()` renders `mkai-tile` for any
+  plain mark ("full", "mark", "auto") above 48 px. `mkai-tile-mark` was removed from the SVG; "tile-mark" is an alias of
+  "tile". So the Ask sheet headers (44, 36 px) and chat avatars (28 to 34 px) all show `mkai-tile`.
+- **"MaiK" wordmark in Ask MaiK labels (owner, 2026-10-10):** every visible "Ask MaiK" label above draws the word MaiK in
+  the owner's lettering (symbol `mkai-word`); "Ask" and the rest stay in the app font. `SMD_MAIK_MARK.label(htmlSafeText)`
+  wraps the text in one `span.mkai-l` (so a flex button still sees one label), replaces each standalone "MaiK" (not
+  MaiKnowledge, Hindi labels too) with `word()`, and joins "Ask" to it with `&nbsp;`. `word()` = an em-sized svg
+  (`<use href="#mkai-word">`, 0.75 em tall, width from the symbol's own viewBox via `--mkai-wr`, baseline aligned) plus
+  the text "MaiK", visually hidden only once the sprite holds `mkai-word` (`html.mkai-wok`); until then, or offline
+  without the file, the plain text shows: never an empty gap. Screen readers, find and copy read "Ask MaiK".
+  Not applied to the main assistant (its bottom-nav "Ask Maik", composer, logo) or the footer logo.
 - `window.SMD_askMaikHandoff({ topic, prefill })` (home.js): opens MaiK with a topic chip and the text typed in; used by
   PrepNucleus Ask MaiK's hand-off after 10 messages.

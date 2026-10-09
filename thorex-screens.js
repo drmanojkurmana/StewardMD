@@ -768,7 +768,7 @@
         '<button type="button" class="tx-aidx-go tx-maik-cta" data-act="tx-aidx-go" aria-label="Ask MaiK for the best-fit diagnoses">' +
           '<span class="tx-maik-glow" aria-hidden="true"></span>' +
           '<span class="tx-maik-ico">' + (typeof window !== "undefined" && window.SMD_MAIK_MARK ? window.SMD_MAIK_MARK.html("mark", { size: 24, color: "#fff" }) : ic("auto_awesome")) + '</span>' +
-          '<span class="tx-maik-txt"><b>Ask MaiK</b><span>Best-fit diagnoses from the findings and history</span></span>' +
+          '<span class="tx-maik-txt"><b>' + (typeof window !== "undefined" && window.SMD_MAIK_MARK ? window.SMD_MAIK_MARK.label("Ask MaiK") : "Ask MaiK") + '</b><span>Best-fit diagnoses from the findings and history</span></span>' +
         "</button>" +
         '<div class="tx-aidx-out" data-hook="aidxOut" hidden></div>' +
       "</div>";
