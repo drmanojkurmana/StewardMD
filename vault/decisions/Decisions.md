@@ -11660,3 +11660,9 @@ which the sign-off gate does not cover, so it has no manifest entry.
   holds exactly one doctor with the same full name, not struck off (`strictNameMatch`); the register's number
   is recorded. Confidence alone never approves anyone. Kill switch env `VERIFY_NAME_FALLBACK=0`.
   [[StewardMD ID]]
+- **Owner, 2026-10-09 ("We are doing three tests ... any one passed means verified ... only one account per reg
+  number ... if you feel doubtful send me the email to revoke"):** supersedes the 2026-10-08 "exactly one
+  namesake" rule. Verified if ANY of: register number + name; the exact full name on any register row; the
+  certificate reading above 0.7 confidence. Doubtful passes email the owner a one-click Revoke, which frees the
+  number. Clearly read student/intern IDs are accepted at once as reviewed trainees. Risk accepted by the owner:
+  a convincing fake certificate can verify until revoked; the email is the control. [[StewardMD ID]]

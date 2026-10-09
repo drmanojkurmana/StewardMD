@@ -20,7 +20,10 @@ ok(/function aiUnlimited\(env\)/.test(src) && /MAIK_ENFORCE_CAPS\) !== "1"/.test
 ok(/const exempt = admin \|\| aiUnlimited\(env\);/.test(src), "exempt = owner/admin OR the unlimited default");
 
 // every per-user throttle is gated on !exempt (not !admin), so normal accounts aren't blocked
-ok(!/\bif \(!admin\b/.test(src) && !/&& !admin\b/.test(src), "no per-user throttle still keys off !admin");
+// Scoped to the per-user section: the PROJECT-WIDE cost breaker above it lets an owner through on purpose
+// (owner, 2026-10-06: "make it unlimited for owner accounts", test/maik-owner-exempt.test.mjs).
+const perUser = src.slice(src.indexOf("per-user rate limit"));
+ok(!/\bif \(!admin\b/.test(perUser) && !/&& !admin\b/.test(perUser), "no per-user throttle still keys off !admin");
 ok((src.match(/!exempt/g) || []).length >= 4, "rate limit + daily tokens + monthly + per-category caps all use !exempt");
 
 // the project-wide COST circuit breaker must STILL apply (it is NOT a per-user restriction)

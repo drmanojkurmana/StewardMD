@@ -11,3 +11,22 @@ The owner dashboard is served at `/admin`. `admin/index.html` retains existing a
 Verification: `node test/run-admin-dashboard-ui.mjs` uses the real page with synthetic auth/API fixtures; covers search, pinning, configuration preservation, activity escaping/filtering, errors/recovery, sign-out gating, mobile navigation, 320/390/768/1440px layouts, and light/black appearances. Screenshots go to `/tmp/stewardmd-admin-dashboard`. Existing OTA and tenants browser harnesses plus `test/remoteconfig.test.mjs` also pass. Production owner operations are not exercised by these fixtures.
 
 Recovery: `codex/admin-dashboard` isolates the redesign; revert its release commit to recover the preceding console.
+
+## User control (2026-10-08)
+Owner: "control users who just signed up, see their profile, activate or deactivate, give any subscription,
+enable limits specific to that account and see usage by account." Pane `userctl` in `admin/index.html`.
+- **List:** `GET /api/ai/admin/users-recent?days=&filter=all|pending|unverified|verified|pro|disabled&q=`.
+  Newest first from `lifecycle:u:<uid>` metadata (`firstSeen`), joined with the Firebase account (batch
+  `accounts:lookup`, 100 per call) and the verification record `icu:doctor:<uid>`. Counts: today, week, window.
+  An exact email that is not in the window still opens via `user-detail?email=`.
+- **Detail:** `GET /api/ai/admin/user-detail?uid=|email=`: account, claims (known keys only), profile/self
+  (known fields only), verification (no storage keys), plan + features (`adminLookup`), per-account module
+  limits, 7 days of usage (`doctorUsageSummary` on `em:<email>`).
+- **Both are read only** (`functions/_admin_users.js`). Every button calls an endpoint that already existed:
+  `ai/admin/user-action` (sign-in on/off, verify/unverify, revoke Pro), `verifications/approve|reject`,
+  `entitlements/admin/set-plan` (Pro / Physician / Clinician Pro / Ultimate / Trainee, 7d-1y or no end),
+  `set-flag`/`clear-flag` (per-account features), `ai/admin/user-limit` (per-account daily limit per module,
+  enforced even when app-wide caps are off), `entitlements/admin/set-budget` (monthly tokens).
+- Owner-gated like every admin route (`aiAdminAuthed`: owner Google sign-in or the admin token).
+- Tests: `test/admin-users.test.mjs` (joins, filters, search), `test/run-userctl-admin-ui.mjs` (real page,
+  every action sends the right request).

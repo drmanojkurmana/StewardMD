@@ -525,13 +525,51 @@
 
       <!-- USER CONTROL -->
       <div class="pane" id="pane-userctl" data-need-auth>
-        <div class="card">
-          <b>User access control</b>
-          <div class="hint" style="margin:4px 0 8px">Look up a doctor by email to grant/revoke Pro, approve/withdraw NMC verification, or disable/enable sign-in. Changes take effect on the doctor's next token refresh.</div>
-          <div class="row"><div style="flex:2"><label for="ucEmail">Doctor email</label><input id="ucEmail" type="email" placeholder="doctor@email" autocomplete="off"></div><div style="align-self:flex-end"><button class="primary" id="ucFind">Look up</button></div></div>
-          <div class="msg" id="ucMsg"></div><div id="ucBox" style="margin-top:8px"></div>
+        <!-- User control (owner, 2026-10-08): newest sign-ups, one account in full, and every switch for it.
+             Reads /api/ai/admin/users-recent + user-detail (functions/_admin_users.js); every change goes through
+             an existing owner-gated endpoint. -->
+        <div class="stats">
+          <div class="sc"><div class="n" id="ucToday">-</div><div class="l">Signed up today</div></div>
+          <div class="sc"><div class="n" id="ucWeek">-</div><div class="l">This week</div></div>
+          <div class="sc"><div class="n" id="ucWin">-</div><div class="l" id="ucWinL">Last 30 days</div></div>
         </div>
+        <div class="card">
+          <div class="uc-bar">
+            <input id="ucQ" type="search" placeholder="Search name, email, phone or uid" autocomplete="off" aria-label="Search accounts">
+            <select id="ucDays" aria-label="Signed up within"><option value="7">7 days</option><option value="30" selected>30 days</option><option value="90">90 days</option><option value="365">1 year</option></select>
+            <button class="ghost" id="ucReload">Refresh</button>
+          </div>
+          <div class="filters" id="ucFilters" style="margin-top:10px">
+            <button class="pill on" data-ucf="all">All</button><button class="pill" data-ucf="pending">Needs review</button><button class="pill" data-ucf="unverified">Unverified</button>
+            <button class="pill" data-ucf="verified">Verified</button><button class="pill" data-ucf="pro">Pro</button><button class="pill" data-ucf="disabled">Disabled</button>
+          </div>
+          <div class="msg" id="ucMsg"></div>
+          <div id="ucList" class="uc-list"></div>
+        </div>
+        <div class="card" id="ucDetail" style="display:none"></div>
       </div>
+      <style>
+        .uc-bar{display:flex;gap:8px;flex-wrap:wrap}.uc-bar input{flex:1 1 220px}.uc-bar select{flex:0 0 auto;width:auto}
+        .uc-list{margin-top:12px;display:grid;gap:6px}
+        .uc-row{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:4px 12px;align-items:center;text-align:left;width:100%;border:1px solid var(--line);border-radius:12px;padding:10px 12px;background:var(--bg);color:var(--ink);cursor:pointer;font:inherit}
+        .uc-row:hover,.uc-row.on{border-color:var(--tl)}
+        .uc-row .nm{font-weight:700;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+        .uc-row .sub{grid-column:1;font-size:12.5px;color:var(--mut);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+        .uc-row .tags{grid-row:1/span 2;grid-column:2;display:flex;gap:4px;flex-wrap:wrap;justify-content:flex-end;max-width:220px}
+        .uc-tag{font:800 10px var(--f);text-transform:uppercase;border-radius:6px;padding:3px 7px;color:#fff;background:var(--mut);white-space:nowrap}
+        .uc-tag.verified,.uc-tag.trainee{background:var(--grn)}.uc-tag.pending{background:var(--amb)}.uc-tag.rejected,.uc-tag.disabled{background:var(--red)}.uc-tag.pro{background:var(--tl)}.uc-tag.week{background:#6d28d9}
+        .uc-h{display:flex;gap:12px;align-items:flex-start;flex-wrap:wrap}.uc-h h3{margin:0;font-size:19px}.uc-h .x{margin-left:auto}
+        .uc-kv{display:grid;grid-template-columns:140px minmax(0,1fr);gap:6px 12px;font-size:13.5px;margin-top:8px}.uc-kv dt{color:var(--mut)}.uc-kv dd{margin:0;overflow-wrap:anywhere}
+        .uc-sec{border-top:1px solid var(--line);margin-top:16px;padding-top:14px}.uc-sec>b{display:block;margin-bottom:8px}
+        .uc-acts{display:flex;gap:8px;flex-wrap:wrap;align-items:center}.uc-acts button{padding:8px 12px}.uc-acts select,.uc-acts input{width:auto;flex:0 0 auto}
+        .uc-danger{color:var(--red)!important;border-color:var(--red)!important}
+        .uc-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:8px}
+        .uc-lim{display:flex;align-items:center;gap:8px;border:1px solid var(--line);border-radius:10px;padding:8px 10px}.uc-lim span{flex:1;font-size:13px}.uc-lim input{width:96px;padding:6px 8px}
+        .uc-feat{display:flex;align-items:center;gap:8px;border:1px solid var(--line);border-radius:10px;padding:8px 10px;font-size:13px}.uc-feat span{flex:1}.uc-feat select{width:auto;padding:5px 6px}
+        .uc-use{width:100%;border-collapse:collapse;font-size:13px}.uc-use th,.uc-use td{text-align:left;padding:6px 8px;border-bottom:1px solid var(--line)}.uc-use td.n{text-align:right;font-variant-numeric:tabular-nums}
+        .uc-photo{max-width:100%;max-height:340px;border-radius:10px;border:1px solid var(--line);margin-top:8px}
+        @media(max-width:640px){.uc-kv{grid-template-columns:110px minmax(0,1fr)}.uc-row .tags{max-width:130px}}
+      </style>
 
       <!-- AI CONTROL -->
       <div class="pane" id="pane-aictl" data-need-auth>
@@ -1305,36 +1343,134 @@
   $("supFilters").addEventListener("click",function(e){var b=e.target.closest("[data-sf]");if(!b)return;supFilter=b.getAttribute("data-sf");Array.prototype.forEach.call($("supFilters").children,function(p){p.classList.toggle("on",p===b);});supLoad();});
   $("supReload").onclick=supLoad;
 
-  // ---- User control ----
-  function ucFind(){
-    var email=($("ucEmail").value||"").trim().toLowerCase(); if(!email){ say("ucMsg","err","Enter an email."); return; }
-    say("ucMsg","","Looking up…"); $("ucBox").innerHTML="";
-    api(AI+"/user-find?email="+encodeURIComponent(email)).then(function(x){
-      if(x.s!==200){ say("ucMsg","err",forbid(x)); return; } say("ucMsg","","");
-      if(!x.d.found){ $("ucBox").innerHTML='<div class="hint">No account for '+esc(email)+'.</div>'; return; }
-      ucRender(x.d.user||{email:email});
-    }).catch(function(){ say("ucMsg","err","Failed."); });
+  // ---- User control (owner, 2026-10-08) ----
+  // List: /api/ai/admin/users-recent. Detail: /api/ai/admin/user-detail. Changes: existing owner-gated endpoints.
+  var ucFilter="all", ucCur=null, ucT=null;
+  var UC_ST={verified:"Verified",trainee:"Trainee verified",pending:"Needs review",rejected:"Rejected",unverified:"Unverified"};
+  var UC_REASON={no_nmc_match:"Not found on the national register",no_offline_match:"Not found on the register",nmc_unreachable:"Register was unreachable",low_confidence_review:"Hard to read",no_reg_number:"No registration number read",no_name_read:"No name read",not_a_certificate:"Not a certificate",not_an_id:"Not an ID",medical_student_id:"Student ID to review",intern_id:"Intern ID to review"};
+  var UC_TIERS=[["pro","Pro"],["physician","Physician"],["physicianpro","Clinician Pro"],["ultimate","Ultimate"],["trainee","Trainee"]];
+  function ucAgo(ms){ if(!ms) return "-"; var d=(Date.now()-ms)/1000; if(d<60) return "just now"; if(d<3600) return Math.floor(d/60)+" min ago"; if(d<86400) return Math.floor(d/3600)+" h ago"; if(d<86400*30) return Math.floor(d/86400)+" d ago"; return new Date(ms).toLocaleDateString("en-IN",{day:"numeric",month:"short",year:"numeric"}); }
+  function ucDate(ms){ return ms?new Date(+ms).toLocaleDateString("en-IN",{day:"numeric",month:"short",year:"numeric"}):"-"; }
+  function ucTags(u){
+    var t='<span class="uc-tag '+esc(u.status)+'">'+esc(UC_ST[u.status]||u.status)+'</span>';
+    if(u.pro) t+='<span class="uc-tag pro">Pro</span>'; else if(u.freeWeekUntil) t+='<span class="uc-tag week">Free week</span>';
+    if(u.disabled) t+='<span class="uc-tag disabled">Disabled</span>';
+    return t;
   }
-  function ucRender(u){
-    var pro=!!u.pro, ver=!!u.verified, dis=!!u.disabled;
-    $("ucBox").innerHTML='<div class="card" style="margin:0"><b>'+esc(u.email||u.uid||"")+'</b>'+
-      '<div class="hint" style="margin:4px 0 10px">uid '+esc(String(u.uid||"").slice(0,14))+'… · Pro: '+(pro?"yes":"no")+' · Verified: '+(ver?"yes":"no")+' · Sign-in: '+(dis?"DISABLED":"enabled")+'</div>'+
-      '<div style="display:flex;gap:8px;flex-wrap:wrap">'+
-      '<button class="'+(pro?"ghost":"primary")+'" data-uc="'+(pro?"revoke-pro":"grant-pro")+'">'+(pro?"Revoke Pro":"Grant Pro")+'</button>'+
-      '<button class="'+(ver?"ghost":"primary")+'" data-uc="'+(ver?"unverify":"verify")+'">'+(ver?"Withdraw verification":"Approve verification")+'</button>'+
-      '<button class="ghost" data-uc="'+(dis?"enable":"disable")+'" style="color:var(--red);border-color:var(--red)">'+(dis?"Enable sign-in":"Disable sign-in")+'</button>'+
-      '</div><div class="msg" id="ucActMsg"></div></div>';
-    Array.prototype.forEach.call($("ucBox").querySelectorAll("[data-uc]"),function(b){ b.onclick=function(){ ucAct(u.email, b.getAttribute("data-uc")); }; });
+  function ucLoad(){
+    var q=($("ucQ").value||"").trim(), days=$("ucDays").value;
+    $("ucWinL").textContent="Last "+(days==="365"?"year":days+" days");
+    say("ucMsg","","Loading…");
+    api(AI+"/users-recent?days="+days+"&filter="+ucFilter+"&q="+encodeURIComponent(q)).then(function(x){
+      if(x.s!==200){ say("ucMsg","err",forbid(x)); return; }
+      var d=x.d||{}, us=d.users||[], c=d.counts||{};
+      $("ucToday").textContent=c.today!=null?c.today:"-"; $("ucWeek").textContent=c.week!=null?c.week:"-"; $("ucWin").textContent=c.total!=null?c.total:"-";
+      say("ucMsg","",us.length?"":"");
+      if(!us.length){
+        // Older account? An exact email still opens it, whatever the window.
+        if(/@/.test(q)){ $("ucList").innerHTML='<div class="hint">Not in this window. Opening the account for '+esc(q)+'…</div>'; ucOpen(null,q); return; }
+        $("ucList").innerHTML='<div class="hint">No accounts match. Widen the window or clear the filter. Any account opens by its exact email.</div>'; return;
+      }
+      $("ucList").innerHTML=us.map(function(u){
+        return '<button type="button" class="uc-row'+(ucCur===u.uid?" on":"")+'" data-uid="'+esc(u.uid)+'"><span class="nm">'+esc(u.name||u.email||u.phone||u.uid)+'</span><span class="tags">'+ucTags(u)+'</span>'+
+          '<span class="sub">'+esc([u.email,u.phone,(u.status==="pending"&&UC_REASON[u.reviewReason])||"","signed up "+ucAgo(u.signedUpAt)].filter(Boolean).join(" · "))+'</span></button>';
+      }).join("");
+    }).catch(function(){ say("ucMsg","err","Failed to load."); });
   }
-  function ucAct(email, action){
-    if((action==="disable"||action==="revoke-pro")&&!confirm(action.replace("-"," ")+" for "+email+"?")) return;
-    var m=$("ucActMsg"); if(m){m.className="msg";m.textContent="Applying…";}
-    api(AI+"/user-action",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({email:email,action:action})}).then(function(x){
-      if(x.s===200&&x.d.ok){ ucRender(x.d.user||{email:email}); } else { var e=$("ucActMsg"); if(e){e.className="msg err";e.textContent="Failed: "+(x.d&&x.d.error||x.s);} }
-    }).catch(function(){});
+  function ucOpen(uid,email){
+    ucCur=uid||null; var box=$("ucDetail"); box.style.display=""; box.innerHTML='<div class="hint">Loading account…</div>';
+    Array.prototype.forEach.call($("ucList").querySelectorAll(".uc-row"),function(r){ r.classList.toggle("on", r.getAttribute("data-uid")===uid); });
+    api(AI+"/user-detail?"+(uid?"uid="+encodeURIComponent(uid):"email="+encodeURIComponent(email))).then(function(x){
+      if(x.s===404){ box.innerHTML='<div class="hint">No account found.</div>'; return; }
+      if(x.s!==200||!x.d||!x.d.ok){ box.innerHTML='<div class="msg err">'+esc(forbid(x))+'</div>'; return; }
+      ucCur=x.d.account.uid; ucRender(x.d);
+      try{ box.scrollIntoView({behavior:"smooth",block:"start"}); }catch(e){}
+    }).catch(function(){ box.innerHTML='<div class="msg err">Failed to load the account.</div>'; });
   }
-  $("ucFind").onclick=ucFind;
-  $("ucEmail").addEventListener("keydown",function(e){ if(e.key==="Enter") ucFind(); });
+  function ucRender(d){
+    var a=d.account||{}, p=d.profile||{}, v=d.verification, pl=d.plan||{}, cl=d.claims||{};
+    var tel=String(a.phone||p.phone||"").replace(/[^0-9+]/g,"");
+    var kv=function(rows){ return '<dl class="uc-kv">'+rows.filter(function(r){return r[1]!==""&&r[1]!=null;}).map(function(r){return '<dt>'+esc(r[0])+'</dt><dd>'+(r[2]?r[1]:esc(r[1]))+'</dd>';}).join("")+'</dl>'; };
+    var h='<div class="uc-h"><div><h3>'+esc(a.name||p.name||a.email||a.uid)+'</h3><div class="hint" style="margin-top:4px">'+ucTags(a)+'</div></div><button class="ghost x" id="ucClose">Close</button></div>';
+    h+=kv([["Email",a.email],["Mobile",tel?esc(tel)+(a.phoneVerified?" (verified)":"")+' · <a href="https://wa.me/'+esc(tel.replace(/^\+/,""))+'" target="_blank" rel="noopener">WhatsApp</a> · <a href="tel:'+esc(tel)+'">Call</a>':"",true],
+      ["StewardMD ID",p.smdId||pl.smdId||""],["Signed in with",a.provider||""],["Signed up",ucDate(a.signedUpAt)+" ("+ucAgo(a.signedUpAt)+")"],["Last active",ucAgo(a.lastLoginAt)],["UID",a.uid]]);
+    // 1. Access
+    h+='<div class="uc-sec"><b>Access</b><div class="uc-acts">'+
+      (a.disabled?'<button class="primary" data-ua="enable">Activate sign-in</button>':'<button class="ghost uc-danger" data-ua="disable">Deactivate sign-in</button>')+
+      '</div><div class="hint" style="margin-top:6px">Deactivated accounts cannot sign in. Nothing is deleted.</div></div>';
+    // 2. Verification
+    h+='<div class="uc-sec"><b>Verification</b>';
+    if(v) h+=kv([["Status",UC_ST[a.status]||a.status],["Role",v.role||cl.role||""],["Why it needs review",a.status==="pending"?(UC_REASON[v.reason]||v.reason):""],["Name read",v.nameRead],["Number read",v.regNoRead],["Council",v.council],["Institution",v.institution],["Reading confidence",v.confidence!=null?String(v.confidence):""],["Registered number",cl.regNo||""]]);
+    else h+='<div class="hint">No document uploaded yet.</div>';
+    h+='<div class="uc-acts" style="margin-top:8px">'+
+      (a.status==="pending"?'<button class="primary" data-uv="approve">Approve</button><button class="ghost uc-danger" data-uv="reject">Reject</button>':
+       a.status==="verified"?'<button class="ghost uc-danger" data-ua="unverify">Withdraw verification</button>':'<button class="primary" data-ua="verify">Mark verified</button>')+
+      (v&&v.hasPhoto?'<button class="ghost" id="ucPhotoBtn">View document</button>':'')+'</div><div id="ucPhoto"></div></div>';
+    // 3. Subscription
+    var tierName=(UC_TIERS.filter(function(t){return t[0]===pl.tier;})[0]||[0,(!pl.tier||pl.tier==="free")?"Free":pl.tier])[1];
+    h+='<div class="uc-sec"><b>Subscription</b>'+kv([["Plan",tierName+(pl.tierExp?" until "+ucDate(pl.tierExp):(pl.tier&&pl.tier!=="free"?" (no end date)":""))],["Pro",a.pro?("Yes"+(a.proExp?" until "+ucDate(a.proExp):" (no end date)")+(cl.source?" · "+cl.source:"")):(a.freeWeekUntil?"Free week until "+ucDate(a.freeWeekUntil):"No")]])+
+      '<div class="uc-acts" style="margin-top:8px"><select id="ucTier">'+UC_TIERS.map(function(t){return '<option value="'+t[0]+'">'+t[1]+'</option>';}).join("")+'</select>'+
+      '<select id="ucDur"><option value="7">7 days</option><option value="30" selected>1 month</option><option value="90">3 months</option><option value="365">1 year</option><option value="forever">No end date</option></select>'+
+      '<button class="primary" id="ucGive">Give plan</button>'+(a.pro||(pl.tier&&pl.tier!=="free")?'<button class="ghost uc-danger" id="ucRevoke">Remove subscription</button>':'')+'</div></div>';
+    // 4. Features
+    var fs=d.features||[];
+    if(fs.length) h+='<div class="uc-sec"><b>Features</b><div class="hint" style="margin-bottom:8px">Default follows the role and plan. On or Off overrides it for this account only.</div><div class="uc-grid">'+
+      fs.map(function(f){ var cur=f.explicit===true?"on":f.explicit===false?"off":"default"; return '<label class="uc-feat"><span>'+esc(f.label||f.key)+'<br><small class="hint">'+(f.allowed?"on now":"off now")+'</small></span><select data-ff="'+esc(f.key)+'"><option value="default"'+(cur==="default"?" selected":"")+'>Default</option><option value="on"'+(cur==="on"?" selected":"")+'>On</option><option value="off"'+(cur==="off"?" selected":"")+'>Off</option></select></label>'; }).join("")+'</div></div>';
+    // 5. AI limits
+    var mu=pl.monthUsage||null;
+    h+='<div class="uc-sec"><b>AI limits for this account</b><div class="hint" style="margin-bottom:8px">Daily questions per module. Blank uses the app default; 0 means unlimited. These apply to this account even when app-wide limits are off.</div><div class="uc-grid">'+
+      (d.limits||[]).map(function(m){ return '<label class="uc-lim"><span>'+esc(m.label||m.id)+'<br><small class="hint">default '+(m.defaultLimit===0?"unlimited":m.defaultLimit)+'</small></span><input type="number" min="0" step="1" inputmode="numeric" data-ul="'+esc(m.id)+'" value="'+(m.limit==null?"":m.limit)+'" placeholder="default"></label>'; }).join("")+'</div>'+
+      '<div class="uc-acts" style="margin-top:10px;align-items:center"><label for="ucBudget" style="margin:0">Monthly AI token budget</label><input id="ucBudget" type="number" min="0" step="1000" style="width:150px" value="'+(pl.aiCapTokens!=null?pl.aiCapTokens:"")+'" placeholder="plan default"><button class="ghost" id="ucBudgetSave">Save budget</button>'+
+      (mu?'<span class="hint">This month: '+(mu.used||0).toLocaleString()+' of '+(mu.cap||0).toLocaleString()+' tokens</span>':'')+'</div></div>';
+    // 6. Usage
+    var us=d.usage||[], tot={req:0,tokens:0,cost:0}, mods={};
+    us.forEach(function(u){ tot.req+=u.req; tot.tokens+=u.tokens; tot.cost+=u.costInr; Object.keys(u.byModule||{}).forEach(function(k){ var n=u.byModule[k]; mods[k]=(mods[k]||0)+(typeof n==="number"?n:(n&&n.req)||0); }); });
+    h+='<div class="uc-sec"><b>Usage, last 7 days</b>'+(tot.req?'':'<div class="hint">No AI use in the last 7 days.</div>')+
+      (tot.req?'<table class="uc-use"><thead><tr><th>Day</th><th class="n">Questions</th><th class="n">Tokens</th><th class="n">Cost</th></tr></thead><tbody>'+us.map(function(u){return '<tr><td>'+esc(u.day)+'</td><td class="n">'+u.req+'</td><td class="n">'+u.tokens.toLocaleString()+'</td><td class="n">Rs '+(+u.costInr).toFixed(2)+'</td></tr>';}).join("")+
+      '<tr><td><b>Total</b></td><td class="n"><b>'+tot.req+'</b></td><td class="n"><b>'+tot.tokens.toLocaleString()+'</b></td><td class="n"><b>Rs '+tot.cost.toFixed(2)+'</b></td></tr></tbody></table>'+
+      '<div class="hint" style="margin-top:6px">Most used: '+esc(Object.keys(mods).sort(function(x,y){return mods[y]-mods[x];}).slice(0,4).map(function(k){return k+" ("+mods[k]+")";}).join(", "))+'</div>':'')+'</div>';
+    // 7. Profile
+    h+='<div class="uc-sec"><b>Profile</b>'+(Object.keys(p).length?kv([["Name",p.name],["Mobile",p.phone],["Hospital",p.hospital],["Degree",p.degree],["Speciality",p.speciality],["City",[p.city,p.state].filter(Boolean).join(", ")],["Role",p.role],["Reg. number",p.regNo]]):'<div class="hint">Profile not filled in yet.</div>')+'</div>';
+    h+='<div class="msg" id="ucActMsg"></div>';
+    var box=$("ucDetail"); box.innerHTML=h;
+    // wiring
+    $("ucClose").onclick=function(){ box.style.display="none"; ucCur=null; Array.prototype.forEach.call($("ucList").querySelectorAll(".uc-row.on"),function(r){r.classList.remove("on");}); };
+    Array.prototype.forEach.call(box.querySelectorAll("[data-ua]"),function(b){ b.onclick=function(){ ucDo(b.getAttribute("data-ua"), a); }; });
+    Array.prototype.forEach.call(box.querySelectorAll("[data-uv]"),function(b){ b.onclick=function(){
+      var act=b.getAttribute("data-uv"); if(act==="reject"&&!confirm("Reject the verification for "+(a.email||a.uid)+"?")) return;
+      ucSend("/api/verifications/"+act, Object.assign({uid:a.uid}, act==="approve"&&v&&v.regNoRead?{regNo:v.regNoRead}:{}), act==="approve"?"Approved.":"Rejected.");
+    }; });
+    var pb=$("ucPhotoBtn"); if(pb) pb.onclick=function(){ pb.disabled=true; vPhoto(a.uid).then(function(u){ $("ucPhoto").innerHTML=u?'<img class="uc-photo" alt="Uploaded document" src="'+u+'">':'<div class="hint">The document is no longer stored.</div>'; }); };
+    $("ucGive").onclick=function(){ var dur=$("ucDur").value, body={uid:a.uid,tier:$("ucTier").value}; if(dur==="forever") body.forever=true; else body.days=+dur;
+      ucSend("/api/entitlements/admin/set-plan", body, "Plan given."); };
+    var rv=$("ucRevoke"); if(rv) rv.onclick=function(){ if(!confirm("Remove the subscription for "+(a.email||a.uid)+"?")) return;
+      api(AI+"/user-action",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({email:a.email,action:"revoke-pro"})}).then(function(){ ucSend("/api/entitlements/admin/set-plan",{uid:a.uid,tier:"free"},"Subscription removed."); }); };
+    Array.prototype.forEach.call(box.querySelectorAll("[data-ff]"),function(sel){ sel.onchange=function(){ var k=sel.getAttribute("data-ff"), val=sel.value;
+      ucSend(val==="default"?"/api/entitlements/admin/clear-flag":"/api/entitlements/admin/set-flag", val==="default"?{uid:a.uid,feature:k}:{uid:a.uid,feature:k,enabled:val==="on"}, "Feature updated.", true); }; });
+    Array.prototype.forEach.call(box.querySelectorAll("[data-ul]"),function(inp){ inp.onchange=function(){ if(!a.email){ say("ucActMsg","err","This account has no email, so a per-account limit cannot be set."); return; }
+      ucSend(AI+"/user-limit",{email:a.email,module:inp.getAttribute("data-ul"),limit:inp.value===""?null:+inp.value},"Limit saved.",true); }; });
+    $("ucBudgetSave").onclick=function(){ var v2=$("ucBudget").value; if(v2===""){ say("ucActMsg","err","Enter a number of tokens."); return; } ucSend("/api/entitlements/admin/set-budget",{uid:a.uid,tokens:+v2},"Budget saved."); };
+  }
+  // One change, then show the account as the server now has it.
+  function ucSend(path, body, okText, quiet){
+    say("ucActMsg","","Saving…");
+    return api(path,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(body)}).then(function(x){
+      var ok=x.s===200&&x.d&&x.d.ok!==false;
+      if(!ok){ say("ucActMsg","err",forbid(x,true)); return; }
+      say("ucActMsg","ok",okText);
+      if(!quiet&&ucCur){ ucOpen(ucCur); ucLoad(); }
+    }).catch(function(){ say("ucActMsg","err","Failed."); });
+  }
+  function ucDo(action,a){
+    if((action==="disable"||action==="unverify")&&!confirm((action==="disable"?"Deactivate sign-in for ":"Withdraw verification for ")+(a.email||a.uid)+"?")) return;
+    if(!a.email){ say("ucActMsg","err","This account has no email; use the Verifications page."); return; }
+    ucSend(AI+"/user-action",{email:a.email,action:action},({enable:"Sign-in activated.",disable:"Sign-in deactivated.",verify:"Marked verified.",unverify:"Verification withdrawn."})[action]||"Done.");
+  }
+  $("ucList").addEventListener("click",function(e){ var r=e.target.closest(".uc-row"); if(r) ucOpen(r.getAttribute("data-uid")); });
+  $("ucFilters").addEventListener("click",function(e){ var b=e.target.closest("[data-ucf]"); if(!b) return; ucFilter=b.getAttribute("data-ucf"); Array.prototype.forEach.call($("ucFilters").children,function(p){p.classList.toggle("on",p===b);}); ucLoad(); });
+  $("ucQ").addEventListener("input",function(){ clearTimeout(ucT); ucT=setTimeout(ucLoad,350); });
+  $("ucQ").addEventListener("keydown",function(e){ if(e.key==="Enter"){ clearTimeout(ucT); ucLoad(); } });
+  $("ucDays").onchange=ucLoad; $("ucReload").onclick=ucLoad;
 
   // ---- AI control ----
   function aicLoad(){
@@ -1434,7 +1570,7 @@
   $("fbReload").onclick=fbLoad;
   $("fbClear").onclick=function(){ if(!confirm("Clear all MaiK feedback?"))return; api(AI+"/maik-feedback",{method:"POST",headers:{"Content-Type":"application/json"},body:"{}"}).then(function(){ fbLoad(); }); };
 
-  function refresh(pane){ if(!(auth&&auth.currentUser))return; if(pane==="audit")auditLoad(); else if(pane==="overview")ovLoad(); else if(pane==="support")supLoad(); else if(pane==="bugs")bugLoad(); else if(pane==="userctl"){ try{ if(!$("ucEmail").value) $("ucEmail").focus(); }catch(e){} } else if(pane==="aictl")aicLoad(); else if(pane==="config")cfgLoad(); else if(pane==="crashes")crLoad(); else if(pane==="analytics")anLoad(); else if(pane==="feedback")fbLoad(); else if(pane==="notif")nLoad(); else if(pane==="sources")sLoad(); else if(pane==="logs")lLoad(); else if(pane==="verif")vLoad(); else if(pane==="ota")otaLoad(); else if(pane==="watch"){} else if(pane==="push")pStatus(); else if(pane==="ai")aiLoad(); else if(pane==="kardiox")kxLoad(); else if(pane==="xa")xaLoad(); else if(pane==="tenants")tnLoad(); else if(pane==="pro"){ try{ if(!$("etEmail").value) $("etEmail").value=(auth.currentUser.email||""); }catch(e){} try{ pbLoad(); }catch(e){} try{ bcLoad(); }catch(e){} try{ cpnLoad(); }catch(e){} } }
+  function refresh(pane){ if(!(auth&&auth.currentUser))return; if(pane==="audit")auditLoad(); else if(pane==="overview")ovLoad(); else if(pane==="support")supLoad(); else if(pane==="bugs")bugLoad(); else if(pane==="userctl")ucLoad(); else if(pane==="aictl")aicLoad(); else if(pane==="config")cfgLoad(); else if(pane==="crashes")crLoad(); else if(pane==="analytics")anLoad(); else if(pane==="feedback")fbLoad(); else if(pane==="notif")nLoad(); else if(pane==="sources")sLoad(); else if(pane==="logs")lLoad(); else if(pane==="verif")vLoad(); else if(pane==="ota")otaLoad(); else if(pane==="watch"){} else if(pane==="push")pStatus(); else if(pane==="ai")aiLoad(); else if(pane==="kardiox")kxLoad(); else if(pane==="xa")xaLoad(); else if(pane==="tenants")tnLoad(); else if(pane==="pro"){ try{ if(!$("etEmail").value) $("etEmail").value=(auth.currentUser.email||""); }catch(e){} try{ pbLoad(); }catch(e){} try{ bcLoad(); }catch(e){} try{ cpnLoad(); }catch(e){} } }
 
   // ---- Medical colleges (tenant provisioning; owner-gated /api/tenants) ----
   function tnRow(t){
