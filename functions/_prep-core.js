@@ -70,6 +70,9 @@ export function getProfile(exam) {
 const S = (type, extra) => Object.assign({ type: type }, extra || {});
 const OBJ = (props, order) => ({ type: "OBJECT", properties: props, required: order, propertyOrdering: order });
 /* SCHEMAS.facts | .mcq | .solve | .review: the generationConfig.responseSchema for each op. */
+// What a cut image is (the imcq schema). Only figures get a question: never a page of text, a table or a chart.
+export const IMG_KINDS = ["radiograph", "ct-mri", "ultrasound", "photo", "micrograph", "ecg", "diagram", "text", "table", "chart", "other"];
+export const IMG_FIGURES = ["radiograph", "ct-mri", "ultrasound", "photo", "micrograph", "ecg", "diagram"];
 export const SCHEMAS = {
   facts: OBJ({
     // "fs", not "f": Vertex Batch reads a one-letter "f" (or "t") string as a boolean and rejects the whole request
@@ -93,8 +96,10 @@ export const SCHEMAS = {
     s: S("ARRAY", { maxItems: PREP_LIMITS.solve.maxItems, items: OBJ({ i: S("INTEGER"), ot: S("STRING") }, ["i", "ot"]) }),
   }, ["s"]),
   // sure first: the model says whether it can read the image and the page text supports a question, before writing one.
+  // kind: what the image is, said before anything is written; a page of text, a table or a chart gets no image question.
   imcq: OBJ({
     sure: S("BOOLEAN"),
+    kind: S("STRING", { enum: IMG_KINDS }),
     q: S("ARRAY", { maxItems: 1, items: OBJ({
       st: S("STRING"),
       key: OBJ({ ot: S("STRING"), wr: S("STRING") }, ["ot", "wr"]),
@@ -102,7 +107,7 @@ export const SCHEMAS = {
       kp: S("STRING"), sn: S("ARRAY", { minItems: 1, maxItems: 3, items: S("INTEGER") }), dl: S("INTEGER"),
       cog: S("STRING", { enum: COG_LEVELS }),
     }, ["st", "key", "dis", "kp", "sn", "dl", "cog"]) }),
-  }, ["sure", "q"]),
+  }, ["sure", "kind", "q"]),
   review: OBJ({
     g: S("ARRAY", { maxItems: PREP_LIMITS.review.maxItems, items: OBJ({
       i: S("INTEGER"), g4: S("BOOLEAN"), g6: S("BOOLEAN"), g7: S("BOOLEAN"), g8: S("BOOLEAN"),
@@ -358,6 +363,8 @@ export function buildImageMcqPrompt(args) {
     "You write one image-based single-best-answer MCQ for " + profile.name + " preparation from a figure in a student's study text and the page text printed near it.",
     "Look at the image. The question must need the image: the stem refers to it (for example 'The X-ray shown', 'The image shows', 'The ECG shown') and never names or describes the answer in words.",
     "The key must be stated in the numbered page text; sn lists the numbers of the one to three sentences that state it. Every number in the key and its reason must appear in those sentences.",
+    "First set kind to what the image is: radiograph, ct-mri, ultrasound, photo (clinical or specimen), micrograph, ecg, diagram (a drawing, flow of anatomy or a labelled figure), text (a page, a box or a list of words), table, chart (a graph or a flowchart of words), or other.",
+    "Only a figure gets a question: when kind is text, table, chart or other, set sure to false and return no question. A question must never be answerable by reading words, numbers or a table in the image: never write 'based on the table', 'according to the text in the image', 'as listed in the image' or anything that asks the student to read the image.",
     "Set sure to false and return no question when you cannot tell what the image shows, when the page text does not clearly say what it shows, or when the image is a logo, a decoration, a table or a page of text.",
     "Write the key first (wr: why it is right, at most 20 words), then exactly three plausible distractors, each wrong for a stated reason (wr, at most 20 words) with its error type et. Options parallel in form; no 'all of the above'; stem at most 60 words; exam pearl kp at most 25 words. dl is difficulty 1 to 3. cog is one of " + COG_LEVELS.join(", ") + ".",
     "Write fresh text: never copy a sentence of the page text word for word.",
@@ -432,10 +439,13 @@ export function sanitizeReview(raw, n) {
 export function sanitizeImageMcq(raw, sentNums) {
   if (!raw || typeof raw !== "object" || typeof raw.sure !== "boolean" || !Array.isArray(raw.q)) return null;
   const x = raw.q[0], ok = new Set(sentNums || []);
-  if (raw.sure !== true || !x || typeof x !== "object") return { sure: raw.sure === true, rq: null, sn: [] };
+  // kind: an older reply without it is read as a figure; a page of text, a table, a chart or "other" is never one.
+  const kind = IMG_KINDS.indexOf(raw.kind) >= 0 ? raw.kind : "diagram";
+  if (IMG_FIGURES.indexOf(kind) < 0) return { sure: false, rq: null, sn: [], kind };
+  if (raw.sure !== true || !x || typeof x !== "object") return { sure: raw.sure === true, rq: null, sn: [], kind };
   const list = sanitizeMcq({ q: [Object.assign({}, x, { fi: 0 })] }, 1);
   const sn = Array.from(new Set((Array.isArray(x.sn) ? x.sn : []).map((n) => intOr(n, -1)).filter((n) => ok.has(n)))).slice(0, 3);
-  return { sure: true, rq: list && list[0] ? list[0] : null, sn };
+  return { sure: true, rq: list && list[0] ? list[0] : null, sn, kind };
 }
 const STOP = new Set(["with", "from", "that", "this", "which", "their", "there", "these", "those", "into", "over", "under", "between", "about", "after", "before", "most", "more", "less", "than", "only", "very", "also", "both", "each", "other", "such", "some", "shown", "seen", "image", "picture"]);
 /* gateImgSupport(rq, sourceText) -> true when the cited page text supports the key: at least 60% of the key's
@@ -449,6 +459,14 @@ export function gateImgSupport(rq, sourceText) {
   if (!words.length) return false;
   const hits = words.filter((w) => src.indexOf(" " + w.slice(0, Math.min(w.length, 5))) >= 0).length;
   return hits / words.length >= 0.6;
+}
+/* imageStemReads(st): the stem asks the student to READ the image (a table, a list, its text): such a question is about
+ * words, not a figure, and is never kept (owner bug 2026-10-09: "Based on the table provided in the image..."). */
+export function imageStemReads(st) {
+  const t = String(st || "");
+  return /\b(table|tabulated|tabular|chart|flow ?chart|list(?:ed)?|text|notes?|box(?:ed)?|written|printed|mentioned|stated|caption|heading|bullet)\b[^.?]{0,40}\b(image|picture|figure|slide|shown|provided|given|above|below)\b/i.test(t) ||
+    /\b(image|picture|figure|slide)\b[^.?]{0,40}\b(table|tabulated|list(?:s|ed)?|text|notes?|written|printed)\b/i.test(t) ||
+    /\b(based on|according to|as per|refer(?:ring)? to|using) the (table|text|notes?|information|data|list|chart|box)\b/i.test(t);
 }
 /* imageStemOk(st): the stem points at the image (the question needs it). */
 export function imageStemOk(st) { return /\b(image|images|picture|photo|photograph|x-?rays?|radiographs?|films?|scans?|ct|mri|ultrasound|sonograph\w*|figure|shown|slide|smear|specimen|ecg|tracing|micrograph|histolog\w*|fundus|lesion)\b/i.test(String(st || "")); }

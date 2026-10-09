@@ -142,9 +142,9 @@ try {
     { const of = await overflow(); ok(of === "", "image question fits the screen" + (of ? ": " + of : "")); }
     await shot("image");
     await click("#smdPrep [data-act=y-zoom]");
-    ok(await until(`return !!document.querySelector("#smdPrep #pnYqZoom img");`, 2000), "tapping the image enlarges it from the same path");
+    ok(await until(`var z=document.querySelector(".pv .pv-img"), f=document.querySelector("#smdPrep .pn-yq-fig img"); return !!(z && f && z.getAttribute("src") === f.getAttribute("src"));`, 2000), "tapping the image enlarges it from the same path (shared viewer)");
     await ev(`PREP.back(); return 1;`);
-    ok(await ev(`return !document.querySelector("#smdPrep #pnYqZoom") && !!document.querySelector("#smdPrep .pn-q");`) === true, "back() closes the enlarged image first");
+    ok(await until(`return !document.querySelector(".pv") && !!document.querySelector("#smdPrep .pn-q");`, 1500), "back() closes the enlarged image first");
   } else if (!REAL) ok(false, "the image question was not reached");
 
   // ---- stack item (start a fresh set so it is reachable whatever the order)

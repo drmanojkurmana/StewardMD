@@ -70,7 +70,7 @@
   }
 
   function scan(el) {
-    if (!el || el.nodeType !== 1) return;
+    if (!el || el.nodeType !== 1 || (el.classList && el.classList.contains("pn-ghost"))) return;   // a leaving screen (prep.js paint)
     var list = [el].concat(Array.prototype.slice.call(el.querySelectorAll(".pl-hero,.pn-home,.pn-fb,.pn-score,.pn-lsn-fin,.pk-end,.pn-sheet,.pn-round,.pn-lobby,.pn-streak,.pn-vsi,.pn-rtick,.pn-heat,.pn-mast,.pn-lvb,.pn-mods,.pc-decks,.ps-list,.pl-ws,.pn-hbn,.pn-fills,[data-cele]")));
     list.forEach(function (n) {
       if (n.__pnMo) return;

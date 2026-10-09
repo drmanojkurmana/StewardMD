@@ -1,20 +1,20 @@
 /* Schema v2 disease content (flowcharts, value tables) for the Knowledge Library disease reader.
  *
- * OFF by default (owner: do not turn on until approved). Turn on per device with ?kbv2=1 (persists)
- * or localStorage smd_kb_v2 = "1"; ?kbv2=0 turns it off again.
+ * ON for everyone (owner 2026-10-09: app is tester-only). Per-device kill switch: ?kbv2=0 (persists as
+ * localStorage smd_kb_v2 = "0"); ?kbv2=1 turns it back on.
  * reasoning.js emits <div class="kbv2-slot" data-kbv2-id="ID"></div> only when SMD_KBV2_ON is true.
  * This file watches for those slots, fetches the one bucket that holds the id, and renders it with
  * kb-flowchart.js and kb-highyield.js.
  */
 (function () {
   "use strict";
-  var on = false;
+  var on = true;
   try {
     var q = new URLSearchParams(location.search).get("kbv2");
-    if (q === "1") localStorage.setItem("smd_kb_v2", "1");
-    if (q === "0") localStorage.removeItem("smd_kb_v2");
-    on = localStorage.getItem("smd_kb_v2") === "1";
-  } catch (e) { on = false; }
+    if (q === "0") localStorage.setItem("smd_kb_v2", "0");
+    if (q === "1") localStorage.removeItem("smd_kb_v2");
+    on = localStorage.getItem("smd_kb_v2") !== "0";
+  } catch (e) { on = true; }
   window.SMD_KBV2_ON = on;
   if (!on) return;
 
@@ -28,7 +28,7 @@
   function load(id) {
     var b = bucketOf(id);
     if (!cache[b]) {
-      cache[b] = fetch("/kb/dist/v2/b" + (b < 10 ? "0" : "") + b + ".json?v=kbv21")
+      cache[b] = fetch("/kb/dist/v2/b" + (b < 10 ? "0" : "") + b + ".json?v=kbv22")
         .then(function (r) { return r.ok ? r.json() : {}; })
         .catch(function () { return {}; });
     }
