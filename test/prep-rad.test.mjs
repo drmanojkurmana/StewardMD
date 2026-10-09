@@ -112,13 +112,13 @@ test("genPrompt names the target and keeps sources and AI out of what it asks fo
   assert.match(s.system, /scrollable/);
 });
 
-test("the ss-radiology taxonomy entry is valid, ships bv v8 (owner-notes module v7 plus the radmax items, tools/prep-radss.mjs) and changes no other subject", () => {
+test("the ss-radiology taxonomy entry is valid, ships bv v9 (owner-notes module v7 plus the radmax and radmax depth items, tools/prep-radss.mjs) and changes no other subject", () => {
   const src = JSON.parse(fs.readFileSync(new URL("../prep/taxonomy/ss-radiology.json", import.meta.url), "utf8"));
   assert.deepEqual(validateSubject(src), []);
   assert.deepEqual(validateSubject({ ...src, bank: "x6" }), ["bank x6"]);
   const app = taxonomyForApp(loadTaxonomy());
   const rad = app.branches.flatMap((b) => b.subjects).find((s) => s.id === "ss-radiology");
-  assert.equal(rad.bv, "v8");
+  assert.equal(rad.bv, "v9");
   assert.deepEqual(rad.ex, ["neet-ss"]);
   assert.equal(rad.sections.reduce((n, s) => n + s.modules.length, 0), 24);
   assert.equal(app.branches.flatMap((b) => b.subjects).filter((s) => s.bv).length, 1);

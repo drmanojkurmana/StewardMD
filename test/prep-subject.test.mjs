@@ -35,7 +35,7 @@ test("ovFor sums a module's items over the subject's sets", () => {
 test("the committed overlay counts cover every set prep.js asks for, on modules of that subject", () => {
   const src = fs.readFileSync(new URL("prep.js", ROOT), "utf8");
   const ov = overlaysOf(src);
-  assert.deepEqual(ov.radiology, ["radnotes", "radmax"]);
+  assert.deepEqual(ov.radiology, ["radnotes", "radmax2"]);
   const oc = JSON.parse(fs.readFileSync(new URL("prep/bank/overlay-counts.json", ROOT), "utf8"));
   assert.equal(oc.v, 1);
   const ver = /VER = G\.SMD_PREP_BANK_VER \|\| "(v\d+)"/.exec(src)[1];

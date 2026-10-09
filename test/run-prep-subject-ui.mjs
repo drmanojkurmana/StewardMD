@@ -1,5 +1,5 @@
 /* PrepNucleus subject screen, Learn and the exam choice, in the REAL app (headless Chrome over CDP, touch emulation).
- * Data: the app's own prep/ (taxonomy, bundled indexes incl. ss-radiology v8, the bundled pilot lessons); the bank API is
+ * Data: the app's own prep/ (taxonomy, bundled indexes incl. ss-radiology v9, the bundled pilot lessons); the bank API is
  * answered here: a lessons index naming two Radiology NEET-SS modules (srd-abd-liver, srd-cardiac-vascular), else 404.
  * What must hold, at 390 x 844, 820 x 1180 and 1180 x 820:
  *  1. Subject screen (Radiology NEET-SS, Surgery NEET-PG): the actions block (Practise, Learn) has the same left and right
@@ -7,7 +7,7 @@
  *     the column, from 700 px the last button in the row ends on the right edge.
  *  2. Learn shows only where the subject has lessons (Radiology NEET-SS: 2; Anatomy: none), opens a list grouped by module
  *     in module order, and a row opens the lesson reader; the module screen of a module with a lesson shows "Learn".
- *  3. Module counts are the v8 index counts (Radiology NEET-SS: 690 in the hero, srd-cardiac-vascular 83).
+ *  3. Module counts are the v9 index counts (Radiology NEET-SS: 1272 in the hero, srd-cardiac-vascular 128).
  *  4. The exam is asked once: a fresh store opens onboarding with no Skip on the exam step; after it, home has no exam
  *     switcher, Settings shows the exam; a reopen goes straight home; Settings lists six exams (INI-SS among them) and a
  *     change there is kept.
@@ -134,8 +134,8 @@ try {
     await click(`#smdPrep [data-act=subject][data-s="ss-radiology"]`);
     ok(await until(`return document.querySelectorAll("#smdPrep .pn-mod[data-act=module]").length === 24 && !!document.querySelector("#smdPrep [data-act=l-subject]");`, 10000), "Radiology lists 24 modules and a Learn button" + at);
     await sleep(350);
-    ok(/690 MCQs/.test(await ev(`return document.querySelector("#smdPrep .pn-subhead").textContent;`)), "the hero counts 690 MCQs (bank v8)" + at);
-    ok(/83 MCQs/.test(await ev(`return document.querySelector('#smdPrep .pn-mod[data-m="srd-cardiac-vascular"]').textContent;`)), "srd-cardiac-vascular shows its v8 count (83)" + at);
+    ok(/1,?272 MCQs/.test(await ev(`return document.querySelector("#smdPrep .pn-subhead").textContent;`)), "the hero counts 1272 MCQs (bank v9)" + at);
+    ok(/128 MCQs/.test(await ev(`return document.querySelector('#smdPrep .pn-mod[data-m="srd-cardiac-vascular"]').textContent;`)), "srd-cardiac-vascular shows its v9 count (128)" + at);
     const al = await geo(ALIGN);
     ok(al === "", "Practise and Learn sit in the hero and module column" + (al ? ": " + al : "") + at);
     ok(/^\s*Learn\s*2 lessons\s*$/.test((await ev(`return document.querySelector("#smdPrep [data-act=l-subject]").textContent;`)).replace(/·/g, "")), "Learn counts 2 lessons" + at);
