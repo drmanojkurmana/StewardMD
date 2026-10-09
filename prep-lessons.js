@@ -17,6 +17,8 @@
    browser's speechSynthesis. Neither sends audio or text anywhere. Pure helpers load under node for tests. */
 (function (G) {
   "use strict";
+  // Bound once per element and site; a later call swaps the handler (prep.js PREP_DOM.on: a patched repaint keeps nodes).
+  function ON(el, site, type, fn, opts) { if (G.PREP_DOM && G.PREP_DOM.on) return G.PREP_DOM.on(el, site, type, fn, opts); el.addEventListener(type, fn, opts); }
 
   /* ================= pure ================= */
   var SPEEDS = [0.75, 1, 1.25, 1.5];
@@ -400,8 +402,8 @@
       else if (p.length === 1) g = { pinch: 0, px: p[0].x, py: p[0].y, x: Z.x, y: Z.y };
       else g = null;
     };
-    sc.addEventListener("pointerdown", function (e) { pts[e.pointerId] = { x: e.clientX, y: e.clientY }; try { sc.setPointerCapture(e.pointerId); } catch (x) {} start(); });
-    sc.addEventListener("pointermove", function (e) {
+    ON(sc, "lsn", "pointerdown", function (e) { pts[e.pointerId] = { x: e.clientX, y: e.clientY }; try { sc.setPointerCapture(e.pointerId); } catch (x) {} start(); });
+    ON(sc, "lsn", "pointermove", function (e) {
       if (!pts[e.pointerId] || !g) return;
       pts[e.pointerId] = { x: e.clientX, y: e.clientY };
       var p = list();
@@ -420,14 +422,14 @@
       else if (Z.s > 1.05) { btn.classList.add("big"); btn.setAttribute("aria-pressed", "true"); }
       start();
     };
-    sc.addEventListener("pointerup", up); sc.addEventListener("pointercancel", up);
+    ON(sc, "lsn", "pointerup", up); ON(sc, "lsn", "pointercancel", up);
   }
   function bindSwipe(el) {
     if (!el) return;
     var x0 = 0, y0 = 0, on = false;
-    el.addEventListener("pointerdown", function (e) { if (e.pointerType === "mouse" || (e.target.closest && e.target.closest(".pn-vtbl"))) return; on = true; x0 = e.clientX; y0 = e.clientY; });
-    el.addEventListener("pointerup", function (e) { if (!on) return; on = false; var d = swipeDir(e.clientX - x0, e.clientY - y0); if (d > 0) next(); else if (d < 0 && L.i) go(L.i - 1); });
-    el.addEventListener("pointercancel", function () { on = false; });
+    ON(el, "lsn", "pointerdown", function (e) { if (e.pointerType === "mouse" || (e.target.closest && e.target.closest(".pn-vtbl"))) return; on = true; x0 = e.clientX; y0 = e.clientY; });
+    ON(el, "lsn", "pointerup", function (e) { if (!on) return; on = false; var d = swipeDir(e.clientX - x0, e.clientY - y0); if (d > 0) next(); else if (d < 0 && L.i) go(L.i - 1); });
+    ON(el, "lsn", "pointercancel", function () { on = false; });
   }
 
   /* ---------- navigation ---------- */
@@ -502,9 +504,10 @@
     index().then(function (ix) {
       var mods = subjectLessons(ix, topics), n = 0;
       mods.forEach(function (m) { n += m.list.length; });
-      if (!n || !wrap.isConnected || wrap.querySelector("[data-act=l-subject]")) return;
+      if (!n || !wrap.isConnected) return;
+      if (wrap.querySelector("[data-act=l-subject]")) { wrap.hidden = false; return; }
       var b = G.document.createElement("button");
-      b.type = "button"; b.className = "pn-btn pn-sublearn"; b.setAttribute("data-act", "l-subject"); b.setAttribute("data-s", sid);
+      b.type = "button"; b.__pnKeep = 1; b.className = "pn-btn pn-sublearn"; b.setAttribute("data-act", "l-subject"); b.setAttribute("data-s", sid);
       b.innerHTML = ic("book") + '<span class="pn-sl-t">Learn</span><span class="pn-sl-n">' + n + (n === 1 ? " lesson" : " lessons") + "</span>";
       var last = wrap.querySelector(".su-lastb");
       wrap.insertBefore(b, last || null);

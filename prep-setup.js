@@ -218,6 +218,23 @@
     var what = LABEL[best.dim][sel[best.dim]] || "";
     return { dim: best.dim, n: best.n, msg: "No " + what + " questions match. Choose " + RELAX[best.dim] + " for " + best.n + (best.n === 1 ? " question." : " questions.") };
   }
+  /* fit(lists, sel, ctx) -> { sel, moved: [rows] }: a choice that leaves no question (a remembered "Incorrect before" with
+     nothing answered wrong yet, owner recording 2026-10-09) is never the default. Row by row (repeat, type, difficulty),
+     a chosen option with 0 questions falls back to the row's open choice (All, or Mix for difficulty) when that has any.
+     The rows a student never sees (rows: { seen: false }) are left as the scope set them. */
+  function fit(lists, sel, ctx, rows) {
+    var out = normSel(sel), moved = [];
+    rows = rows || {};
+    if (!flat(lists).length) return { sel: out, moved: moved };   // an empty scope: the sheet says so instead
+    // Opening a row never loses a question, so an empty choice is opened even when the other rows still empty the pool;
+    // the next row is then judged with this one open.
+    [["seen", "all"], ["type", "all"], ["d", "mix"]].forEach(function (x) {
+      var k = x[0];
+      if (rows[k] === false || out[k] === x[1] || (k !== "d" && out[k] === "mix")) return;
+      if (!counts(lists, out, ctx)[k][out[k]]) { out[k] = x[1]; moved.push(k); }
+    });
+    return { sel: out, moved: moved };
+  }
   // Remembered choices: { "<kind>:<id>": sel, "<kind>": sel }, newest 40 kept.
   function remember(map, kind, id, sel) {
     map = map && typeof map === "object" ? map : {};
@@ -232,7 +249,7 @@
   function hasLast(map, kind, id) { map = map || {}; return !!((id && map[kind + ":" + id]) || map[kind]); }
 
   var PURE = { CASE_MIN: CASE_MIN, LONG_WORDS: LONG_WORDS, MID_WORDS: MID_WORDS, stemScore: stemScore, stemKind: stemKind, kindOf: kindOf, hasImg: hasImg, typeOf: typeOf, dOf: dOf,
-    wrongBefore: wrongBefore, seenOf: seenOf, seenMatch: seenMatch, normSel: normSel, keep: keep, counts: counts, allocate: allocate, draw: draw, relaxHint: relaxHint,
+    wrongBefore: wrongBefore, seenOf: seenOf, seenMatch: seenMatch, normSel: normSel, keep: keep, counts: counts, allocate: allocate, draw: draw, relaxHint: relaxHint, fit: fit,
     remember: remember, recall: recall, hasLast: hasLast, timerOf: timerOf, runOpts: runOpts, summary: summary, TIMERS: TIMERS, QSECS: QSECS, TYPES: TYPES, SEENS: SEENS, DIFFS: DIFFS, COUNTS: COUNTS, N_MAX: N_MAX, DEFAULTS: DEFAULTS };
   if (isNode) { module.exports = PURE; return; }
 
@@ -274,6 +291,9 @@
     Promise.resolve().then(scope.load).then(function (lists) {
       if (S !== mine) return;
       S.lists = (lists || []).map(function (l) { return (l || []).filter(Boolean); });
+      var f = fit(S.lists, S.sel, S.ctx, scope.rows);
+      f.sel.mode = S.sel.mode;
+      S.sel = f.sel;
       S.loading = false; draw_(true);
     }, function () {
       if (S !== mine) return;
@@ -291,8 +311,9 @@
   function fmt(n) { return S && S.host ? S.host.fmt(n) : String(n); }
   function seg(act, label, opts, v, cnt) {
     return '<div class="su-chips" role="radiogroup" aria-label="' + label + '">' + opts.map(function (o) {
-      var on = String(o[0]) === String(v), c = cnt ? cnt[o[0]] : null;
-      return '<button type="button" class="su-chip' + (on ? " on" : "") + (c === 0 ? " zero" : "") + '" role="radio" aria-checked="' + on + '" tabindex="' + (on ? 0 : -1) + '" data-act="' + act + '" data-v="' + o[0] + '"><span>' + o[1] + "</span>" +
+      // An option that would leave no question cannot be chosen: it reads as off and does nothing (owner 2026-10-09).
+      var on = String(o[0]) === String(v), c = cnt ? cnt[o[0]] : null, off = c === 0 && !on;
+      return '<button type="button" class="su-chip' + (on ? " on" : "") + (c === 0 ? " zero" : "") + '" role="radio" aria-checked="' + on + '" tabindex="' + (on ? 0 : -1) + '" data-act="' + act + '" data-v="' + o[0] + '"' + (off ? " disabled" : "") + "><span>" + o[1] + "</span>" +
         (c != null ? '<b class="su-n">' + fmt(c) + '<span class="su-vh">' + (c === 1 ? " question" : " questions") + "</span></b>" : "") + "</button>";
     }).join("") + "</div>";
   }
@@ -300,18 +321,23 @@
     var b = function (act, dis, lab, d) { return '<button type="button" class="su-sb" data-act="' + act + '" aria-label="' + lab + '"' + (dis ? " disabled" : "") + '><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="' + d + '"/></svg></button>'; };
     return '<div class="su-step" role="group" aria-label="' + label + '">' + b(dec, cur <= lo, less || "Less", "M6 12h12") + '<output class="su-sv" aria-live="off">' + val + "</output>" + b(inc, cur >= hi, more || "More", "M6 12h12M12 6v12") + "</div>";
   }
+  /* The three timer panels (Off, Per question, Whole set) share one grid cell and only the chosen one shows, so the group
+     is always as tall as its tallest panel: switching the timer never changes the sheet's height, and nothing below or
+     at the bottom of the scroller moves (native pass 2; at the end of the sheet a shorter panel made the scroller clamp
+     and the chip slid away under the finger). Hidden panels are inert: out of the tab order and the accessibility tree. */
   function timerHtml(sel, n) {
-    var t = timerOf(sel), opts = sel.mode === "exam" ? TIMERS.slice(1) : TIMERS, sub;
-    var body = seg("su-timer", "Timer", opts, t, null);
-    if (t === "q") {
-      body += '<div class="su-nrow">' + seg("su-qs", "Seconds a question", QSECS.map(function (x) { return [x, x + " s"]; }), QSECS.indexOf(sel.qs) >= 0 ? sel.qs : -1, null) + stepper("su-qdec", "su-qinc", sel.qs + " s", "Custom seconds", 10, 600, sel.qs, "5 seconds less", "5 seconds more") + "</div>";
-      sub = "Each question has its own time, counted only while it is on screen and never reset. When it runs out the question locks and the set moves on.";
-    } else if (t === "set") {
-      var m = sel.mins || Math.max(1, n);
-      body += '<div class="su-nrow">' + seg("su-mins", "Time for the set", [["0", "Exam pace"]], sel.mins ? -1 : "0", null) + stepper("su-mdec", "su-minc", m + " min", "Custom minutes", 1, 600, m, "Fewer minutes", "More minutes") + "</div>";
-      sub = (sel.mins ? m + " minutes" : "Exam pace: 1 minute a question, " + m + " min") + " for the whole set." + (sel.mode === "exam" ? "" : " Practice ends when the time is up.");
-    } else sub = "No clock. Take your time.";
-    return body + '<p class="pn-mut pn-small su-modesub">' + sub + "</p>";
+    var t = timerOf(sel), opts = sel.mode === "exam" ? TIMERS.slice(1) : TIMERS;
+    var m = sel.mins || Math.max(1, n);
+    var panel = function (k, body, sub) {
+      return '<div class="su-tp' + (t === k ? " on" : "") + '" data-key="tp-' + k + '"' + (t === k ? "" : ' inert aria-hidden="true"') + ">" + body + '<p class="pn-mut pn-small su-modesub">' + sub + "</p></div>";
+    };
+    return seg("su-timer", "Timer", opts, t, null) + '<div class="su-tstack">' +
+      panel("off", "", "No clock. Take your time.") +
+      panel("q", '<div class="su-nrow">' + seg("su-qs", "Seconds a question", QSECS.map(function (x) { return [x, x + " s"]; }), QSECS.indexOf(sel.qs) >= 0 ? sel.qs : -1, null) + stepper("su-qdec", "su-qinc", sel.qs + " s", "Custom seconds", 10, 600, sel.qs, "5 seconds less", "5 seconds more") + "</div>",
+        "Each question has its own time, counted only while it is on screen and never reset. When it runs out the question locks and the set moves on.") +
+      panel("set", '<div class="su-nrow">' + seg("su-mins", "Time for the set", [["0", "Exam pace"]], sel.mins ? -1 : "0", null) + stepper("su-mdec", "su-minc", m + " min", "Custom minutes", 1, 600, m, "Fewer minutes", "More minutes") + "</div>",
+        (sel.mins ? m + " minutes" : "Exam pace: 1 minute a question, " + m + " min") + " for the whole set." + (sel.mode === "exam" ? "" : " Practice ends when the time is up.")) +
+      "</div>";
   }
   function grp(k, title, body) { return '<section class="su-grp su-g-' + k + '"><h3 class="su-h"><span class="pl-sic" aria-hidden="true">' + svg(k) + "</span>" + title + "</h3>" + body + "</section>"; }
   function draw_(arrived) {
@@ -338,11 +364,14 @@
     }
     var status = S.loading || S.err ? "" : total ? '<b>' + fmt(total) + "</b> " + (total === 1 ? "question matches" : "questions match") : (hint ? esc(hint.msg) : "");
     var go = !S.loading && !S.err && total > 0;
-    sh.innerHTML = '<span class="pn-grab" aria-hidden="true"></span><div class="su-head"><span class="pn-ic xs su-hic" style="--h:' + (sc.hue == null ? 172 : sc.hue) + '" aria-hidden="true">' + svg("head") + '</span><div><h2 id="suT">Set up practice</h2><p class="pn-mut pn-small">' + esc(sc.title || "") + (sc.sub ? " · " + esc(sc.sub) : "") + "</p></div></div>" +
+    var html = '<span class="pn-grab" aria-hidden="true"></span><div class="su-head"><span class="pn-ic xs su-hic" style="--h:' + (sc.hue == null ? 172 : sc.hue) + '" aria-hidden="true">' + svg("head") + '</span><div><h2 id="suT">Set up practice</h2><p class="pn-mut pn-small">' + esc(sc.title || "") + (sc.sub ? " · " + esc(sc.sub) : "") + "</p></div></div>" +
       '<div class="su-body">' + body + "</div>" +
       '<div class="pn-sheet-act su-act"><p class="su-status' + (total || S.loading || S.err ? "" : " empty") + '" id="suStatus" role="status" aria-atomic="true">' + status + "</p>" +
       '<div class="su-btns"><button type="button" class="pn-btn" data-act="su-close">Cancel</button><button type="button" class="pn-btn pri" data-act="su-go" id="suGo"' + (go ? "" : " disabled") + ">" + (go ? "Start " + S.n + (S.n === 1 ? " question" : " questions") : "Start") + "</button></div></div>";
-    if (arrived && G.PREP_MOTION && G.PREP_MOTION.nav) { /* the sheet's own entrance already played; counts swap in place */ }
+    /* Native pass 2: the sheet is patched, never rebuilt (owner recording 2026-10-09: every chip tap rebuilt it, so its
+       scroller was a new node at scrollTop 0 and the sheet jumped to the top). Same nodes, same scroll, the pressed chip
+       keeps its press state; only the counts, the chosen chip, the timer's own controls and the status change. */
+    if (sh.firstChild && G.PREP_DOM) G.PREP_DOM.patch(sh, html); else sh.innerHTML = html;
   }
   // After a redraw the same control gets the focus back, for keyboard use only (a tap never leaves a focus ring).
   function refocus(act, v) {
@@ -372,11 +401,24 @@
     }, function () { host.toast("The questions did not load. Check the connection and try again."); });
   }
   function last(kind, id) { var m = readMap(); return hasLast(m, kind, id) ? summary(recall(m, kind, id)) : ""; }
+  /* The control under the finger stays under the finger: a row above it can change height (the count note under the
+     stepper, the timer's own controls), so after the patch the scroller moves by however far the control moved. */
+  function anchored(b, fn) {
+    var r = S && S.host.root(), body = r && r.querySelector("#pnSetup .su-body"), y0 = b && b.isConnected && body ? b.getBoundingClientRect().top : null;
+    fn();
+    if (y0 == null || !b.isConnected || !body || !body.contains(b)) return;
+    var d = b.getBoundingClientRect().top - y0;
+    if (Math.abs(d) >= 0.5) body.scrollTop += d;
+  }
   function act(a, b) {
     if (!S) return;
-    var v = b.getAttribute("data-v"), sel = S.sel;
+    if (b && b.disabled) return;
     if (a === "su-close") return close();
     if (a === "su-go") return start();
+    anchored(b, function () { act_(a, b); });
+  }
+  function act_(a, b) {
+    var v = b.getAttribute("data-v"), sel = S.sel;
     if (a === "su-type") sel.type = v;
     else if (a === "su-seen") sel.seen = v;
     else if (a === "su-d") sel.d = v;
@@ -407,8 +449,8 @@
     var step = k === "ArrowRight" || k === "ArrowDown" ? 1 : k === "ArrowLeft" || k === "ArrowUp" ? -1 : 0;
     if (!step) return;
     e.preventDefault();
-    var bs = Array.prototype.slice.call(t.parentNode.querySelectorAll(".su-chip")), i = (bs.indexOf(t) + step + bs.length) % bs.length;
-    act(bs[i].getAttribute("data-act"), bs[i]);
+    var bs = Array.prototype.slice.call(t.parentNode.querySelectorAll(".su-chip:not([disabled])")), i = (bs.indexOf(t) + step + bs.length) % bs.length;
+    if (bs[i]) act(bs[i].getAttribute("data-act"), bs[i]);
   }
   function back() { return S ? close() || true : false; }
   function leave() { S = null; }

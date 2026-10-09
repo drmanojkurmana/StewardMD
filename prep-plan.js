@@ -15,6 +15,8 @@
    and sync controls ("p-n-*" acts go to it). */
 (function (G) {
   "use strict";
+  // Bound once per element and site; a later call swaps the handler (prep.js PREP_DOM.on: a patched repaint keeps nodes).
+  function ON(el, site, type, fn, opts) { if (G.PREP_DOM && G.PREP_DOM.on) return G.PREP_DOM.on(el, site, type, fn, opts); el.addEventListener(type, fn, opts); }
   var NODE = typeof module !== "undefined" && module.exports && !(G && G.document);
   var CORE = NODE ? require("./specialty-core.js") : G.SPECIALTY_CORE;
 
@@ -524,17 +526,22 @@
       sec("exam", "cap", "Exam", f.exam) + sec("date", "cal", "Exam date", f.date) + sec("min", "clock", "Time a day", f.min) + sec("rem", "bell", "Reminder", f.rem) + (G.PREP_ASK ? G.PREP_ASK.settingsHtml(H) : "") + (G.PREP_NATIVE ? G.PREP_NATIVE.syncHtml() : "") + "</div>" +
       '<div class="pn-sheet-act"><button type="button" class="pn-btn pri" data-act="p-save">Save</button><button type="button" class="pn-btn" data-act="p-close">Cancel</button></div>';
     if (first) openSheet("set", html, "pnSetT");
-    else { var sh = root().querySelector("#pnPlanSheet .pn-sheet"), body = sh && sh.querySelector(".pl-setbody"), y = body ? body.scrollTop : 0; if (sh) sh.innerHTML = html; body = sh && sh.querySelector(".pl-setbody"); if (body) body.scrollTop = y; }
+    else {
+      // Patched in place (native pass 2): the scroller is the same node, so it never jumps; rebuilt only without prep.js.
+      var sh = root().querySelector("#pnPlanSheet .pn-sheet"), body = sh && sh.querySelector(".pl-setbody"), y = body ? body.scrollTop : 0;
+      if (sh && G.PREP_DOM) G.PREP_DOM.patch(sh, html);
+      else if (sh) { sh.innerHTML = html; body = sh.querySelector(".pl-setbody"); if (body) body.scrollTop = y; }
+    }
     wireInputs(SET, function () { drawSettings(false); });
     if (G.PREP_NATIVE && G.PREP_NATIVE.wire) G.PREP_NATIVE.wire(root());
   }
   // Native date and time inputs report on change; the chips beside them clear the value.
   function wireInputs(c, redraw) {
     var r = root(), d = r && r.querySelector("#plDate"), t = r && r.querySelector("#plRem");
-    if (d) d.addEventListener("change", function () { c.date = dayOfDate(d.value) != null ? d.value : null; P.cal = null; redraw(); });
-    if (t) t.addEventListener("change", function () { c.rem = /^\d{2}:\d{2}$/.test(t.value) ? t.value : null; redraw(); });
+    if (d) ON(d, "pl", "change", function () { c.date = dayOfDate(d.value) != null ? d.value : null; P.cal = null; redraw(); });
+    if (t) ON(t, "pl", "change", function () { c.rem = /^\d{2}:\d{2}$/.test(t.value) ? t.value : null; redraw(); });
     var box = r && (r.querySelector("#pnPlanSheet .pl-setbody") || r.querySelector(".pl-ob"));
-    if (box) box.addEventListener("keydown", function (e) { pickKey(e, c, redraw); });
+    if (box) ON(box, "pl", "keydown", function (e) { pickKey(e, c, redraw); });
   }
   // After a picker redraws, the same control (or the new day) keeps the focus.
   function refocus(sel) { var r = root(), el = r && r.querySelector(sel); if (el) try { el.focus(); } catch (e) {} }

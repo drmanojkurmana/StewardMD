@@ -1442,3 +1442,13 @@ html.pn-open, html.pn-open body { overflow: hidden; overscroll-behavior: none; }
    new body, outside #smdPrep, fading out while the new body fades in under it. */
 .pn-root.pn-ghost { position: fixed; inset: auto; z-index: 886; padding: 0; background: none; pointer-events: none; overflow: hidden; contain: strict; }
 .pn-root.pn-ghost > .pn-body { height: 100%; overflow: hidden; }
+
+/* ---- Native pass 2 (owner iPhone recording, 2026-10-09) ----
+   No scroll bars anywhere in PrepNucleus: iOS paints its own indicator over an overflow box (the thin line on the sheet's
+   edge in the recording) unless the box hides it; phones show position by the content itself, as native apps do.
+   The scrim and a sheet's fixed chrome (its head and action bar) are not scroll surfaces: a drag there pans nothing, so
+   the page behind never rubber-bands or shifts under a sheet. */
+.pn-root, .pn-root *, .pv, .pv * { scrollbar-width: none; }
+.pn-root ::-webkit-scrollbar, .pv ::-webkit-scrollbar { display: none; width: 0; height: 0; }
+.pn-root .pn-scrim { touch-action: none; overscroll-behavior: none; }
+.pn-root .su-sheet > .su-head, .pn-root .su-sheet > .su-act { touch-action: none; }

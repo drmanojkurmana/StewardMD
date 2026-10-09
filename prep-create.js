@@ -30,6 +30,8 @@
    (imgPlace "stem") through the PYQ figure and zoom. The image is sent only for that call and kept nowhere else. */
 (function (G) {
   "use strict";
+  // Bound once per element and site; a later call swaps the handler (prep.js PREP_DOM.on: a patched repaint keeps nodes).
+  function ON(el, site, type, fn, opts) { if (G.PREP_DOM && G.PREP_DOM.on) return G.PREP_DOM.on(el, site, type, fn, opts); el.addEventListener(type, fn, opts); }
   var isNode = typeof module !== "undefined" && module.exports && !(G && G.document);
   var DK = isNode ? require("./prep-decks.js") : G.PREP_DECKS;
   var SR = isNode ? require("./prep-source.js") : G.PREP_SRC;
@@ -814,8 +816,8 @@
     var r = host.root();
     if (!r) return;
     var ta = r.querySelector("#pcText"), fi = r.querySelector("#pcFile");
-    if (ta) ta.addEventListener("input", function () { cs.text = ta.value; var c = r.querySelector("#pcChars"); if (c) c.textContent = host.fmt(cs.text.length) + " characters"; });
-    if (fi) fi.addEventListener("change", function () { if (fi.files && fi.files[0]) pickPdf(fi.files[0], host); });
+    if (ta) ON(ta, "pc", "input", function () { cs.text = ta.value; var c = r.querySelector("#pcChars"); if (c) c.textContent = host.fmt(cs.text.length) + " characters"; });
+    if (fi) ON(fi, "pc", "change", function () { if (fi.files && fi.files[0]) pickPdf(fi.files[0], host); });
   }
   function pickPdf(file, host) {
     cs.err = ""; cs.pdf = null; cs.sel = []; cs.busy = "Opening the PDF…";
@@ -850,9 +852,9 @@
       '<div class="pc-pg" id="pcPg" role="group" aria-label="Pages of the PDF"></div>' +
       '<div class="pc-pgfoot"><button type="button" class="pn-btn pri" data-act="c-pgok" id="pcPgOk"' + (n ? "" : " disabled") + ">" + (n ? "Continue with " + n + (n === 1 ? " page" : " pages") : "Pick at least one page") + "</button></div></div>");
     var r = host.root(), form = r && r.querySelector("#pcPgForm");
-    if (form) form.addEventListener("submit", function (e) { e.preventDefault(); applySpec(host); });
+    if (form) ON(form, "pc", "submit", function (e) { e.preventDefault(); applySpec(host); });
     var sp = r && r.querySelector("#pcPgSpec");
-    if (sp) sp.addEventListener("input", function () { cs.spec = sp.value; });
+    if (sp) ON(sp, "pc", "input", function () { cs.spec = sp.value; });
     pg.doc = cs.pdf.doc;
     SR.pageAspect(cs.pdf.doc).then(function (a) { pg.aspect = a; layoutGrid(host); });
     // A rotation, a split-view resize or the app's text zoom changes the grid's width: lay it out again for the new
@@ -991,7 +993,7 @@
       '<p class="pn-mut pn-small">Names, phone numbers and ID numbers are looked for and removed before anything is sent. Only the text is sent, never the file.</p>' +
       '<p class="pn-mut pn-small">' + (cl ? esc(cl) + ". " : "") + "Up to " + DAY_CAP + " new decks a day and " + MONTH_CAP + " a month. Adding questions to a deck does not count as a new deck.</p></div>", cs.err ? "#pcErr" : null);
     var r = host.root(), ti = r && r.querySelector("#pcTitle");
-    if (ti) ti.addEventListener("input", function () { cs.title = ti.value; });
+    if (ti) ON(ti, "pc", "input", function () { cs.title = ti.value; });
   }
   function toSettings(host) {
     cs.err = "";
