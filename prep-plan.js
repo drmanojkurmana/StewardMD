@@ -24,6 +24,7 @@
     { id: "neet-pg", tab: "neet-pg", label: "NEET-PG", sub: "MD, MS and DNB entrance, 19 MBBS subjects" },
     { id: "ini-cet", tab: "neet-pg", label: "INI-CET", sub: "AIIMS, JIPMER, PGIMER and NIMHANS entrance" },
     { id: "neet-ss", tab: "neet-ss", label: "NEET-SS", sub: "Superspeciality entrance, medicine group" },
+    { id: "ini-ss", tab: "neet-ss", label: "INI-SS", sub: "Superspeciality entrance of AIIMS, JIPMER and PGIMER, medicine group" },
     { id: "usmle", tab: "usmle", label: "USMLE", sub: "Clinical vignettes where the bank has them" },
     { id: "fmge", tab: "fmge", label: "FMGE", sub: "Screening test for foreign medical graduates" }
   ];
@@ -584,7 +585,7 @@
     H = h;
     if (!P.ob) { P.ob = { i: 0, c: { exam: null, date: null, min: 30, rem: null } }; P.cal = null; }
     var o = P.ob, st = STEPS[o.i], last = o.i === STEPS.length - 1, can = st[0] !== "exam" || !!o.c.exam;
-    H.paint('<div class="pn-sky" aria-hidden="true"></div>' + H.bar("PrepNucleus", "Step " + (o.i + 1) + " of 4", "close", '<button type="button" class="pn-link pl-skip" data-act="p-skip">Skip</button>') +
+    H.paint('<div class="pn-sky" aria-hidden="true"></div>' + H.bar("PrepNucleus", "Step " + (o.i + 1) + " of 4", "close", st[0] === "exam" ? "" : '<button type="button" class="pn-link pl-skip" data-act="p-skip">Skip</button>') +
       '<div class="pn-lsn-prog" aria-hidden="true">' + STEPS.map(function (x, i) { return "<i" + (i <= o.i ? ' class="on"' : "") + "></i>"; }).join("") + "</div>" +
       '<div class="pn-body pl-ob"><img class="pl-art" src="/prep/art/ob-' + st[0] + '.webp" alt="" width="640" height="640" decoding="async"><h2 class="pl-q" id="plQ" tabindex="-1">' + st[1] + '</h2><p class="pn-mut">' + st[2] + "</p>" + fieldsHtml(o.c, st[0]) +
       '<div class="pn-navrow pl-obnav">' + (o.i ? '<button type="button" class="pn-btn" data-act="p-ob-back">Back</button>' : "") +

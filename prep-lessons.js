@@ -147,6 +147,13 @@
     rest.sort(function (a, b) { return a[0] < b[0] ? -1 : a[0] > b[0] ? 1 : 0; });
     return own.concat(rest);
   }
+  /* subjectLessons(ix, topics) -> [{ mid, topic, list }] for a subject, in the subject's module order: each module that
+     has a lesson, with its lessons (lessonsFor). */
+  function subjectLessons(ix, topics) {
+    var out = [];
+    (topics || []).forEach(function (t) { var list = lessonsFor(ix, t.id); if (list.length) out.push({ mid: t.id, topic: t, list: list }); });
+    return out;
+  }
   /* moduleOf(key, meta) -> the module a lesson belongs to. */
   function moduleOf(key, meta) { return (meta && meta.module) || key; }
   /* imgUrl(src, bankApi, apiBase) -> where an image step loads from. "api/prep/bank/..." goes through the bank API base
@@ -170,7 +177,7 @@
   }
   var PURE = { mergeIx: mergeIx, SPEEDS: SPEEDS, XP_STEP: XP_STEP, LIM: LIM, IMG_RE: IMG_RE, plain: plain, words: words, boldHtml: boldHtml, boldTerms: boldTerms, visText: visText,
     flowLevels: flowLevels, checkVis: checkVis, checkStep: checkStep, checkLesson: checkLesson, nextSpeed: nextSpeed, speedLabel: speedLabel, xpFor: xpFor,
-    swipeDir: swipeDir, pickQuiz: pickQuiz, lessonsFor: lessonsFor, moduleOf: moduleOf, imgUrl: imgUrl, lessonImgUrl: lessonImgUrl };
+    swipeDir: swipeDir, pickQuiz: pickQuiz, lessonsFor: lessonsFor, subjectLessons: subjectLessons, moduleOf: moduleOf, imgUrl: imgUrl, lessonImgUrl: lessonImgUrl };
   if (typeof module !== "undefined" && module.exports && !(G && G.document)) { module.exports = PURE; return; }
 
   /* ================= app ================= */
@@ -460,9 +467,9 @@
   var SHOW = 3;
   /* The module's lessons: one row reads "Lesson"; several are listed by title, the first 3 then "Show all". */
   function entryHtml(sid, mid, list, s) {
-    if (list.length === 1) return '<div class="pn-group pn-lsn-entry">' + rowHtml(sid, mid, list[0][0], list[0][1], s, list[0][0] === mid ? "Lesson" : list[0][1].title || "Lesson") + "</div>";
+    if (list.length === 1) return '<h2 class="pn-sec pn-lsn-h">Learn</h2><div class="pn-group pn-lsn-entry">' + rowHtml(sid, mid, list[0][0], list[0][1], s, list[0][1].title || "Lesson") + "</div>";
     var all = L.more[mid] || list.length <= SHOW + 1, shown = all ? list : list.slice(0, SHOW);
-    return '<h2 class="pn-sec">Lessons <span class="pn-mut">' + list.length + "</span></h2>" +
+    return '<h2 class="pn-sec pn-lsn-h">Learn <span class="pn-mut">' + list.length + " lessons</span></h2>" +
       '<div class="pn-group pn-lsn-entry">' + shown.map(function (x) { return rowHtml(sid, mid, x[0], x[1], s, x[0] === mid ? "Lesson" : x[1].title || "Lesson"); }).join("") +
       (all ? "" : '<button type="button" class="pn-row" data-act="l-more" data-s="' + escH(sid) + '" data-m="' + escH(mid) + '"><span class="pn-rb"><b>Show all ' + list.length + " lessons</b></span>" + ico("chev") + "</button>") + "</div>";
   }
@@ -475,6 +482,41 @@
       if (!list.length || !slot.isConnected) return;
       slot.innerHTML = entryHtml(sid, mid, list, store());
     });
+  }
+  /* subjectButton(wrap, sid, topics, h): on the subject screen, a secondary Learn button in the actions block (under
+     Practise, before "Start with last settings") when any module of the subject has a lesson; nothing otherwise. */
+  function subjectButton(wrap, sid, topics, h) {
+    host = h;
+    if (!wrap) return;
+    index().then(function (ix) {
+      var mods = subjectLessons(ix, topics), n = 0;
+      mods.forEach(function (m) { n += m.list.length; });
+      if (!n || !wrap.isConnected || wrap.querySelector("[data-act=l-subject]")) return;
+      var b = G.document.createElement("button");
+      b.type = "button"; b.className = "pn-btn pn-sublearn"; b.setAttribute("data-act", "l-subject"); b.setAttribute("data-s", sid);
+      b.innerHTML = ic("book") + '<span class="pn-sl-t">Learn</span><span class="pn-sl-n">' + n + (n === 1 ? " lesson" : " lessons") + "</span>";
+      var last = wrap.querySelector(".su-lastb");
+      wrap.insertBefore(b, last || null);
+      wrap.hidden = false;
+    });
+  }
+  /* openSubject(sid, h): the subject's lessons, grouped by module in module order. */
+  function openSubject(sid, h) {
+    host = h;
+    var view = function () {
+      var ixs = host.ix ? host.ix() : {}, topics = (ixs[sid] && ixs[sid].topics) || [], sb = host.subjectById(sid), name = sb ? host.tx(sb.name) : "";
+      index().then(function (ix) {
+        if (host.stackTop() !== view) return;
+        var mods = subjectLessons(ix, topics), s = store(), n = 0, done = 0;
+        mods.forEach(function (m) { m.list.forEach(function (x) { n++; if (s.ls[x[0]] && s.ls[x[0]].done) done++; }); });
+        host.paint(host.bar("Learn", escH(name), "back") + '<div class="pn-body pn-lsn-all">' +
+          (n ? '<p class="pn-mut pn-lsn-sum">' + n + (n === 1 ? " lesson" : " lessons") + " in " + mods.length + (mods.length === 1 ? " module" : " modules") + (done ? ", " + done + " finished" : "") + ". Each is a few short steps you can listen to, then quick questions.</p>" : '<p class="pn-empty">No lessons for this subject yet.</p>') +
+          mods.map(function (m) {
+            return '<section class="pn-lsn-mod"><h2 class="pn-sec">' + host.tx(m.topic.title) + '</h2><div class="pn-group">' + m.list.map(function (x) { return rowHtml(sid, m.mid, x[0], x[1], s, x[1].title || "Lesson"); }).join("") + "</div></section>";
+          }).join("") + "</div>");
+      });
+    };
+    host.push(view);
   }
   /* open(sid, mid, h, key): key defaults to the module's own lesson. */
   function open(sid, mid, h, key) {
@@ -499,6 +541,7 @@
   }
   function act(a, b, h) {
     host = h;
+    if (a === "l-subject") return openSubject(b.getAttribute("data-s"), h);
     if (a === "l-open") { if (L.loading && host.stackTop() === L.loading) host.stack().pop(); return open(b.getAttribute("data-s"), b.getAttribute("data-m"), h, b.getAttribute("data-l") || ""); }
     if (a === "l-more") {
       var mm = b.getAttribute("data-m"), slot = b.closest && b.closest("#pnLsnSlot");
@@ -549,5 +592,5 @@
   }
   if (G.document && G.document.addEventListener) G.document.addEventListener("keydown", onKey);
 
-  G.PREP_LESSONS = { mount: mount, open: open, act: act, back: back, leave: leave, index: index, _pure: PURE, _l: L };
+  G.PREP_LESSONS = { mount: mount, subjectButton: subjectButton, openSubject: openSubject, open: open, act: act, back: back, leave: leave, index: index, _pure: PURE, _l: L };
 })(typeof window !== "undefined" ? window : this);

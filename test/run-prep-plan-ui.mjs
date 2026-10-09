@@ -74,9 +74,9 @@ try {
   await ev(`PREP.open(); return 1;`);
   ok(await until(`return !!document.querySelector("#smdPrep .pl-q");`, 20000), "the first plain open shows onboarding");
   await ev(STUB_LESSONS);
-  ok(/Which exam/.test(await text("#smdPrep .pl-q")) && await ev(`return document.querySelectorAll("#smdPrep [data-act=p-f-exam]").length;`) === 5, "step 1 offers the five exams");
+  ok(/Which exam/.test(await text("#smdPrep .pl-q")) && await ev(`return document.querySelectorAll("#smdPrep [data-act=p-f-exam]").length;`) === 6, "step 1 offers the six exams");
   ok(await ev(`return document.querySelector("#smdPrep [data-act=p-ob-next]").disabled;`) === true, "Continue waits for an exam");
-  ok(await ev(`return !!document.querySelector("#smdPrep [data-act=p-skip]") && !document.querySelector("#smdPrep .pn-tabs");`) === true, "Skip is offered; home is not drawn behind");
+  ok(await ev(`return !document.querySelector("#smdPrep [data-act=p-skip]") && !document.querySelector("#smdPrep #pnHome");`) === true, "the exam step has no Skip (the exam is asked once); home is not drawn behind");
   await click('#smdPrep [data-act=p-f-exam][data-v=neet-pg]');
   ok(await ev(`return document.querySelector('#smdPrep [data-v=neet-pg]').getAttribute("aria-checked");`) === "true", "picking an exam checks it");
   await shot("ob-exam");
@@ -181,7 +181,7 @@ try {
   await shot("home-ticked");
 
   // ---- FMGE: tab, subjects, mock pattern, Arena coming soon
-  await click('#smdPrep .pn-tab[data-v=fmge]');
+  await ev(`PREP._host.setExam("fmge"); return 1;`);
   ok(await until(`return !!document.querySelector("#smdPrep .pn-tile[data-s=anatomy]") && !document.querySelector("#smdPrep .pn-tile[data-s=ss-cardiology]");`, 5000), "the FMGE tab lists the MBBS subjects");
   ok(/FMGE readiness/.test(await text("#smdPrep .pl-hero")), "readiness follows the tab: " + await text("#smdPrep .pl-hero"));
   await shot("fmge-home");
@@ -203,13 +203,15 @@ try {
   await ev(`localStorage.setItem("smd_prep_arena","1"); window.SMD_AUTH={currentUser:{uid:"u1",displayName:"Test",getIdToken:function(){return Promise.resolve("t");}}}; PREP._st.stack[PREP._st.stack.length-1](); return 1;`);
   ok(await until(`return /FMGE Arena: coming soon/.test((document.getElementById("pnCompete")||{}).textContent||"");`, 5000), "the FMGE Arena says coming soon");
   await ev(`localStorage.removeItem("smd_prep_arena"); delete window.SMD_AUTH; return 1;`);
-  await click('#smdPrep .pn-tab[data-v=neet-pg]');
+  await ev(`PREP._host.setExam("neet-pg"); return 1;`);
 
   // ---- skip: a fresh store, Skip lands on home and onboarding never shows again
   await ev(`PREP.close(); localStorage.removeItem("smd_prep_v1"); PREP._st.store=null; PREP.open(); return 1;`);
-  ok(await until(`return !!document.querySelector("#smdPrep [data-act=p-skip]");`, 5000), "a fresh store shows onboarding again");
+  ok(await until(`return !!document.querySelector("#smdPrep [data-act=p-f-exam]");`, 5000), "a fresh store shows onboarding again");
+  await click('#smdPrep [data-act=p-f-exam][data-v=neet-pg]'); await click("#smdPrep [data-act=p-ob-next]");
+  ok(await until(`return !!document.querySelector("#smdPrep [data-act=p-skip]");`, 3000), "after the exam, the other steps can be skipped");
   await click("#smdPrep [data-act=p-skip]");
-  ok(await until(`return !!document.querySelector("#smdPrep .pl-hero") && !!document.querySelector("#smdPrep .pn-tabs");`, 5000), "Skip lands on home");
+  ok(await until(`return !!document.querySelector("#smdPrep .pl-hero") && !!document.querySelector("#smdPrep #pnHome");`, 5000), "Skip lands on home");
   ok(await store(`s.pl && s.pl.ob===1 && s.pl.min===30 && s.pl.date===null`) === true, "skipping stores the defaults");
   await ev(`PREP.close(); PREP.open(); return 1;`);
   ok(await until(`return !!document.querySelector("#smdPrep .pl-hero");`, 5000) && await ev(`return !document.querySelector("#smdPrep .pl-q");`) === true, "the next open goes straight home");

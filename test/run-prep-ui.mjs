@@ -220,18 +220,18 @@ try {
 
   // ---- back to home: bookmark count, exam tab
   await ev(`PREP.back(); return 1;`);
-  ok(await until(`return !!document.querySelector("#smdPrep .pn-tabs");`, 5000), "back() unwinds to home");
+  ok(await until(`return !!document.querySelector("#smdPrep #pnHome");`, 5000), "back() unwinds to home");
   // Round 4: a tab cross-fades (opacity, no travel); Escape goes back with no animation; reduced motion is a fade.
-  const navTab = JSON.parse(await ev(`document.querySelector("#smdPrep .pn-tab.on").click(); var an=document.getAnimations().filter(function(a){var t=a.effect&&a.effect.target; return t&&t.matches&&t.matches("#smdPrep > .pn-body");}); var k=an.length?an[0].effect.getKeyframes():[]; return JSON.stringify({n:an.length, from:(k[0]&&k[0].transform)||"", op:k[0]?k[0].opacity:null});`));
+  const navTab = JSON.parse(await ev(`PREP._host.setExam(PREP._host.exam().id); var an=document.getAnimations().filter(function(a){var t=a.effect&&a.effect.target; return t&&t.matches&&t.matches("#smdPrep > .pn-body");}); var k=an.length?an[0].effect.getKeyframes():[]; return JSON.stringify({n:an.length, from:(k[0]&&k[0].transform)||"", op:k[0]?k[0].opacity:null});`));
   ok(navTab.n === 1 && !navTab.from && String(navTab.op) === "0", "an exam tab cross-fades the body: " + JSON.stringify(navTab));
   await sleep(300); await click("#smdPrep [data-act=bookmarks]"); await until(`return /Bookmarks/.test(document.querySelector("#smdPrep .pn-t h1").textContent);`, 3000); await sleep(300);
   const navKey = JSON.parse(await ev(`document.getElementById("smdPrep").dispatchEvent(new KeyboardEvent("keydown",{key:"Escape",bubbles:true})); var an=document.getAnimations().filter(function(a){var t=a.effect&&a.effect.target; return t&&t.matches&&t.matches("#smdPrep > .pn-body");}); var k=an.length?an[0].effect.getKeyframes():[]; return JSON.stringify({n:an.length, from:(k[0]&&k[0].transform)||"", op:k[0]?k[0].opacity:null});`));
-  ok(navKey.n === 0 && await ev(`return !!document.querySelector("#smdPrep .pn-tabs");`) === true, "Escape goes back with no animation: " + JSON.stringify(navKey));
+  ok(navKey.n === 0 && await ev(`return !!document.querySelector("#smdPrep #pnHome");`) === true, "Escape goes back with no animation: " + JSON.stringify(navKey));
   await call("Emulation.setEmulatedMedia", { features: [{ name: "prefers-reduced-motion", value: "reduce" }] });
   const navRm = JSON.parse(await ev(`document.querySelector("#smdPrep [data-act=bookmarks]").click(); var an=document.getAnimations().filter(function(a){var t=a.effect&&a.effect.target; return t&&t.matches&&t.matches("#smdPrep > .pn-body");}); var k=an.length?an[0].effect.getKeyframes():[]; return JSON.stringify({n:an.length, from:(k[0]&&k[0].transform)||"", op:k[0]?k[0].opacity:null});`));
   ok(navRm.n === 1 && !navRm.from && String(navRm.op) === "0", "reduced motion: a push is a cross-fade with no travel: " + JSON.stringify(navRm));
   await call("Emulation.setEmulatedMedia", { features: [] });
-  await ev(`PREP.back(); return 1;`); await until(`return !!document.querySelector("#smdPrep .pn-tabs");`, 3000);
+  await ev(`PREP.back(); return 1;`); await until(`return !!document.querySelector("#smdPrep #pnHome");`, 3000);
   ok(await ev(`return /1 saved/.test(document.querySelector("#smdPrep [data-act=bookmarks]").textContent);`) === true, "home counts the bookmark");
   const nmt = await ev(`return Object.keys(JSON.parse(localStorage.getItem("smd_prep_v1")).mt).length;`);
   ok(nmt > 0 && await ev(`return /${nmt} to fix/.test(document.querySelector("#smdPrep [data-act=mistakes]").textContent);`) === true, "home counts the mistakes: " + nmt);
@@ -274,10 +274,10 @@ try {
   ok(await until(`var r=PREP._st.run; return !!r && r.items.length===3 && r.items[0]._m==="ana-brachial-plexus";`, 8000), "and starts 3 questions of the matching module");
   ok(await ev(`var o=document.querySelector('#smdPrep .pn-opt[data-k="'+((PREP._st.run.items[0].a+1)%4)+'"]'); o.click(); return !document.querySelector("#smdPrep [data-act=teach]") && !!window.PREP_TEACHER;`) === true, "the offline teacher is loaded but offers nothing on the web (no local model)");
   await ev(`PREP.close(); PREP.open(); return 1;`);
-  await until(`return !!document.querySelector("#smdPrep .pn-tabs");`, 5000);
-  await click('#smdPrep .pn-tab[data-v=neet-ss]');
+  await until(`return !!document.querySelector("#smdPrep #pnHome");`, 5000);
+  await ev(`PREP._host.setExam("neet-ss"); return 1;`);
   ok(await until(`return !!document.querySelector("#smdPrep .pn-tile[data-s=ss-cardiology]") && !document.querySelector("#smdPrep .pn-tile[data-s=anatomy]");`, 5000), "NEET-SS tab shows the SS subject only");
-  await click('#smdPrep .pn-tab[data-v=neet-pg]');
+  await ev(`PREP._host.setExam("neet-pg"); return 1;`);
   await ev(`PREP.back(); return 1;`);
   ok(await until(`return !PREP.isOpen() && !document.getElementById("smdPrep");`, 3000), "back() on home closes PrepNucleus");
 
@@ -331,8 +331,8 @@ try {
   await click('#smdPrep [data-act=start][data-k=study]');
   ok(await until(`return !!document.querySelector("#smdPrep .pn-q");`, 10000), "a module opened once loads offline after a reload");
   await ev(`PREP.back(); PREP.back(); PREP.back(); return 1;`);
-  await until(`return !!document.querySelector('#smdPrep .pn-tab[data-v=neet-ss]');`, 5000);
-  await click('#smdPrep .pn-tab[data-v=neet-ss]');
+  await until(`return !!document.querySelector('#smdPrep #pnHome');`, 5000);
+  await ev(`PREP._host.setExam("neet-ss"); return 1;`);
   await until(`return !!document.querySelector("#smdPrep .pn-tile[data-s=ss-cardiology]");`, 5000);
   await click("#smdPrep .pn-tile[data-s=ss-cardiology]");
   await until(`return !!document.querySelector('#smdPrep .pn-mod[data-m=scd-hfref]');`, 5000);

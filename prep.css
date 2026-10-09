@@ -1292,6 +1292,22 @@ body.dark .pn-root .pn-fb .pn-mtag { border-top-color: var(--pn-edge); }
   .pn-root .pn-body > .pn-banner.pn-brand-banner { aspect-ratio: 16 / 3.4; margin-bottom: 8px; }
 }
 
+/* Subject actions: Practise, Learn and "Start with last settings" as one block, a direct child of the body, so it takes
+   the same column (width, max-width and auto margins) as the hero and the module grid at every width. */
+.pn-root .pn-subacts { display: flex; flex-direction: column; gap: 8px; }
+.pn-root .pn-subacts[hidden] { display: none; }
+.pn-root .pn-subacts > .pn-btn { width: 100%; margin: 0; }
+.pn-root .pn-sublearn > svg { color: var(--pn-pri); flex-shrink: 0; }
+.pn-root .pn-sl-n { font-size: 13.5px; font-weight: 600; color: var(--pn-mut); font-variant-numeric: tabular-nums; }
+.pn-root .pn-sl-n::before { content: "\00b7"; margin-right: 8px; }
+@media (min-width: 700px) {
+  .pn-root .pn-subacts { display: grid; grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr); }
+  .pn-root .pn-subacts > .pn-btn:only-child, .pn-root .pn-subacts > .su-lastb, .pn-root .pn-subacts > .pn-subgo:not(:has(+ .pn-sublearn)) { grid-column: 1 / -1; }
+}
+/* Learn: a subject's lessons by module. */
+.pn-root .pn-lsn-sum { font-size: 14.5px; line-height: 1.5; text-wrap: pretty; }
+.pn-root .pn-lsn-mod { display: flex; flex-direction: column; gap: 8px; }
+
 /* Browse screens widen to 1040 px; the module list goes two a row. */
 @media (min-width: 900px) {
   .pn-root .pn-body.pn-home > :not(.pn-brand-banner), .pn-root #pnSub > *, .pn-root .pn-body:has(> .pn-lvb) > * { max-width: 1040px; }
