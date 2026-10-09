@@ -129,19 +129,23 @@ test("tidy: key opener cut only when the line still names the answer; keys, opti
   assert.equal(OUT_SET, "medcov2", "a changed release goes to a new immutable folder");
 });
 
-test("tidy: applyDrops removes whole lines only, keeps headings and tables whole, renumbers steps, refuses big cuts", () => {
+test("tidy: applyDrops removes whole lines only, trailing lines only, headings and empty tables follow, refuses big cuts", () => {
   const filler = Array.from({ length: 6 }, (_, k) => "- Point " + k + " about the tested condition and how it is diagnosed and treated well.").join("\n");
   const notes = "## Topic\n" + filler + "\n- Off topic line about another disease entirely here.\n\n| A | B |\n| --- | --- |\n| x | y |\n\n1. First step.\n2. Second step.\n3. Third step.\n\n## Other\n- Unrelated bullet.";
   const L = noteLines(notes);
   const ix = (re) => L.findIndex((l) => re.test(l.t));
   assert.equal(L[0].kind, "h"); assert.equal(L[ix(/^\| A/)].kind, "th"); assert.equal(L[ix(/^\| ---/)].kind, "ts"); assert.equal(L[ix(/^\| x/)].kind, "tr");
-  const out = applyDrops(notes, [ix(/Off topic/), ix(/^\| x/), ix(/^2\./), ix(/Unrelated/), 0]);
+  const out = applyDrops(notes, [ix(/Off topic/), ix(/^\| x/), ix(/^3\./), ix(/Unrelated/), 0]);
   assert.ok(out, "gates pass");
-  assert.doesNotMatch(out, /Off topic|Unrelated|\| A \||## Other/, "dropped lines, the empty table and the empty heading go");
+  assert.doesNotMatch(out, /Off topic|Unrelated|## Other/, "dropped lines and the empty heading go");
+  assert.match(out, /\| x \| y \|/, "a table keeps its last row");
   assert.match(out, /^## Topic/, "a heading is never dropped on its own");
-  assert.match(out, /1\. First step\.\n2\. Third step\./, "steps renumbered");
-  for (const l of out.split("\n")) assert.ok(notes.split("\n").includes(l) || /^2\. Third/.test(l), "no new text: " + l);
+  assert.match(out, /1\. First step\.\n2\. Second step\.$/m, "the last step goes"); assert.doesNotMatch(out, /Third/);
+  for (const l of out.split("\n")) assert.ok(notes.split("\n").includes(l), "no new text: " + l);
   assert.equal(applyDrops(notes, []), null);
+  assert.equal(applyDrops(notes, [ix(/Point 2/)]), null, "a line in the middle of its block stays");
+  assert.doesNotMatch(applyDrops(notes, [ix(/Point 2/), ix(/Off topic/)]), /Off topic/, "the trailing line goes");
+  assert.match(applyDrops(notes, [ix(/Point 2/), ix(/Off topic/)]), /Point 2/, "the middle one stays");
   assert.equal(applyDrops(notes, [1, 2, 3, 4, 5]), null, "more than 45% of the words: refused");
 });
 

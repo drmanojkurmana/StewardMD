@@ -416,11 +416,22 @@ export function noteLines(notes) {
   return out;
 }
 export const DROPPABLE = new Set(["b", "n", "tr", "p"]);
-/* applyDrops(notes, drops) -> the notes without the dropped lines, or null when the gates fail: at most 45% of the
+/* applyDrops(notes, drops) -> the notes without the dropped lines, or null when the gates fail: only lines that end
+ * their block (a run of list lines or of table rows) go, so a line in the middle stays; at most 45% of the
  * words go, at least 50 words stay, nothing but whole lines goes (no new text). Headings left with nothing under them
  * go, a table left with no rows goes, numbered steps are renumbered. */
 export function applyDrops(notes, drops) {
-  const L0 = noteLines(notes), set = new Set((drops || []).filter((d) => Number.isInteger(d) && L0[d] && DROPPABLE.has(L0[d].kind)));
+  const L0 = noteLines(notes), asked = new Set((drops || []).filter((d) => Number.isInteger(d) && L0[d] && DROPPABLE.has(L0[d].kind)));
+  // only trailing lines go: within each block (a run of list lines or of table rows), the asked lines that end it
+  const set = new Set(), fam = (k) => (k === "tr" ? "t" : DROPPABLE.has(k) ? "l" : "");
+  for (let i = L0.length - 1; i >= 0; i--) {
+    const f = fam(L0[i].kind); if (!f) continue;
+    let j = i; while (j >= 0 && fam(L0[j].kind) === f) j--;
+    const tail = []; for (let k = i; k > j && asked.has(k); k--) tail.push(k);
+    // a comparison table keeps at least one row
+    if (!(f === "t" && tail.length === i - j)) tail.forEach((k) => set.add(k));
+    i = j + 1;
+  }
   if (!set.size) return null;
   let keep = L0.filter((l, i) => !set.has(i));
   // a table header and separator with no row left go too
@@ -489,7 +500,7 @@ async function tidyRun(dir, args) {
     const notes = d.drop.length ? applyDrops(it.x.notes, d.drop) : null;
     if (d.drop.length && !notes) gated++;
     if (notes) changed++;
-    dec[it.id] = { drop: notes ? d.drop : [], asked: d.drop };
+    dec[it.id] = { drop: d.drop };   // the model's pick; applyDrops keeps only the trailing lines that pass the gates
   });
   writeJson(decFile, dec, true);
   console.log(`tidy: decisions ${Object.keys(dec).length}; notes trimmed ${changed}, drops refused by the gates ${gated}`);
