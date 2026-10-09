@@ -1008,3 +1008,17 @@ best way of learning."
   `prep:teach-chat`, counter `prep.teach.chat`.
 - Tests: `test/prep-ask-chat.test.mjs`, `test/prep-teach-server.test.mjs` (chat part), `test/run-prep-ask-chat-ui.mjs`.
 - Icon: see vault/modules/MaiK.md "MaiK AI mark".
+
+## Release-readiness QA (2026-10-10, branch `fix/prep-ready`, prep44)
+- **Ask MaiK reads structured explanations.** Items with bank v5 `x` (key, notes, others, pearl) and an empty `exp` were
+  grounded on the stem alone and the fallback said "No explanation is stored" under a question that showed one (live
+  sur-wound-healing: 40 of 245 items). `prep-teacher.js` `expOf` / `kpOf` / `reasons` now read `x` exactly as the
+  question screen does (markdown made plain); old `*` bullets become lines and stray asterisks go.
+- **Search in ss-radiology.** Bank v6 to v10 shipped no `search.json`, so search showed "needs a connection". On a 404
+  `prep.js loadSearch` builds the same index from the subject's module files (`buildSearch`, flagged items out).
+- **Bank route.** A failed R2 read is a 503 `bank-unavailable` (no-store), never a 404 (a 404 overlay is remembered as
+  empty for the session); HEAD is answered like GET (it fell through to index.html with a 200).
+- **Tests.** Lesson KB gate: `kbGrounding` puts a named doc's first (summary) sentence first and keeps repeated sentences
+  once (KB v2 #1414 grew breast_cancer.json past the 1,400-word cut). Node 22 (CI): server mocks in
+  prep-nudges.test.mjs moved above the first test (a mock.module made while a test runs is undone with it); the sprint
+  assertion only applies in IST. run-prep-ask-ui waits for the sheet's open animation before measuring.

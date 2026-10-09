@@ -13,6 +13,23 @@ import fs from "node:fs";
 import { DatabaseSync } from "node:sqlite";
 const require = createRequire(import.meta.url);
 const N = require("../prep-nudges.js");
+/* Server mocks and imports come before the first test(): on Node 22 (CI) a mock.module() made while an earlier test is
+ * running (a top-level await yields to it) is tied to that test and undone when it ends, so the push mock was lost. */
+const CLAIMS = { "tok-a": { sub: "u-a", name: "Asha Rao" }, "tok-b": { sub: "u-b", name: "Bilal K" }, "tok-c": { sub: "u-c", name: "Chitra M" } };
+const SMD = { a: "SMD-AAAAAA", b: "SMD-BBBBBB", c: "SMD-CCCCCC" };
+const FS = new Map();
+for (const k of Object.keys(SMD)) { FS.set("doctorDirectory/" + SMD[k], { uid: "u-" + k }); FS.set("users/u-" + k + "/profile/self", { smdId: SMD[k] }); }
+const realAuth = await import("../functions/_fbauth.js");
+mock.module("../functions/_fbauth.js", { namedExports: { ...realAuth, verifiedClaimsFor: async (req) => CLAIMS[(req.headers.get("Authorization") || "").replace(/^Bearer\s+/i, "")] || null } });
+const realFs = await import("../functions/_fbfirestore.js");
+mock.module("../functions/_fbfirestore.js", { namedExports: { ...realFs, fsGet: async (env, p) => { const f = FS.get(p); return f ? { fields: f } : null; } } });
+const SENT = [];
+const realNp = await import("../functions/_nativepush.js");
+mock.module("../functions/_nativepush.js", { namedExports: { ...realNp, sendNativeToTokens: async (env, toks, msg) => { SENT.push({ toks: toks.map((t) => t.uid), msg }); return { sent: toks.length, total: toks.length }; } } });
+const social = await import("../functions/api/prep/social/[[path]].js");
+const arena = await import("../functions/api/prep/arena/[[path]].js");
+const P = await import("../functions/_prep-nudge-push.js");
+const A = await import("../functions/_prep-arena.js");
 
 const H = 3600e3, DAY = 864e5;
 const at = (d, h, m = 0) => new Date(2026, 9, d, h, m).getTime();   // October 2026, local time
@@ -50,7 +67,9 @@ test("quiet hours: custom window respected; an anchor inside it moves to 30 min 
   assert.equal(N.anchorFor(null, null, N.parseQuiet("garbage")), 19 * 60, "default 7 pm, default quiet");
   const list = N.build(base({ quiet: "21:00-09:00", anchor: N.anchorFor(null, "08:00", q), streak: 5, arena: "neet-pg" }));
   list.forEach((n) => { const d = new Date(n.at), m = d.getHours() * 60 + d.getMinutes(); assert.ok(m >= 9 * 60 && m < 21 * 60, "inside 09:00-21:00: " + d); });
-  assert.ok(!list.some((n) => n.k === "sprint"), "the 19:45 IST sprint (if local) cannot sit 4 h from a 20:30 anchor");
+  // The sprint nudge is 19:45 IST; only on a phone in IST does it fall within 4 h of the 20:30 anchor (CI runs in UTC,
+  // where it is 14:15 local and allowed; the window check above still holds there).
+  if (new Date(at(7, 8)).getTimezoneOffset() === -330) assert.ok(!list.some((n) => n.k === "sprint"), "the 19:45 IST sprint cannot sit 4 h from a 20:30 anchor");
 });
 
 test("back-off: 3 ignored in a row -> 1 a day; tail days 4, 6, 9 ... 21 only; nothing on day 3 or after 21", () => {
@@ -184,21 +203,6 @@ test("learning the study time, wins, snapshots, recap and accuracy wins", () => 
 });
 
 /* ---------- server ---------- */
-const CLAIMS = { "tok-a": { sub: "u-a", name: "Asha Rao" }, "tok-b": { sub: "u-b", name: "Bilal K" }, "tok-c": { sub: "u-c", name: "Chitra M" } };
-const SMD = { a: "SMD-AAAAAA", b: "SMD-BBBBBB", c: "SMD-CCCCCC" };
-const FS = new Map();
-for (const k of Object.keys(SMD)) { FS.set("doctorDirectory/" + SMD[k], { uid: "u-" + k }); FS.set("users/u-" + k + "/profile/self", { smdId: SMD[k] }); }
-const realAuth = await import("../functions/_fbauth.js");
-mock.module("../functions/_fbauth.js", { namedExports: { ...realAuth, verifiedClaimsFor: async (req) => CLAIMS[(req.headers.get("Authorization") || "").replace(/^Bearer\s+/i, "")] || null } });
-const realFs = await import("../functions/_fbfirestore.js");
-mock.module("../functions/_fbfirestore.js", { namedExports: { ...realFs, fsGet: async (env, p) => { const f = FS.get(p); return f ? { fields: f } : null; } } });
-const SENT = [];
-const realNp = await import("../functions/_nativepush.js");
-mock.module("../functions/_nativepush.js", { namedExports: { ...realNp, sendNativeToTokens: async (env, toks, msg) => { SENT.push({ toks: toks.map((t) => t.uid), msg }); return { sent: toks.length, total: toks.length }; } } });
-const social = await import("../functions/api/prep/social/[[path]].js");
-const arena = await import("../functions/api/prep/arena/[[path]].js");
-const P = await import("../functions/_prep-nudge-push.js");
-const A = await import("../functions/_prep-arena.js");
 const SCHEMA = fs.readFileSync(new URL("../prep-arena-worker/schema.sql", import.meta.url), "utf8");
 const MIG = fs.readFileSync(new URL("../prep-arena-worker/migrations/0003_nudges.sql", import.meta.url), "utf8");
 function d1() {

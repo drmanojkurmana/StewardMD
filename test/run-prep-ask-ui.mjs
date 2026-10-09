@@ -261,6 +261,8 @@ try {
   await sleep(300);
   await click("#smdPrep [data-act=ask]");
   await until(`return !!document.querySelector("#pnAsk .pt-ans-b");`, 5000);
+  // A started thread reopens with its answer at once (no call), so wait for the sheet's open animation to end before measuring.
+  await until(`var s = document.querySelector("#pnAsk .pn-sheet"); return !!s && !s.getAnimations().length;`, 3000);
   const sideP = JSON.parse(await ev(`var w=document.getElementById("pnAsk"), s=w.querySelector(".pn-sheet").getBoundingClientRect(), q=document.querySelector("#smdPrep .pn-q").getBoundingClientRect(); return JSON.stringify({ side: w.classList.contains("pa-side"), right: Math.round(innerWidth - s.right), w: w.querySelector(".pn-sheet").offsetWidth, qRight: Math.round(q.right), sLeft: Math.round(s.left), h: Math.round(s.height), vh: innerHeight });`));
   ok(sideP.side && sideP.right <= 4 && sideP.w <= 430 && sideP.qRight <= sideP.sLeft + 4 && sideP.h >= sideP.vh - 12, "iPad landscape: a right side panel, the question visible beside it: " + JSON.stringify(sideP));
   await shot("ask-side-l1180");

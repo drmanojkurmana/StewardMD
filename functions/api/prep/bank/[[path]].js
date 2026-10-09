@@ -49,8 +49,10 @@ export async function onRequestGet({ env, params }) {
   if (!p) return notFound();
   const bucket = env && env.PREP_BANK_R2;
   if (!bucket || !bucket.get) return new Response(JSON.stringify({ error: "bank-not-configured" }), { status: 503, headers: { "Content-Type": "application/json", "Cache-Control": "no-store" } });
+  // A failed R2 read is a 503 (retry later), never a 404: the client treats a 404 as "this file does not exist" and,
+  // for overlays, remembers that for the session (prep.js), so a passing R2 error used to hide content.
   let obj = null;
-  try { obj = await bucket.get(PREFIX + p); } catch (e) { obj = null; }
+  try { obj = await bucket.get(PREFIX + p); } catch (e) { return new Response(JSON.stringify({ error: "bank-unavailable" }), { status: 503, headers: { "Content-Type": "application/json", "Cache-Control": "no-store", "Retry-After": "5" } }); }
   if (!obj) return notFound();
   const headers = new Headers({
     "Content-Type": /\.webp$/.test(p) ? "image/webp" : /\.svg$/.test(p) ? "image/svg+xml" : "application/json; charset=utf-8",
@@ -62,4 +64,11 @@ export async function onRequestGet({ env, params }) {
   if (/\.svg$/.test(p)) headers.set("Content-Security-Policy", "default-src 'none'; style-src 'unsafe-inline'; img-src data:");
   if (obj.httpEtag) headers.set("ETag", obj.httpEtag);
   return new Response(obj.body, { status: 200, headers });
+}
+
+// HEAD answers like GET without a body (without it, HEAD fell through to the app's index.html with a 200).
+export async function onRequestHead(ctx) {
+  const r = await onRequestGet(ctx);
+  if (r.body && r.body.cancel) { try { await r.body.cancel(); } catch (e) {} }
+  return new Response(null, { status: r.status, headers: r.headers });
 }

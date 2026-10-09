@@ -55,6 +55,20 @@ test("bank: anything off the whitelist is 404 and never reaches the bucket", asy
   assert.equal((await get("v1/anatomy/mcq/missing-module.json", { PREP_BANK_R2: r2({}) })).status, 404);
 });
 
+test("bank: a failed R2 read is a 503 with no-store (never a 404); HEAD answers like GET with no body", async () => {
+  const bad = { PREP_BANK_R2: { get: async () => { throw new Error("r2 down"); } } };
+  const r = await get("v1/anatomy/mcq/ana-gametogenesis.json", bad);
+  assert.equal(r.status, 503);
+  assert.equal(r.headers.get("Cache-Control"), "no-store");
+  const env = { PREP_BANK_R2: r2({ "prep-bank/v1/manifest.json": "{}" }) };
+  const h = await bank.onRequestHead({ env, params: { path: ["v1", "manifest.json"] } });
+  assert.equal(h.status, 200);
+  assert.match(h.headers.get("Content-Type"), /json/);
+  assert.equal(h.body, null);
+  assert.equal((await bank.onRequestHead({ env, params: { path: ["v1", "nope.json"] } })).status, 404);
+  assert.equal((await bank.onRequestHead({ env, params: { path: ["..", "x"] } })).status, 404);
+});
+
 test("bank: PYQ index (short cache), hashed items file and webp images (immutable, image/webp); nothing else under pyq/", async () => {
   const env = { PREP_BANK_R2: r2({ "prep-bank/v2/pyq/index.json": '{"v":1}', "prep-bank/v2/pyq/items-0a1b2c3d.json": '{"v":1,"items":[]}', "prep-bank/v2/pyq/img/neet-pg-2025-r1-1-1.webp": "RIFF" }) };
   const ix = await get("v2/pyq/index.json", env);
