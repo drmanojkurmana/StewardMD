@@ -4632,7 +4632,7 @@
         '<div class="dx-reader-content">' + (rd.body || '<p class="dx-sel-empty">No reference loaded for this disease.</p>') + '</div>' +
       '</div>';
     kbDedupeReader(el);
-    kbWireJump(el);
+    try { kbWireJump(el); } catch (e) {}   // the chips are a convenience; never let them block the page
     var favourite = document.createElement("button"); favourite.type = "button"; favourite.className = "dx-reader-favourite";
     function favouritePaint() { var saved = kbReadList("favourites").indexOf(id) >= 0; favourite.innerHTML = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3.5l2.6 5.3 5.9.9-4.3 4.1 1 5.8L12 16.9l-5.2 2.7 1-5.8L3.5 9.7l5.9-.9z"/></svg><span>' + (saved ? "Saved" : "Save") + '</span>'; favourite.setAttribute("aria-pressed", String(saved)); favourite.setAttribute("aria-label", saved ? "Saved to favourites" : "Save to favourites"); }
     favouritePaint();
