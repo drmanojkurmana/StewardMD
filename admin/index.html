@@ -1421,7 +1421,7 @@
     h+='<div class="uc-sec"><b>AI limits for this account</b><div class="hint" style="margin-bottom:8px">Daily questions per module. Blank uses the app default; 0 means unlimited. These apply to this account even when app-wide limits are off.</div><div class="uc-grid">'+
       (d.limits||[]).map(function(m){ return '<label class="uc-lim"><span>'+esc(m.label||m.id)+'<br><small class="hint">default '+(m.defaultLimit===0?"unlimited":m.defaultLimit)+'</small></span><input type="number" min="0" step="1" inputmode="numeric" data-ul="'+esc(m.id)+'" value="'+(m.limit==null?"":m.limit)+'" placeholder="default"></label>'; }).join("")+'</div>'+
       '<div class="uc-acts" style="margin-top:10px;align-items:center"><label for="ucBudget" style="margin:0">Monthly AI token budget</label><input id="ucBudget" type="number" min="0" step="1000" style="width:150px" value="'+(pl.aiCapTokens!=null?pl.aiCapTokens:"")+'" placeholder="plan default"><button class="ghost" id="ucBudgetSave">Save budget</button>'+
-      (mu?'<span class="hint">This month: '+(mu.used||0).toLocaleString()+' of '+(mu.cap||0).toLocaleString()+' tokens</span>':'')+'</div></div>';
+      '<span class="hint">This month: '+((d.month&&d.month.tokens)||0).toLocaleString()+' tokens, Rs '+(((d.month&&d.month.costInr)||0)).toFixed(2)+(mu&&mu.cap?' · cap '+mu.cap.toLocaleString():' · no monthly cap set')+'</span>'+'</div></div>';
     // 6. Usage
     var us=d.usage||[], tot={req:0,tokens:0,cost:0}, mods={};
     us.forEach(function(u){ tot.req+=u.req; tot.tokens+=u.tokens; tot.cost+=u.costInr; Object.keys(u.byModule||{}).forEach(function(k){ var n=u.byModule[k]; mods[k]=(mods[k]||0)+(typeof n==="number"?n:(n&&n.req)||0); }); });
@@ -1446,7 +1446,7 @@
     $("ucGive").onclick=function(){ var dur=$("ucDur").value, body={uid:a.uid,tier:$("ucTier").value}; if(dur==="forever") body.forever=true; else body.days=+dur;
       ucSend("/api/entitlements/admin/set-plan", body, "Plan given."); };
     var rv=$("ucRevoke"); if(rv) rv.onclick=function(){ if(!confirm("Remove the subscription for "+(a.email||a.uid)+"?")) return;
-      api(AI+"/user-action",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({email:a.email,action:"revoke-pro"})}).then(function(){ ucSend("/api/entitlements/admin/set-plan",{uid:a.uid,tier:"free"},"Subscription removed."); }); };
+      api(AI+"/user-action",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({uid:a.uid,email:a.email,action:"revoke-pro"})}).then(function(){ ucSend("/api/entitlements/admin/set-plan",{uid:a.uid,tier:"free"},"Subscription removed."); }); };
     Array.prototype.forEach.call(box.querySelectorAll("[data-ff]"),function(sel){ sel.onchange=function(){ var k=sel.getAttribute("data-ff"), val=sel.value;
       ucSend(val==="default"?"/api/entitlements/admin/clear-flag":"/api/entitlements/admin/set-flag", val==="default"?{uid:a.uid,feature:k}:{uid:a.uid,feature:k,enabled:val==="on"}, "Feature updated.", true); }; });
     Array.prototype.forEach.call(box.querySelectorAll("[data-ul]"),function(inp){ inp.onchange=function(){ if(!a.email){ say("ucActMsg","err","This account has no email, so a per-account limit cannot be set."); return; }
@@ -1465,8 +1465,7 @@
   }
   function ucDo(action,a){
     if((action==="disable"||action==="unverify")&&!confirm((action==="disable"?"Deactivate sign-in for ":"Withdraw verification for ")+(a.email||a.uid)+"?")) return;
-    if(!a.email){ say("ucActMsg","err","This account has no email; use the Verifications page."); return; }
-    ucSend(AI+"/user-action",{email:a.email,action:action},({enable:"Sign-in activated.",disable:"Sign-in deactivated.",verify:"Marked verified.",unverify:"Verification withdrawn."})[action]||"Done.");
+    ucSend(AI+"/user-action",{uid:a.uid,email:a.email,action:action},({enable:"Sign-in activated.",disable:"Sign-in deactivated.",verify:"Marked verified.",unverify:"Verification withdrawn."})[action]||"Done.");
   }
   $("ucList").addEventListener("click",function(e){ var r=e.target.closest(".uc-row"); if(r) ucOpen(r.getAttribute("data-uid")); });
   $("ucFilters").addEventListener("click",function(e){ var b=e.target.closest("[data-ucf]"); if(!b) return; ucFilter=b.getAttribute("data-ucf"); Array.prototype.forEach.call($("ucFilters").children,function(p){p.classList.toggle("on",p===b);}); ucLoad(); });

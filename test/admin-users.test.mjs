@@ -82,3 +82,13 @@ test("an unknown uid is not found", async () => {
   const d = await userDetail({}, "ghost", { ...deps, fsGet: async () => null, adminLookup: async () => null });
   assert.equal(d.ok, false); assert.equal(d.error, "not_found");
 });
+
+test("this month adds up the same daily meter as the 7-day table", async () => {
+  const days = {};   // 8 Oct: 49,984 tokens; 30 Sep (last month) must not count
+  const d = await userDetail({}, "pend", { ...deps, now: Date.parse("2026-10-09T05:00:00Z"), usageStore: {},
+    fsGet: async () => null, adminLookup: async () => ({ ok: true, tier: "free", usage: { used: 0, cap: 0 } }), getUserLimit: async () => ({}),
+    doctorUsageSummary: async (env, store, key, t) => { const day = new Date(t).toISOString().slice(0, 10);
+      return { day, req: day === "2026-10-08" ? 33 : day === "2026-09-30" ? 5 : 0, tokens: day === "2026-10-08" ? 49984 : day === "2026-09-30" ? 999 : 0, estCostInr: day === "2026-10-08" ? 3 : 0, byModule: {} }; } });
+  assert.equal(d.month.tokens, 49984); assert.equal(d.month.req, 33); assert.equal(d.month.costInr, 3);
+  assert.equal(d.usage.length, 7);
+});

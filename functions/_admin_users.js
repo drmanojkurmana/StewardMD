@@ -163,12 +163,19 @@ export async function userDetail(env, uid, deps) {
   const email = row.email;
   const limits = (email && store) ? ((await (deps.getUserLimit || getUserLimit)(store, email)) || {}) : {};
   const modules = aiModuleList().map((m) => ({ id: m.id, label: m.label, group: m.group, defaultLimit: moduleDailyLimit(env, m.id), limit: Object.prototype.hasOwnProperty.call(limits, m.id) ? limits[m.id] : null }));
-  const usage = [];
+  // 7 days for the table, and this calendar month from the SAME daily meter for the month line (the
+  // entitlement record's monthly counter is keyed differently and read "0 of 0" beside 49,984 tokens).
+  const usage = [], month = { tokens: 0, req: 0, costInr: 0 };
   if (email && store) {
     const sum = deps.doctorUsageSummary || doctorUsageSummary;
-    for (let i = 0; i < 7; i++) {
-      try { const u = await sum(env, store, "em:" + email, now - i * DAY); usage.push({ day: u.day, req: u.req || 0, tokens: u.tokens || 0, costInr: u.estCostInr || 0, byModule: u.byModule || {} }); }
-      catch (e) { /* a missing day is just zero */ }
+    const thisMonth = new Date(now).toISOString().slice(0, 7);
+    for (let i = 0; i < 31; i++) {
+      let u = null;
+      try { u = await sum(env, store, "em:" + email, now - i * DAY); } catch (e) { /* a missing day is just zero */ }
+      if (!u) continue;
+      if (i < 7) usage.push({ day: u.day, req: u.req || 0, tokens: u.tokens || 0, costInr: u.estCostInr || 0, byModule: u.byModule || {} });
+      if (String(u.day || "").slice(0, 7) !== thisMonth) { if (i >= 7) break; continue; }
+      month.tokens += u.tokens || 0; month.req += u.req || 0; month.costInr = Math.round((month.costInr + (u.estCostInr || 0)) * 100) / 100;
     }
   }
   return {
@@ -177,6 +184,6 @@ export async function userDetail(env, uid, deps) {
     plan: ent && ent.ok ? { tier: ent.tier || "free", tierExp: ent.tierExp, role: ent.role, smdId: ent.smdId, aiCapTokens: ent.aiCapTokens, monthUsage: ent.usage || null } : null,
     // per-account feature switches (POST /api/entitlements/admin/set-flag | clear-flag)
     features: ent && ent.ok && Array.isArray(ent.features) ? ent.features : [],
-    limits: modules, usage, errors,
+    limits: modules, usage, month, errors,
   };
 }
