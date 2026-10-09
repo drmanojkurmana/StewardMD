@@ -255,10 +255,10 @@ try {
   await until(`return !!document.getElementById("pnCompete");`, 3000);
 
   // ---- NEET-SS: Arena coming soon (no bank yet)
-  await click('#smdPrep .pn-tab[data-v=neet-ss]');
+  await ev(`PREP._host.setExam("neet-ss"); return 1;`);
   ok(await until(`return /NEET-SS Arena: coming soon/.test((document.getElementById("pnCompete")||{}).textContent||"");`, 4000), "NEET-SS Compete says coming soon");
   await shot("home-ss");
-  await click('#smdPrep .pn-tab[data-v=neet-pg]');
+  await ev(`PREP._host.setExam("neet-pg"); return 1;`);
   await until(`return !!document.querySelector("#smdPrep [data-act=a-battle]");`, 4000);
 
   // ---- battle

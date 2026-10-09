@@ -66,6 +66,17 @@ export async function onRequestPost(context) {
     } catch (e) { return json({ ok: false, error: "server_error" }, 500); }
   }
   if (!(await ownerOK(request, env))) return json({ ok: false, error: "forbidden" }, 403);
+  /* Owner-only, so the real reason is returned (owner, 2026-10-09: User control showed a bare "Failed: 500").
+   * An uncaught throw (a Firestore commit, a claims write) used to escape as the platform's HTML 500 with
+   * no reason anywhere the owner could see. The detail is Google's error text: no patient data. */
+  try { return await adminPost(context); }
+  catch (e) {
+    try { console.warn("[entitlements] admin error", String((e && (e.code || e.message)) || e), e && e.status, String((e && e.detail) || "").slice(0, 200)); } catch (x) {}
+    return json({ ok: false, error: (e && e.code) || "server_error", status: (e && e.status) || null, detail: String((e && (e.detail || e.message)) || "").slice(0, 300) }, 500);
+  }
+}
+async function adminPost(context) {
+  const { request, env, params } = context;
   const route = (params && params.path) || [];
   const seg = Array.isArray(route) ? route[route.length - 1] : route;   // .../admin/<seg>
   let body = {}; try { body = await request.json(); } catch (e) {}

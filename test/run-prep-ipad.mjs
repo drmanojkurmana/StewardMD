@@ -142,8 +142,8 @@ try {
     ok(await until(`return !!document.querySelector("#smdPrep .pn-tile[data-s=anatomy]") && /MCQs/.test(document.querySelector("#smdPrep .pn-tile[data-s=anatomy]").textContent);`, 20000), "home opens" + at);
     await sleep(400);
     ok(await geo(OVER) === "", "1. home: no horizontal overflow " + (await geo(OVER)) + at);
-    const al = await geo(`var t=RT.querySelector(".pn-tabs"), c=RT.querySelector("#pnGrid"); var a=R(t), b=R(c); return Math.abs(a.l-b.l).toFixed(1)+"|"+Math.abs(a.r-b.r).toFixed(1);`);
-    ok(+al.split("|")[0] <= 1 && +al.split("|")[1] <= 1, "2. home: exam tabs share the column's edges (left|right off by " + al + ")" + at);
+    const al = await geo(`var t=RT.querySelector(".pn-home > .pn-next + .pn-group"), c=RT.querySelector("#pnGrid"); var a=R(t), b=R(c); return Math.abs(a.l-b.l).toFixed(1)+"|"+Math.abs(a.r-b.r).toFixed(1);`);
+    ok(+al.split("|")[0] <= 1 && +al.split("|")[1] <= 1, "2. home: the Practise group shares the column's edges (left|right off by " + al + ")" + at);
     const want = S.w < 700 ? 2 : S.w < 900 ? 3 : 4;
     const subs = await ev(COLS("#smdPrep #pnGrid")), grp = await ev(COLS("#smdPrep .pn-home > .pn-next + .pn-group"));
     ok(subs === want && grp === want, `3. home: ${want} tiles a row (subjects ${subs}, Practise ${grp})` + at);

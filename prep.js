@@ -39,6 +39,13 @@
     (extra || []).forEach(function (it) { if (it && it.id && !seen[it.id]) { seen[it.id] = 1; out.push(it); } });
     return out;
   }
+  /* ovFor(sets, setIds, sid, mid) -> overlay items a module adds: the sum over the subject's sets of
+     sets[set][sid][mid] (prep/bank/overlay-counts.json "sets"). */
+  function ovFor(sets, setIds, sid, mid) {
+    var n = 0;
+    (setIds || []).forEach(function (set) { var m = sets && sets[set] && sets[set][sid]; n += (m && +m[mid]) || 0; });
+    return n;
+  }
   function usable(it, hidden) { return !!it && !(it.flags && it.flags.length) && !(hidden && hidden[it.id]); }
   // Questions the app shows for a module: flagged keys and hidden items out; for USMLE, vignettes when there are enough.
   function poolFor(items, exam, hidden) {
@@ -62,7 +69,9 @@
   function statusOf(answered, count) { return !answered ? "new" : count && answered >= count ? "done" : "paused"; }
   // Mastery 0 to 5 stars from the share of right answers, once there are at least 5 attempts.
   function stars(ms) { if (!ms || (ms.t || 0) < 5) return null; return Math.max(0, Math.min(5, Math.round((ms.ok / ms.t) * 5))); }
-  function countFor(t, exam) { return exam === "usmle" && t.usmle >= 5 ? t.usmle : t.count || 0; }
+  // A module's MCQs: the bank count plus its overlay items (t.ov, from prep/bank/overlay-counts.json via loadIndex), the
+  // same questions loadModule draws. USMLE with 5 or more vignettes counts those only.
+  function countFor(t, exam) { return exam === "usmle" && t.usmle >= 5 ? t.usmle : (t.count || 0) + (t.ov || 0); }
   /* What to solve next, within the exam's subjects (in taxonomy order): the module with the most reviews due; else
      the started, unfinished module with the lowest share right; else the first module never opened that has questions. */
   function solveNext(subjects, indexes, store, today, exam) {
@@ -310,7 +319,7 @@
     return s.cel;
   }
   var PURE = { pickLine: pickLine, setSubject: setSubject, mileSnap: mileSnap, milestone: milestone, noteCele: noteCele, levelN: levelN, xpOfStore: xpOfStore, streakMile: streakMile, EXAMS: EXAMS, examOf: examOf, emptyStore: emptyStore, deckKey: deckKey, usable: usable, poolFor: poolFor, progressByModule: progressByModule,
-    statusOf: statusOf, stars: stars, countFor: countFor, solveNext: solveNext, filterModules: filterModules, customDraw: customDraw, oldOverlays: oldOverlays, levelOf: levelOf, markLevels: markLevels, shuffle: shuffle, fmtTime: fmtTime,
+    statusOf: statusOf, stars: stars, countFor: countFor, ovFor: ovFor, solveNext: solveNext, filterModules: filterModules, customDraw: customDraw, oldOverlays: oldOverlays, levelOf: levelOf, markLevels: markLevels, shuffle: shuffle, fmtTime: fmtTime,
     targetDifficulty: targetDifficulty, adaptiveNew: adaptiveNew, weakModules: weakModules, planToday: planToday, MISTAKE_TAGS: MISTAKE_TAGS, mistakeCounts: mistakeCounts,
     MOCKS: MOCKS, mockOf: mockOf, mockModules: mockModules, scoreMock: scoreMock, findModule: findModule,
     mdLite: mdLite, inlineMd: inlineMd, legacyExp: legacyExp, explainOf: explainOf, mergeOverlay: mergeOverlay, bankStamps: bankStamps, cacheFresh: cacheFresh };
@@ -346,9 +355,19 @@
   function loadTax() { return st.tax ? Promise.resolve(st.tax) : getJSON(STATIC + "taxonomy.json").then(function (t) { return (st.tax = t); }); }
   // MaiK lines: fetched once per open, cached like the taxonomy; a miss shows no line.
   function loadLines() { if (st.lines || st.linesP) return; st.linesP = getJSON(STATIC + "maik-lines.json").then(function (j) { st.lines = j && j.subject ? j : null; }, function () { st.linesP = null; }); }
+  // A subject's index; modules with overlay items (OVERLAYS) carry t.ov, their count from prep/bank/overlay-counts.json
+  // (tools/prep-overlay-counts.mjs), so the counts on screen match what practice draws. No counts file: bank counts only.
   function loadIndex(sid) {
     if (st.ix[sid]) return Promise.resolve(st.ix[sid]);
-    return getJSON(STATIC + "bank/" + bvOf(sid) + "/" + sid + "/index.json").then(function (ix) { return (st.ix[sid] = ix); }, function () { return (st.ix[sid] = { id: sid, topics: [], counts: { total: 0 } }); });
+    return Promise.all([getJSON(STATIC + "bank/" + bvOf(sid) + "/" + sid + "/index.json"), (OVERLAYS[sid] || []).length ? loadOvc() : {}]).then(function (r) {
+      var ix = r[0];
+      (ix.topics || []).forEach(function (t) { var n = ovFor(r[1], OVERLAYS[sid], sid, t.id); if (n) t.ov = n; });
+      return (st.ix[sid] = ix);
+    }, function () { return (st.ix[sid] = { id: sid, topics: [], counts: { total: 0 } }); });
+  }
+  function loadOvc() {
+    if (!st.ovcP) st.ovcP = getJSON(STATIC + "bank/overlay-counts.json").then(function (j) { return (j && j.sets) || {}; }, function () { return {}; });
+    return st.ovcP;
   }
   function subjectsOf(exam) {
     var ex = examOf(exam), out = [];
@@ -406,12 +425,12 @@
       }, function (e) { if (hit) return (st.mem[p] = hit.items); throw e; });
     });
   }
-  /* Overlay sets: extra MCQs for a module from outside the bank (the owner's radiology notes, sets "radnotes" and "radmax"; new
+  /* Overlay sets: extra MCQs for a module from outside the bank (the owner's radiology notes, sets "radnotes" and "radmax2"; new
      Medicine questions for topics the bank covered thinly, set "medcov"), at overlay/<set>/<subject>/<module>.json
      { topic, set, v, items }, immutable once uploaded. A file is cached for good under its path, so a changed release
-     goes to a new folder (medcov3 now; medcov2 and medcov copies are removed) and the folder named here moves with it.
+     goes to a new folder (medcov3 and radmax2 now; the earlier folders' copies are removed) and the folder named here moves with it.
      Only subjects listed here are asked for; a module without a file (404) or offline without a copy adds nothing. */
-  var OVERLAYS = G.SMD_PREP_OVERLAYS || { radiology: ["radnotes", "radmax"], medicine: ["medcov3"], "ss-pulmonology": ["medcov3"] };
+  var OVERLAYS = G.SMD_PREP_OVERLAYS || { radiology: ["radnotes", "radmax2"], medicine: ["medcov3"], "ss-pulmonology": ["medcov3"] };
   // Earlier releases of a set (medcov3 -> medcov, medcov2), whose cached copies a new release replaces.
   function oldOverlays(set) { var m = /^(.*?[a-z])(\d+)$/.exec(set), out = []; if (!m || +m[2] < 2) return out; out.push(m[1]); for (var k = 2; k < +m[2]; k++) out.push(m[1] + k); return out; }
   function loadOverlay(sid, mid, miss) {
@@ -480,7 +499,8 @@
     stats: '<path d="M4 20h16M7 16v-5M12 16V6M17 16v-8"/>', bolt: '<path d="M13 3L5 14h6l-1 7 8-11h-6z"/>', cal: '<rect x="4" y="5" width="16" height="16" rx="2"/><path d="M4 10h16M9 3v4M15 3v4"/>',
     versus: '<path d="M4 4l8 8M4 4v4M4 4h4M20 4l-8 8M20 4v4M20 4h-4M7 17l-3 3M17 17l3 3M9 15l-2 2M15 15l2 2"/>', trophy: '<path d="M8 4h8v5a4 4 0 0 1-8 0z"/><path d="M8 6H5a3 3 0 0 0 3 4M16 6h3a3 3 0 0 1-3 4M12 13v4M9 21h6M10 17h4"/>',
     off: '<path d="M3 3l18 18M8.5 8.6A9 9 0 0 0 5 11M2 8a14 14 0 0 1 4-2.4M16 11.5a9 9 0 0 1 3 1.5M10.7 5.1A14 14 0 0 1 22 8M8.5 15a5 5 0 0 1 6.5-.5M12 19h.01"/>',
-    user: '<circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/>', leave: '<path d="M15 4h4v16h-4M10 8l-4 4 4 4M6 12h10"/>'
+    user: '<circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/>', book: '<path d="M4 5a2 2 0 0 1 2-2h13v16H6a2 2 0 0 0-2 2zM4 21V5M8 7h7M8 11h5"/>',
+    gear: '<circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"/>', leave: '<path d="M15 4h4v16h-4M10 8l-4 4 4 4M6 12h10"/>'
   };
   /* Subject icons: one authored 24px set, 2px stroke, round caps, to match ICON. Keyed by subject id (taxonomy.json). */
   var SUBJ = {
@@ -658,11 +678,14 @@
   }
   function renderHome() {
     var s = load(), ex = examOf(s.exam), subs = subjectsOf(s.exam), arena = arenaOn();
-    var tabs = '<div class="pn-tabs" role="tablist" aria-label="Exam">' + EXAMS.map(function (e) {
+    // The exam is asked once (onboarding, prep-plan.js) and kept in the synced store; it changes only in Settings (the
+    // plan sheet's Exam row), so home shows no exam switcher. Without prep-plan.js the old exam tabs stay.
+    var plan = !!G.PREP_PLAN, choice = plan && s.pl && s.pl.exam && G.PREP_PLAN._pure.choiceOf(s.pl.exam), exLabel = choice && choice.tab === ex.id ? choice.label : ex.label;
+    var tabs = plan ? "" : '<div class="pn-tabs" role="tablist" aria-label="Exam">' + EXAMS.map(function (e) {
       return '<button type="button" role="tab" class="pn-tab' + (e.id === ex.id ? " on" : "") + '" aria-selected="' + (e.id === ex.id) + '" data-act="exam" data-v="' + e.id + '">' + esc(e.label) + "</button>";
     }).join("") + "</div>";
     var nb = Object.keys(s.bm).length;
-    paint('<div class="pn-sky" aria-hidden="true"></div>' + bar("PrepNucleus", ex.label, "close", '<button type="button" class="pn-ib" data-act="downloads" aria-label="Offline downloads">' + ico("dl") + "</button>") +
+    paint('<div class="pn-sky" aria-hidden="true"></div>' + bar("PrepNucleus", esc(exLabel), "close", '<button type="button" class="pn-ib" data-act="downloads" aria-label="Offline downloads">' + ico("dl") + "</button>") +
       tabs + '<div class="pn-body pn-home" id="pnHome">' +
       '<div class="pn-banner pn-brand-banner" role="img" aria-label="PrepNucleus"></div>' +
       // Readiness and Today's plan (prep-plan.js); the older Today card without it.
@@ -682,7 +705,8 @@
       (G.PREP_FLASH ? G.PREP_FLASH.homeRow(HOST) : "") +
       (G.PREP_C ? row("c-home", ico("deck"), "Your decks", "Questions and cards from your PDF or notes") : "") +
       (G.PREP_ARENA ? row("a-stats", ico("stats"), "My stats", "Accuracy by subject, the last 30 days") : "") +
-      (G.PrepSocial ? row("soc-open", ico("user"), "Friends and groups", "Challenge a friend, college boards") + row("soc-acc", ico("check"), "Accuracy", "Your public accuracy page") : "") + "</div>" +
+      (G.PrepSocial ? row("soc-open", ico("user"), "Friends and groups", "Challenge a friend, college boards") + row("soc-acc", ico("check"), "Accuracy", "Your public accuracy page") : "") +
+      (plan ? row("p-settings", ico("gear"), "Settings", "Exam: " + esc(exLabel) + " · plan and reminder") : "") + "</div>" +
       '<p class="pn-eb" aria-hidden="true">' + subs.length + (subs.length === 1 ? " subject" : " subjects") + '</p><h2 class="pn-h">Subjects</h2><div class="pn-subs" id="pnGrid">' + subs.map(function (sb) { return tile(sb, null); }).join("") + "</div>" +
       (G.PrepPro ? G.PrepPro.homeHtml(HOST) : "") +
       '<p class="pn-note">Practice and progress stay on this device.</p></div>');
@@ -737,7 +761,12 @@
       var mixed = ix.topics.filter(function (t) { return t.group === "mixed"; })[0];
       if (mixed && mixed.count && st.filter === "all") html += '<h2 class="pn-sec">More</h2><ol class="pn-mods">' + modRow(sid, mixed, prog, s, null) + "</ol>";
       var box = root.querySelector("#pnSub");
-      if (box) box.innerHTML = head + (setupOn() && q ? '<button type="button" class="pn-btn pri pn-subgo" data-act="su-subject" data-s="' + esc(sid) + '">' + ico("play") + " Practise " + tx(sb.name) + "</button>" + lastBtn("subject", sid, ' data-s="' + esc(sid) + '"') : "") + (html || '<p class="pn-empty">Nothing in this filter yet.</p>');
+      // The subject's actions sit in one block in the same column as the hero and the module grid: Practise, then
+      // Learn (prep-lessons.js, only when a module of this subject has a lesson), then "Start with last settings".
+      var go = setupOn() && q ? '<button type="button" class="pn-btn pri pn-subgo" data-act="su-subject" data-s="' + esc(sid) + '">' + ico("play") + " Practise " + tx(sb.name) + "</button>" : "";
+      var acts = go + lastBtn("subject", sid, ' data-s="' + esc(sid) + '"');
+      if (box) box.innerHTML = head + '<div class="pn-subacts" id="pnSubActs"' + (acts ? "" : " hidden") + ">" + acts + "</div>" + (html || '<p class="pn-empty">Nothing in this filter yet.</p>');
+      if (G.PREP_LESSONS && G.PREP_LESSONS.subjectButton) G.PREP_LESSONS.subjectButton(box && box.querySelector("#pnSubActs"), sid, ix.topics, HOST);
     });
   }
   function modRow(sid, t, prog, s, num) {
@@ -1626,6 +1655,8 @@
   var HOST = { bankVer: function () { return VER; }, pyqVer: function () { return PYQ_VER; }, push: push, rerender: rerender, back: back, paint: paint, nav: nav, bar: bar, hband: hband, ico: ico, esc: esc, toast: toast, fmt: fmt,
     run: runQuestions, today: today, store: load, save: save, core: function () { return C; }, root: function () { return root; },
     exam: function () { return examOf(load().exam); },
+    // setExam(id): what the Settings exam row does to the exam tab (tests use it to switch exams without the sheet).
+    setExam: function (id) { var s = load(); s.exam = examOf(id).id; save(); nav(0); rerender(); },
     // Arena and My stats (prep-arena.js)
     subjIco: subjIco, subjHue: subjHue, row: row, fmtTime: fmtTime, mockOf: mockOf, subjectOfModule: subjectOfModule, subjectById: subjectById, tx: tx,
     stackTop: function () { return st.stack[st.stack.length - 1]; }, home: renderHome, run_: function () { return st.run; },

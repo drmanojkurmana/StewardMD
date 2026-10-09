@@ -261,3 +261,19 @@ Tool: `tools/prep-radmax.mjs` (branch `feat/prep-radiology-max`); data `~/prep-d
   `rm-cfc7fcf33595`, `rm-3572f734b1d8`, `rm-6c388481494b`, `rm-f75bd48bdc7a`) were never in the accepted 623 (left out
   for fact-check, duplicate or image-vote failures), so they did not ship.
 - R2: 30 v8 files and 21 radmax files (13 overlays, 8 figures) uploaded and SHA-256 verified.
+
+## 12. radmax depth: more items per page (shipped 2026-10-09, owner asked "try to increase radio questions")
+Page coverage was already 86-99%, so this round adds depth: more distinct items per page on facts the live items do
+not test. Tool: `tools/prep-radmax.mjs run --depth` (each text unit gets its accepted stems as "do not repeat", levels
+lean Easy and Very Hard, thin modules preferred) and `--srd-notes` (the owner's notes pages re-aimed at the thin
+NEET-SS modules: neuro, head and neck, chest, physics, emergency, paediatrics, kidney). Figures were not re-asked.
+- Runs d1 (406 text units) and d2 (88 notes units), $1.79 in all; same checks as before (blind solve, review, Haiku
+  fact check, Haiku duplicate check against live v8, radnotes, radmax and each other).
+- 722 accepted: 582 `srd-*` items join ss-radiology as bank **v9** (the 690 v8 items unchanged plus the new ones; 1272
+  in all); 140 `rad-*` items join Radiology as overlay set **radmax2** (the 122 radmax items plus the new ones, 262).
+  Cache rule: phones keep v8 and radmax files for good, so the new content is at new paths; prep.js
+  `OVERLAYS.radiology = ["radnotes", "radmax2"]` and `oldOverlays("radmax2")` drops cached radmax copies. The 8 radmax
+  figure items in radmax2 name their image as a bank path (`img/radmax/rm-*.webp`), so no figure was re-uploaded.
+- Route: `overlay/radmax2..radmaxNN/` accepted. `prep/bank/overlay-counts.json` regenerated with radmax2.
+- Items labelled Very Hard carry `vh: true`. Possibly-wrong-key items (53) stay out and went to the owner's flag list.
+- R2: 25 v9 files and 14 radmax2 files uploaded and SHA-256 verified.
